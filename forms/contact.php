@@ -1,4 +1,5 @@
 <?php
+
   /**
   * Requires the "PHP Email Form" library
   * The "PHP Email Form" library is available only in the pro version of the template
@@ -15,7 +16,7 @@
     die( 'Unable to load the "PHP Email Form" Library!');
   }
 
-  $contact = new PHP_Email_Form;
+ // $contact = new PHP_Email_Form; ESTO ME DA UN ERROR REVISAR CUANDO PONGA MI FORMULARIO
   $contact->ajax = true;
   
   $contact->to = $receiving_email_address;
@@ -38,4 +39,5 @@
   $contact->add_message( $_POST['message'], 'Message', 10);
 
   echo $contact->send();
+  
 ?>

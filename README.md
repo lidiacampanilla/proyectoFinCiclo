@@ -9,7 +9,12 @@ Mi proyecto fin de ciclo se basa en la implementación de un sitio web para una 
 - **Información sobre la Cofradía**:
   - Historia
   - Componentes
+  - Patrimonio
   - Noticias de actualidad
+
+- **Zona de Contacto**:
+  - Formulario de contacto
+  - Mapa de localización
 
 - **Zona de Acceso**:
   - Para Hermanos y futuros Hermanos
@@ -18,17 +23,21 @@ Mi proyecto fin de ciclo se basa en la implementación de un sitio web para una 
 ## Tecnologías Utilizadas
 
 ### Frontend
+
 - HTML
 - CSS
 - JavaScript
 
 ### Backend
+
 - PHP
 
 ### Base de Datos
+
 - MySQL
 
 ### Otras Tecnologías
+
 - GitHub (control de versiones)
 - Docker (contenedorización del proyecto)
 

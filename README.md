@@ -36,6 +36,6 @@ Mi proyecto fin de ciclo se basa en la implementación de un sitio web para una 
 
 A continuación, se muestra una primera aproximación a la pantalla de inicio del sitio web:
 
-![Pantalla de inicio](./mnt/data/627ac680-22fd-476c-acc7-a6caf1ac16c5.png)
+![Pantalla de inicio](./assets/img/pantallaInicio.jpg)
 
 Esta vista puede estar sujeta a cambios durante el desarrollo.

@@ -44,6 +44,10 @@
   --surface-color: #ffffff;
 }
 
+.beigs-background{
+  --background-color: #e8c39e;
+  
+}
 .dark-background {
   --background-color:  rgb(113, 20, 20); 
   --default-color: #ffffff;
@@ -473,6 +477,9 @@ h6 {
   padding-top: 5px;
 }
 
+.footer .credits a{
+  color: var(--default-color);
+}
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/

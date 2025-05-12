@@ -1,322 +1,399 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Web Cofradia Buena muerte</title>
+    <meta
+      name="description"
+      content="bootstrap, html, css, js, php, formularios, bbdd"
+    />
+    <meta name="keywords" content="" />
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Web Cofradia Buena muerte</title>
-  <meta name="description" content="bootstrap, html, css, js, php, formularios, bbdd">
-  <meta name="keywords" content="">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  
+    <!-- Fuentes-->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Fuentes-->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet" />
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
-
-  <!-- =======================================================
+    <!-- =======================================================
   * Template Name: MeFamily
   * Template URL: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/
   * Updated: Aug 07 2024 with Bootstrap v5.3.3
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-</head>
+  </head>
 
-<body class="index-page">
-
+  <body class="index-page">
     <header id="header" class="header d-flex align-items-center sticky-top">
-        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-    
-          <a href="index.html" class="logo d-flex align-items-center">
-            <img src="assets/img/logo.png" alt="escudo de la Cofradia">
-            <h1 class="sitename">BUENA MUERTE Y AMARGURA</h1>
-          </a>
-    
-          <nav id="navmenu" class="navmenu">
-            <ul>
-              <li><a href="index.html" class="active">Inicio</a></li>
-              <li class="dropdown"><a href="#"><span>Hermandad</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="historia.html">Historia</a></li>
-                  <li class="dropdown"><a href="#"><span>Colectivos</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                    <ul>
-                      <li><a href="juntaGobierno.html">Junta de Gobierno</a></li>
-                      <li><a href="grupoJoven.html">Grupo Joven</a></li>
-                      <li><a href="#">Costaleros</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li><a href="patrimonio.html">Patrimonio</a></li>
-              <li><a href="galeria.html">Galeria</a></li>
-              <li><a href="acceso.html">Acceso</a></li>
-              <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-          </nav>
-    
-        </div>
-      </header>
+      <div
+        class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between"
+      >
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="assets/img/logo.png" alt="escudo de la Cofradia" />
+          <h1 class="sitename">BUENA MUERTE Y AMARGURA</h1>
+        </a>
 
-  <main class="main">
-
-    <!-- Page Title -->
-    <div class="page-title light-background">
-      <div class="container d-lg-flex justify-content-between align-items-center">
-        <h1 class="mb-2 mb-lg-0">Blog</h1>
-        <nav class="breadcrumbs">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Blog</li>
-          </ol>
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="index.html" class="active">Inicio</a></li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Hermandad</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li><a href="historia.html">Historia</a></li>
+                <li class="dropdown">
+                  <a href="#"
+                    ><span>Colectivos</span>
+                    <i class="bi bi-chevron-down toggle-dropdown"></i
+                  ></a>
+                  <ul>
+                    <li><a href="juntaGobierno.html">Junta de Gobierno</a></li>
+                    <li><a href="grupoJoven.html">Grupo Joven</a></li>
+                    <li><a href="#">Costaleros</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="patrimonio.html">Patrimonio</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="acceso.html">Acceso</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
       </div>
-    </div><!-- End Page Title -->
+    </header>
 
-    <!-- Blog Posts Section -->
-    <section id="blog-posts" class="blog-posts section">
+    <main class="main">
+      <!-- About Section -->
+      <section id="about" class="about section">
+        <!-- Page Title -->
+        <div class="page-title light-background">
+          <div
+            class="container d-lg-flex justify-content-between align-items-center"
+          >
+            <h1 class="mb-2 mb-lg-0">Acceso</h1>
+            <nav class="breadcrumbs">
+              <ol>
+                <li><a href="index.html">Inicio</a></li>
+                <li class="current">Acceso</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <!-- End Page Title -->
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row gy-4">
+            <div class="col-lg-6">
+              <img src="assets/img/acceso.jpeg" class="img-fluid" alt="" />
+            </div>
+            <div class="col-lg-6 content">
+              <div class="row justify-content-center w-100 positionRel">
+                <div class="align-items-center justify-content-center img-height d-flex">
+                  <img alt="login" style="width: 35%" src="assets/img/favicon.png"/>
+                </div>
+                <div class="col-lg-9 max-width-form" style="text-align: center">
+                  <h4 class="f-w-700 m-0 welcome-title" style="font-size: 22px">
+                    Cofradía Buena Muerte y Amargura
+                  </h4>
+                  <span class="f-s-14 d-block mat-body-1 m-t-8 accent">ACCESO PRIVADO</span>
+                  <app-login-main class="ng-star-inserted">
+                    <form class="m-t-30 ng-untouched ng-pristine ng-invalid">
+                      <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block text-theme">Email</mat-label>
+                      <mat-form-field appearance="outline" color="primary" 
+                      class="mat-form-field w-100 ng-tns-c118-51 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-outline mat-form-field-can-float ng-untouched ng-pristine ng-invalid ng-star-inserted">
 
+                      </mat-form-field>
+                      <div class="mat-form-field-wrapper ng-tns-c118-51">
+                          <div class="mat-form-field-flex ng-tns-c118-51">
+                            <div class="mat-form-field-outline ng-tns-c118-51 ng-star-inserted">
+                              <div class="mat-form-field-outline-start ng-tns-c118-51">
+
+                              </div>
+                              <div class="mat-form-field-outline-gap ng-tns-c118-51">
+
+                              </div>
+                              <div class="mat-form-field-outline-end ng-tns-c118-51">
+
+                              </div>
+                            </div>
+                            <div class="mat-form-field-outline mat-form-field-outline-thick ng-tns-c118-51 ng-star-inserted">
+                              <div class="mat-form-field-outline-start ng-tns-c118-51">
+
+                              </div>
+                              <div class="mat-form-field-outline-gap ng-tns-c118-51">
+
+                              </div>
+                              <div class="mat-form-field-outline-end ng-tns-c118-51">
+
+                              </div>
+                            </div>
+
+                            <div class="mat-form-field-infix ng-tns-c118-51">
+                              <input placeholder="Email"
+                                name="user"
+                                class="mat-input-element mat-form-field-autofill-control ng-tns-c118-51 ng-untouched ng-pristine ng-invalid cdk-text-field-autofill-monitored"
+                                id="mat-input-20"
+                                data-placeholder="Email"
+                                aria-required="true"/>
+                                <span class="mat-form-field-label-wrapper ng-tns-c118-51">
+                                  </span>
+                            </div>
+                           
+                          </div>
+                          
+                          <div class="mat-form-field-subscript-wrapper ng-tns-c118-51">
+                           
+                            <div class="mat-form-field-hint-wrapper ng-tns-c118-51 ng-trigger ng-trigger-transitionMessages ng-star-inserted"
+                              style="opacity: 1; transform: translateY(0%)">
+                              
+                              <div class="mat-form-field-hint-spacer ng-tns-c118-51">
+
+                              </div>
+                            </div>
+                        
+                          </div>
+                        </div>
+                      
+                        <mat-label
+                        _ngcontent-esi-c250=""
+                        class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block text-theme"
+                        >Contraseña</mat-label
+                      ><mat-form-field
+                        _ngcontent-esi-c250=""
+                        appearance="outline"
+                        color="primary"
+                        class="mat-form-field w-100 ng-tns-c118-52 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-outline mat-form-field-can-float ng-untouched ng-pristine ng-invalid ng-star-inserted"
+                        ><div class="mat-form-field-wrapper ng-tns-c118-52">
+                          <div class="mat-form-field-flex ng-tns-c118-52">
+                            <div
+                              class="mat-form-field-outline ng-tns-c118-52 ng-star-inserted"
+                            >
+                              <div
+                                class="mat-form-field-outline-start ng-tns-c118-52"
+                              ></div>
+                              <div
+                                class="mat-form-field-outline-gap ng-tns-c118-52"
+                              ></div>
+                              <div
+                                class="mat-form-field-outline-end ng-tns-c118-52"
+                              ></div>
+                            </div>
+                            <div
+                              class="mat-form-field-outline mat-form-field-outline-thick ng-tns-c118-52 ng-star-inserted"
+                            >
+                              <div
+                                class="mat-form-field-outline-start ng-tns-c118-52"
+                              ></div>
+                              <div
+                                class="mat-form-field-outline-gap ng-tns-c118-52"
+                              ></div>
+                              <div
+                                class="mat-form-field-outline-end ng-tns-c118-52"
+                              ></div>
+                            </div>
+                            <!----><!----><!---->
+                            <div class="mat-form-field-infix ng-tns-c118-52">
+                              <input
+                                _ngcontent-esi-c250=""
+                                matinput=""
+                                type="password"
+                                placeholder="Contraseña"
+                                name="pass"
+                                class="mat-input-element mat-form-field-autofill-control ng-tns-c118-52 ng-untouched ng-pristine ng-invalid cdk-text-field-autofill-monitored"
+                                id="mat-input-21"
+                                data-placeholder="Contraseña"
+                                aria-invalid="false"
+                                aria-required="false"
+                              /><span
+                                class="mat-form-field-label-wrapper ng-tns-c118-52"
+                                ><!----></span
+                              >
+                            </div>
+                            <!---->
+                          </div>
+                          <!---->
+                          <div
+                            class="mat-form-field-subscript-wrapper ng-tns-c118-52"
+                          >
+                            <!---->
+                            <div
+                              class="mat-form-field-hint-wrapper ng-tns-c118-52 ng-trigger ng-trigger-transitionMessages ng-star-inserted"
+                              style="opacity: 1; transform: translateY(0%)"
+                            >
+                              <!---->
+                              <div
+                                class="mat-form-field-hint-spacer ng-tns-c118-52"
+                              ></div>
+                            </div>
+                            <!---->
+                          </div>
+                        </div></mat-form-field
+                      >
+                      <div
+                        _ngcontent-esi-c250=""
+                        class="d-flex align-items-center m-b-12"
+                      >
+                        <a
+                          _ngcontent-esi-c250=""
+                          class="link text-theme cursor-pointer"
+                          >Recuperar contraseña</a
+                        >
+                      </div>
+                      <button
+                        _ngcontent-esi-c250=""
+                        mat-flat-button=""
+                        type="submit"
+                        class="mat-focus-indicator btn-block btn-lg m-t-20 m-b-5 w-100 mat-flat-button mat-button-base mat-button-disabled ng-star-inserted"
+                        disabled="true"
+                      >
+                        <span class="mat-button-wrapper">Acceder </span
+                        ><span
+                          matripple=""
+                          class="mat-ripple mat-button-ripple"
+                        ></span
+                        ><span class="mat-button-focus-overlay"></span></button
+                      ><!----><!---->
+                      <div
+                        _ngcontent-esi-c250=""
+                        class="d-flex justify-content-center align-items-center m-b-12"
+                      >
+                        <span _ngcontent-esi-c250=""
+                          ><a
+                            _ngcontent-esi-c250=""
+                            class="access-text link"
+                            style="font-size: 1.2rem; font-weight: 500"
+                            href="/authentication/new-brother"
+                            >Quiero ser Hermano/a</a
+                          ></span
+                        >
+                      </div>
+                      <div
+                        _ngcontent-esi-c250=""
+                        class="d-flex justify-content-center align-items-center m-b-12"
+                      >
+                        <span _ngcontent-esi-c250=""
+                          >¿Ya eres Hermano?
+                          <a
+                            _ngcontent-esi-c250=""
+                            class="access-text link cursor-pointer"
+                            >Solicita acceso</a
+                          ></span
+                        >
+                      </div>
+                      <div
+                        _ngcontent-esi-c250=""
+                        class="d-flex justify-content-center align-items-center"
+                      >
+                        <span
+                          _ngcontent-esi-c250=""
+                          class="text-theme link"
+                          style="cursor: pointer"
+                          >Aviso Legal</span
+                        >
+                      </div>
+                      <div
+                        _ngcontent-esi-c250=""
+                        class="d-flex justify-content-center align-items-center"
+                      >
+                        <span
+                          _ngcontent-esi-c250=""
+                          class="text-theme link"
+                          style="cursor: pointer"
+                          >Política de Privacidad
+                        </span>
+                      </div>
+                    </form></app-login-main
+                  ><!----><!----><!---->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--/About Section -->
+    </main>
+
+    <footer id="footer" class="footer dark-background">
       <div class="container">
-        <div class="row gy-4">
-
-          <div class="col-lg-4">
-            <article>
-
-              <div class="post-img">
-                <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Politics</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Maria Doe</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Jan 1, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div><!-- End post list item -->
-
-          <div class="col-lg-4">
-            <article>
-
-              <div class="post-img">
-                <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Sports</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author-2.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Allisa Mayer</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Jun 5, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div><!-- End post list item -->
-
-          <div class="col-lg-4">
-            <article>
-
-              <div class="post-img">
-                <img src="assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Entertainment</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author-3.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Mark Dower</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Jun 22, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div><!-- End post list item -->
-
-          <div class="col-lg-4">
-            <article>
-
-              <div class="post-img">
-                <img src="assets/img/blog/blog-4.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Sports</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Non rem rerum nam cum quo minus olor distincti</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author-4.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Lisa Neymar</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Jun 30, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div><!-- End post list item -->
-
-          <div class="col-lg-4">
-            <article>
-
-              <div class="post-img">
-                <img src="assets/img/blog/blog-5.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Politics</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Accusamus quaerat aliquam qui debitis facilis consequatur</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author-5.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Denis Peterson</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Jan 30, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div><!-- End post list item -->
-
-          <div class="col-lg-4">
-            <article>
-
-              <div class="post-img">
-                <img src="assets/img/blog/blog-6.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Entertainment</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Distinctio provident quibusdam numquam aperiam aut</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author-6.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Mika Lendon</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Feb 14, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div><!-- End post list item -->
-
+        <h3 class="sitename">Buena Muerte y Amargura</h3>
+        <p>
+          Real e Ilustre Cofradia del Cristo de la Buena Muerte y María
+          Santísima de la Amargura
+        </p>
+        <div class="social-links d-flex justify-content-center">
+          <a href=""><i class="bi bi-twitter-x"></i></a>
+          <a href=""><i class="bi bi-facebook"></i></a>
+          <a href=""><i class="bi bi-instagram"></i></a>
+          <a href=""><i class="bi bi-tiktok"></i></a>
+        </div>
+        <div class="container">
+          <div class="copyright">
+            <span>Copyright</span>
+            <strong class="px-1 sitename">Buena Muerte y Amargura</strong>
+            <span>All Rights Reserved</span>
+          </div>
+          <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you've purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+            Designed by
+            <a href="https://bootstrapmade.com/">
+              BootstrapMade &amp; LidiaLopez</a
+            >
+          </div>
         </div>
       </div>
+    </footer>
 
-    </section><!-- /Blog Posts Section -->
+    <!-- Scroll Top -->
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
 
-    <!-- Blog Pagination Section -->
-    <section id="blog-pagination" class="blog-pagination section">
+    <!-- Preloader -->
+    <div id="preloader"></div>
 
-      <div class="container">
-        <div class="d-flex justify-content-center">
-          <ul>
-            <li><a href="#"><i class="bi bi-chevron-left"></i></a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#" class="active">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li>...</li>
-            <li><a href="#">10</a></li>
-            <li><a href="#"><i class="bi bi-chevron-right"></i></a></li>
-          </ul>
-        </div>
-      </div>
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
 
-    </section><!-- /Blog Pagination Section -->
-
-  </main>
-
-  <footer id="footer" class="footer dark-background">
-    <div class="container">
-      <h3 class="sitename">Buena Muerte y Amargura</h3>
-      <p>Real e Ilustre Cofradia del Cristo de la Buena Muerte y María Santísima de la Amargura</p>
-      <div class="social-links d-flex justify-content-center">
-        <a href=""><i class="bi bi-twitter-x"></i></a>
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-        <a href=""><i class="bi bi-tiktok"></i></a>
-      </div>
-      <div class="container">
-        <div class="copyright">
-          <span>Copyright</span> <strong class="px-1 sitename">Buena Muerte y Amargura</strong> <span>All Rights Reserved</span>
-        </div>
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you've purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-          Designed by <a href="https://bootstrapmade.com/">  BootstrapMade &amp; LidiaLopez</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
-
-</body>
-
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+  </body>
 </html>

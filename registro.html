@@ -94,60 +94,92 @@
 
     <main class="main">
       <!-- About Section -->
-      <section id="contact" class="contact section"> 
+      <section id="contact" class="contact section registro"> 
         
         <!-- Page Title -->
         <div class="page-title light-background">
           <div
             class="container d-lg-flex justify-content-between align-items-center"
           >
-            <h1 class="mb-2 mb-lg-0">Acceso</h1>
+            <h1 class="mb-2 mb-lg-0">Registro</h1>
             <nav class="breadcrumbs">
               <ol>
                 <li><a href="index.html">Inicio</a></li>
-                <li class="current">Acceso</li>
+                <li class="current">Registro</li>
               </ol>
             </nav>
           </div>
         </div>
         <!-- End Page Title -->
         <div class="container mt-5">
-          <div class="row gy-4">
-            <div class="col-lg-6">
-              <img src="assets/img/acceso.jpeg" class="img-fluid" alt="imagen del Cristo de la Buena muerte" />
-            </div>
-            <div class="col-lg-6">
-              <div class="text-center mb-4" data-aos="fade-up" data-aos-delay="200">
-                  <img alt="escudo cofradía" style="width: 35%" class="mb-3" src="assets/img/favicon.png"/>
-                  <h4 class="fw-bold mb-1 mt-5">
-                    Cofradía Buena Muerte y Amargura
-                  </h4>
-                  <p class="text-muted">ACCESO PRIVADO</p>
-              </div> 
-                    
-              <form action="" method="POST" class="php-acceso-form mt-5" data-aos="fade-up" data-aos-delay="300">
-                <div class="mb-4">
-                  <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email"
-                  name="email" placeholder="e-mail" required>
-                </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="formulario">
+                        <h3 class="text-center mb-4">Formulario de Registro</h3>
+                        <form action="" method="POST" class="php-acceso-form" data-aos="fade-up" data-aos-delay="200">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            </div>
 
-                <div class="mb-4">
-                  <label for="password" class="form-label">Contraseña</label>
-                  <input type="password" class="form-control" id="password"
-                  name="password" placeholder="Contraseña" required>
-                </div>
+                            <div class="mb-3">
+                                <label for="apellidos" class="form-label">Apellidos</label>
+                                <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+                            </div>
 
-                <div class="col-md-12 text-center mt-5" data-aos="fade-up" data-aos-delay="400">
-                  <button type="submit">Acceder
-                  </button>
+                            <div class="mb-3">
+                                <label for="dni" class="form-label">DNI</label>
+                                <input type="text" class="form-control" id="dni" name="dni" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="direccion" class="form-label">Dirección</label>
+                                <input type="text" class="form-control" id="direccion" name="direccion" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="poblacion" class="form-label">Poblacion</label>
+                                <input type="text" class="form-control" id="poblacion" name="poblacion" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="provincia" class="form-label">Provincia</label>
+                                <input type="text" class="form-control" id="provincia" name="provincia" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="cp" class="form-label">Código Postal</label>
+                                <input type="text" class="form-control" id="cp" name="cp" required>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="tipoHermano" class="form-label">Tipo de Hermano</label>
+                                <select class="form-select" id="tipoHermano" name="tipoHermano" required>
+                                    <option value="">Seleccione......</option>
+                                    <option value="nazareno">Nazareno</option>
+                                    <option value="costalero">Costalero</option>
+                                    <option value="mantilla">Mantilla</option>
+                                    <option value="otros">Otros</option>
+                                </select>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <button type="submit">Registrarse</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-              </form>  
-              <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="500">
-                <a class="text-decoration-none fw-4" href="registro.html">Quiero ser Hermano/a</a>
-              </div>
             </div>
-          </div>
         </div>
       </section>
       <!--/About Section -->

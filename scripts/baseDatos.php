@@ -1,6 +1,6 @@
 <?php
 
-//Creamos una base variable con la base de datos para crearla sino existe
+//Creamos una variable con la base de datos para crearla sino existe
 $sqlBaseDatos = "
 CREATE DATABASE IF NOT EXISTS COFRADIA  ;
 USE COFRADIA;

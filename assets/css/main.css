@@ -1599,10 +1599,10 @@ section,
 # Registro
 --------------------------------------------------------------*/
 .registro{
-  background-image: url(/assets/img/hero-carousel/hero-carousel-1.jpg);
+  background-image: url(../img/hero-carousel/hero-carousel-1.jpg);
   background-size: cover;
   background-position: center;
-  backdrop-filter: blur (5px);
+  backdrop-filter: blur(5px);
 }
 
 .formulario {

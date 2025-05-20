@@ -26,6 +26,7 @@ Mi proyecto fin de ciclo se basa en la implementación de un sitio web para una 
 
 - HTML
 - CSS
+- Bootstrap
 - JavaScript
 
 ### Backend

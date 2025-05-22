@@ -11,7 +11,7 @@
     <meta name="keywords" content="" />
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="../assets/img/favicon.png" rel="icon" />
 
     <!-- Fuentes-->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -23,22 +23,22 @@
 
     <!-- Vendor CSS Files -->
     <link
-      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      href="../assets/vendor/bootstrap/css/bootstrap.min.css"
       rel="stylesheet"
     />
     <link
-      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      href="../assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="../assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
     <link
-      href="assets/vendor/glightbox/css/glightbox.min.css"
+      href="../assets/vendor/glightbox/css/glightbox.min.css"
       rel="stylesheet"
     />
 
     <!-- Main CSS File -->
-    <link href="assets/css/main.css" rel="stylesheet" />
+    <link href="../assets/css/main.css" rel="stylesheet" />
 
     <!-- =======================================================
   * Template Name: MeFamily
@@ -54,38 +54,38 @@
       <div
         class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between"
       >
-        <a href="index.html" class="logo d-flex align-items-center">
-          <img src="assets/img/logo.png" alt="escudo de la Cofradia" />
+        <a href="../index.html" class="logo d-flex align-items-center">
+          <img src="../assets/img/logo.png" alt="escudo de la Cofradia" />
           <h1 class="sitename">BUENA MUERTE Y AMARGURA</h1>
         </a>
 
         <nav id="navmenu" class="navmenu">
           <ul>
-            <li><a href="index.html" class="active">Inicio</a></li>
+            <li><a href="../index.html" class="active">Inicio</a></li>
             <li class="dropdown">
               <a href="#"
                 ><span>Hermandad</span>
                 <i class="bi bi-chevron-down toggle-dropdown"></i
               ></a>
               <ul>
-                <li><a href="historia.html">Historia</a></li>
+                <li><a href="../historia.html">Historia</a></li>
                 <li class="dropdown">
                   <a href="#"
                     ><span>Colectivos</span>
                     <i class="bi bi-chevron-down toggle-dropdown"></i
                   ></a>
                   <ul>
-                    <li><a href="juntaGobierno.html">Junta de Gobierno</a></li>
-                    <li><a href="grupoJoven.html">Grupo Joven</a></li>
-                    <li><a href="#">Costaleros</a></li>
+                    <li><a href="../juntaGobierno.html">Junta de Gobierno</a></li>
+                    <li><a href="../grupoJoven.html">Grupo Joven</a></li>
+                    <li><a href="../costaleros.html">Costaleros</a></li>
                   </ul>
                 </li>
               </ul>
             </li>
-            <li><a href="patrimonio.html">Patrimonio</a></li>
-            <li><a href="galeria.html">Galeria</a></li>
-            <li><a href="acceso.html">Acceso</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="../patrimonio.html">Patrimonio</a></li>
+            <li><a href="../galeria.html">Galeria</a></li>
+            <li><a href="#">Acceso</a></li>
+            <li><a href="../contacto.html">Contacto</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
@@ -93,6 +93,17 @@
     </header>
 
     <main class="main">
+      <?php
+      include("./mysqlConexion.php");
+      include("./bibliotecaFunciones.php");
+      include("../scripts/basedatos.php");
+      
+      $baseDatos="cofradia";
+      $pdo=conexionSinBase();
+      existeBaseDatos($pdo,$baseDatos,$sqlBaseDatos);
+     
+      
+      ?>
       <!-- About Section -->
       <section id="contact" class="contact section"> 
         
@@ -104,7 +115,7 @@
             <h1 class="mb-2 mb-lg-0">Acceso</h1>
             <nav class="breadcrumbs">
               <ol>
-                <li><a href="index.html">Inicio</a></li>
+                <li><a href="../index.html">Inicio</a></li>
                 <li class="current">Acceso</li>
               </ol>
             </nav>
@@ -114,11 +125,11 @@
         <div class="container mt-5">
           <div class="row gy-4">
             <div class="col-lg-6">
-              <img src="assets/img/acceso.jpeg" class="img-fluid" alt="imagen del Cristo de la Buena muerte" />
+              <img src="../assets/img/acceso.jpeg" class="img-fluid" alt="imagen del Cristo de la Buena muerte" />
             </div>
             <div class="col-lg-6">
               <div class="text-center mb-4" data-aos="fade-up" data-aos-delay="200">
-                  <img alt="escudo cofradía" style="width: 35%" class="mb-3" src="assets/img/favicon.png"/>
+                  <img alt="escudo cofradía" style="width: 35%" class="mb-3" src="../assets/img/favicon.png"/>
                   <h4 class="fw-bold mb-1 mt-5">
                     Cofradía Buena Muerte y Amargura
                   </h4>
@@ -144,7 +155,7 @@
                 </div>
               </form>  
               <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="500">
-                <a class="text-decoration-none fw-4" href="registro.html">Quiero ser Hermano/a</a>
+                <a class="text-decoration-none fw-4" href="./registro.php">Quiero ser Hermano/a</a>
               </div>
             </div>
           </div>
@@ -198,13 +209,13 @@
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../assets/vendor/aos/aos.js"></script>
+    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
 
     <!-- Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
   </body>
 </html>

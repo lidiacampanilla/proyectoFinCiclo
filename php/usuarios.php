@@ -79,48 +79,50 @@
     <!-- About Section -->
     <section id="about" class="about section">
 
-      <!-- Section Title --
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Real e Ilustre Cofradia</h2>
-        <h2>Cristo de la Buena Muerte y Maria Santisima de la Amargura</h2>
-        
-      </div> End Section Title -->
-      <!-- Page Title -->
     <div class="page-title light-background">
         <div class="container d-lg-flex justify-content-between align-items-center">
           <h1 class="mb-2 mb-lg-0">¡Bienvenido </h1>
           <nav class="breadcrumbs">
             <ol>
               <li><a href="../index.html">Salir</a></li>
-              <li class="current">Mi perfil</li>
+              <li class="current"><a href="#">Mi perfil</a></li>
             </ol>
           </nav>
         </div>
-      </div><!-- End Page Title -->
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+      </div><!-- FIN Menu Bienvenida-->
 
+       <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Avisos importantes</h2>        
+      </div>
+      <!-- Page Title -->
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
           <div class="col-lg-6">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-6 content">
-            <h3>Voluptatem dignissimos provident</h3>
-            <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <ul>
-              <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
-            </ul>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-            </p>
+            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
           </div>
         </div>
-
+        <div class="row gy-4">
+          <div class="col-lg-6">
+            <img src="../assets/img/Nazarenos.jpeg" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-6">
+            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
+          </div>
+        </div>
+        <div class="row gy-4">
+          <div class="col-lg-6">
+            <img src="../assets/img/mantillas.jpeg" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-6">
+            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
+          </div>
+        </div>
+        <div class="row gy-4">
+          <div class="col-lg-6">
+            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
+          </div>
+        </div>
       </div>
 
     </section> <!--/About Section -->

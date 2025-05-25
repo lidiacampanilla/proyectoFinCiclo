@@ -21,6 +21,52 @@ function existeBaseDatos($pdo, $baseDatos, $sqlBaseDatos)
     }
 }
 
+//Con la siguiente función vamos a validar el DNI
+function validarDNI($dni){
+    $letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+    //Transformamos todo a mayuscula
+    $dni = strtoupper($dni);
+    //Esta funcion "preg_match" devuleve 1 si coincide con la expresion regular y 0 sino coincide
+    if (!preg_match("/^[0-9]{8}[A-Z]$/",$dni)) return false;
+    $numero = substr ($dni, 0, 8);
+    $letra = substr($dni, -1);
+    return $letra == $letras[$numero % 23];
+}
+
+//Con la siguiente función validamos la cta_bancaria(IBAN) que deberá tener dos letras y 22 números
+function validarIBAN ($iban){
+    return preg_match("/^[A-Z]{2}[0-9]{22}$/", strtoupper($iban));
+}
+
+//Con la siguiente función insertaremos datos en cualquier tabla
+function insertar($pdo, $baseDatos, $tabla, $datos)
+{
+    //Nos aseguramos de estar usando la base de datos
+    $pdo->query("USE $baseDatos");
+
+    //Del array datos obtenemos las columnas y los valores
+    $columnas = array_keys($datos);
+    $valores = array_values($datos);
+
+    //Para hacer una funcion que sirva para cualquier tabla vamos a preparar las distintas partes del INSERT.Primero vamos a preparar los valores, que como no los sabemos, vamos a utilizar ?. Con implode conseguimos unir los valores del array en una cadena separada por ','. Con 'array_fill' obtenemos un array desde la posicion 0, con tantos elementos como columnas tengamos ($columnas), y los elementos del array son las '?'.
+    $parametros = implode(',', array_fill(0, count($columnas), '?'));
+
+    //Definimos la consulta. Con "implode" obtenemos los nombres de las columnas en una cadena separada por ','
+    $consulta = "INSERT INTO $tabla (" . implode(',', $columnas) . ") VALUES ($parametros)";
+
+    //Preparamos la consulta para evitar inyecciones de codigo, utilizamos try..catch para manejar los errores, ya que en la conexion hemos utilazado ERRMODE_EXCEPTION
+    try {
+        //Preparamos nuestra consulta
+        $stmt = $pdo->prepare($consulta);
+        //Ejecutamos, con esto conseguimos sustituir los ? por los valores obtenidos con array_values.
+        $stmt->execute($valores);
+        /* echo ("Se ha insertado el registro correctamente"); */
+    } catch (PDOException $e) {
+        print "<p>Código de Error:" . $e->getCode() . "<br>El Mensaje es: " . $e->getMessage() . "</p>";
+        exit;
+    }
+}
+
 //Creamos la función para mostrar los usuarios, pasamos por parametro, la conexión, la base de datos y la tabla a mostrar.
 function mostrarUsuarios($pdo, $baseDatos, $tabla)
 {
@@ -102,33 +148,7 @@ function obtenerCategorias($pdo, $baseDatos)
     }
 }
 //Hacemos la funcion insertar que recibira por parametro la conexion, la base de datos,la tabla y los datos recogidos de la funcion "insertar"
-function insertar($pdo, $baseDatos, $tabla, $datos)
-{
-    //Nos aseguramos de estar usando la base de datos
-    $pdo->query("USE $baseDatos");
 
-    //Del array datos obtenemos las columnas y los valores
-    $columnas = array_keys($datos);
-    $valores = array_values($datos);
-
-    //Para hacer una funcion que sirva para cualquier tabla vamos a preparar las distintas partes del INSERT.Primero vamos a preparar los valores, que como no los sabemos, vamos a utilizar ?. Con implode conseguimos unir los valores del array en una cadena separada por ','. Con 'array_fill' obtenemos un array desde la posicion 0, con tantos elementos como columnas tengamos ($columnas), y los elementos del array son las '?'.
-    $parametros = implode(',', array_fill(0, count($columnas), '?'));
-
-    //Definimos la consulta. Con "implode" obtenemos los nombres de las columnas en una cadena separada por ','
-    $consulta = "INSERT INTO $tabla (" . implode(',', $columnas) . ") VALUES ($parametros)";
-
-    //Preparamos la consulta para evitar inyecciones de codigo, utilizamos try..catch para manejar los errores, ya que en la conexion hemos utilazado ERRMODE_EXCEPTION
-    try {
-        //Preparamos nuestra consulta
-        $stmt = $pdo->prepare($consulta);
-        //Ejecutamos, con esto conseguimos sustituir los ? por los valores obtenidos con array_values.
-        $stmt->execute($valores);
-        /* echo ("Se ha insertado el registro correctamente"); */
-    } catch (PDOException $e) {
-        print "<p>Código de Error:" . $e->getCode() . "<br>El Mensaje es: " . $e->getMessage() . "</p>";
-        exit;
-    }
-}
 
 //Con la siguiente funcion hacemos una tabla que muestre todas las recetas, trabajamos con las tablas RECETAS y CATEGORIAS, para mostrar tambien las categorias de las recetas
 function tablaGestionRe($pdo, $baseDatos, $tabla1, $tabla2, $tabla3)

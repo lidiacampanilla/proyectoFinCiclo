@@ -116,7 +116,9 @@
                 <div class="col-md-8 col-lg-6">
                     <div class="formulario">
                         <h3 class="text-center mb-4">Formulario de Registro</h3>
-                        <form action="" method="POST" class="php-acceso-form" data-aos="fade-up" data-aos-delay="200">
+                        <!-- El siguiente contenedor esta oculto, si hay algun error mostrara un mensaje mediante .js -->
+                        <div id="error" style ="color: red; margin-bottom : 1rem; display: none;"></div>
+                        <form action="./registroUsuarios.php" method="POST" class="php-acceso-form" data-aos="fade-up" data-aos-delay="200">
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre</label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -243,5 +245,8 @@
 
     <!-- Main JS File -->
     <script src="../assets/js/main.js"></script>
+  
+    <!-- JS Ficheros  -->
+    <script src="../js/controlRegistrar.js"></script>
   </body>
 </html>

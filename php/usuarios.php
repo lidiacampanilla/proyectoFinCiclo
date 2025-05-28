@@ -1,3 +1,16 @@
+<!-- Nos aseguramos de iniciar la sesion -->
+ <?php
+  session_start();
+
+  if(!isset($_SESSION['tipo'])){
+    header("Location: acceso.php");
+    exit;
+  }
+
+  //Inicializamos las variables que vamos a usar
+  $tipoUsuario = $_SESSION['tipo'];
+  $nombre = $_SESSION['nombre'];
+ ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -81,7 +94,7 @@
 
     <div class="page-title light-background">
         <div class="container d-lg-flex justify-content-between align-items-center">
-          <h1 class="mb-2 mb-lg-0">¡Bienvenido </h1>
+          <h1 class="mb-2 mb-lg-0">¡Bienvenid@ <?php echo htmlspecialchars($nombre); ?>!</h1>
           <nav class="breadcrumbs">
             <ol>
               <li><a href="../index.html">Salir</a></li>
@@ -95,14 +108,14 @@
       <div class="container section-title" data-aos="fade-up">
         <h2>Avisos importantes</h2>        
       </div>
-      <!-- Page Title -->
+      <!-- Page Title --> 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-4">
+        <div class="row gy-4" id="otros" style ="display: none;">
           <div class="col-lg-6">
             <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
           </div>
         </div>
-        <div class="row gy-4">
+        <div class="row gy-4" id="nazarenos" style ="display: none;">
           <div class="col-lg-6">
             <img src="../assets/img/Nazarenos.jpeg" class="img-fluid" alt="">
           </div>
@@ -110,7 +123,7 @@
             <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
           </div>
         </div>
-        <div class="row gy-4">
+        <div class="row gy-4" id="mantillas" style ="display: none;">
           <div class="col-lg-6">
             <img src="../assets/img/mantillas.jpeg" class="img-fluid" alt="">
           </div>
@@ -118,7 +131,12 @@
             <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
           </div>
         </div>
-        <div class="row gy-4">
+        <div class="row gy-4" id="administrador" style ="display: none;">
+          <div class="col-lg-6">
+            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
+          </div>
+        </div>
+        <div class="row gy-4" id="junta" style ="display: none;">
           <div class="col-lg-6">
             <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
           </div>
@@ -171,6 +189,14 @@
 
   <!-- Main JS File -->
   <script src="../assets/js/main.js"></script>
+
+  <!-- Pasamos el valor de Nomnb_tipo a nuestro archivo .js -->
+   <script>
+    let tipoUsuario = "<?php echo $_SESSION['tipo']; ?>";
+   </script>
+
+  <!-- Fichero Control JS -->
+   <script src="../js/controlUsuarios.js"></script>
 
 </body>
 

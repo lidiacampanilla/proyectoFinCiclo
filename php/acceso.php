@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -39,7 +40,8 @@
 
     <!-- Main CSS File -->
     <link href="../assets/css/main.css" rel="stylesheet" />
-
+<!-- Ficheros de control JS -->
+    <script src="../js/controlAcceso.js" defer></script>
     <!-- =======================================================
   * Template Name: MeFamily
   * Template URL: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/
@@ -93,7 +95,9 @@
     </header>
 
     <main class="main">
+      <!--El siguiente trozo de codigo podriamos ponerlo en un archivo aparte y ejecutarlo solo al desplegar mi aplicacion -->
       <?php
+      /*
       include("./mysqlConexion.php");
       include("./bibliotecaFunciones.php");
       include("../scripts/basedatos.php");
@@ -102,8 +106,10 @@
       $pdo=conexionSinBase();
       existeBaseDatos($pdo,$baseDatos,$sqlBaseDatos);
      
-      
+      */
       ?>
+
+      
       <!-- About Section -->
       <section id="contact" class="contact section"> 
         
@@ -135,8 +141,9 @@
                   </h4>
                   <p class="text-muted">ACCESO PRIVADO</p>
               </div> 
-                    
-              <form action="" method="POST" class="php-acceso-form mt-5" data-aos="fade-up" data-aos-delay="300">
+              <!-- Para mostrar error de una forma mas amigable con el usuario -->
+              <div id="error" style ="color: red; margin-bottom : 1rem; display: none;"></div>      
+              <form id="loginForm" action="" method="POST"  class="php-acceso-form mt-5" data-aos="fade-up" data-aos-delay="300">
                 <div class="mb-4">
                   <label for="email" class="form-label">Email</label>
                   <input type="email" class="form-control" id="email"
@@ -208,6 +215,8 @@
     <!-- Preloader -->
     <div id="preloader"></div>
 
+     
+
     <!-- Vendor JS Files -->
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/vendor/php-email-form/validate.js"></script>
@@ -215,7 +224,8 @@
     <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
 
+
     <!-- Main JS File -->
-    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/main.js" defer></script>
   </body>
 </html>

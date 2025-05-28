@@ -11,13 +11,20 @@ function existeBaseDatos($pdo, $baseDatos, $sqlBaseDatos)
 {
     $resultado = $pdo->query('SHOW DATABASES');
 
-    $registros = $resultado->fetchAll();
-    for ($i = 0; $i < count($registros); $i++) {
+    /*$registros = $resultado->fetchAll();
+   for ($i = 0; $i < count($registros); $i++) {
         if ($registros[$i] == $baseDatos) {
             return true;
         } else {
             crearBaseDatos($pdo, $sqlBaseDatos);
         }
+    }*/
+    $registros = $resultado ->fetchAll(PDO::FETCH_COLUMN);
+    if (in_array ($baseDatos, $registros)){
+        return true;
+    }else{
+        crearBaseDatos($pdo, $sqlBaseDatos);
+        return false;
     }
 }
 
@@ -66,6 +73,28 @@ function insertar($pdo, $baseDatos, $tabla, $datos)
         exit;
     }
 }
+
+//Creamos una funcion para validar el acceso de usuarios
+function validarAcceso($email,$password,$pdo){
+    //Lanzamos la consulta para iniciar la verificacion del email y del password
+        $stmt = $pdo -> prepare ("SELECT U.id_usu, U.password, U.Nomb_usu, T.Nomb_tipo
+                                  FROM USUARIO U
+                                  JOIN PERTENECEN P ON U.id_usu = P.id_usu
+                                  JOIN TIPO T ON P.id_tipo = T.id_tipo
+                                  WHERE U.email = ?");
+        $stmt->execute([$email]);
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($usuario && password_verify($password, $usuario['password'])){
+          return[
+            'id_usu'=>$usuario['id_usu'],
+            'tipo'=>$usuario['Nomb_tipo'],
+            'nombre'=>$usuario['Nomb_usu']
+          ];
+        }else{
+          return false;
+        }
+      } 
 
 //Creamos la función para mostrar los usuarios, pasamos por parametro, la conexión, la base de datos y la tabla a mostrar.
 function mostrarUsuarios($pdo, $baseDatos, $tabla)

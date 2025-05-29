@@ -12,8 +12,11 @@ function conexion($baseDatos){
         $pdo = new PDO("mysql:host=$server;dbname=$baseDatos", $user, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
-        print "<p>Código de Error:" . $e->getCode() . "<br>El Mensaje es: " . $e->getMessage() . "</p>";
-        //echo "Error en la conexion: ".$e->getMessage();
+         // Puedes loguear el error aquí si lo necesitas
+        echo json_encode([
+            'success' => false,
+            'message' => 'Error de conexión a la base de datos.'
+        ]);
         exit;
     }
     return $pdo;
@@ -37,4 +40,3 @@ function conexionSinBase(){
     }
     return $pdo;
 }
-?>

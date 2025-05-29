@@ -98,14 +98,16 @@
           <nav class="breadcrumbs">
             <ol>
               <li><a href="../index.html">Salir</a></li>
-              <li class="current"><a href="#">Mi perfil</a></li>
+              <li class="current"><a href="#" id="miPerfilBtn">Mi perfil</a></li>
             </ol>
           </nav>
         </div>
       </div><!-- FIN Menu Bienvenida-->
 
        <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
+      <div id="miPerfil" class="container section-title" data-aos="fade-up" style="display: none;"></div>
+      <!-- Page Title -->  
+      <div id="avisos" class="container section-title" data-aos="fade-up">
         <h2>Avisos importantes</h2>        
       </div>
       <!-- Page Title --> 

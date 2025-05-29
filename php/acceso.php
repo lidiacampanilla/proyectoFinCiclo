@@ -40,8 +40,7 @@
 
     <!-- Main CSS File -->
     <link href="../assets/css/main.css" rel="stylesheet" />
-<!-- Ficheros de control JS -->
-    <script src="../js/controlAcceso.js" defer></script>
+
     <!-- =======================================================
   * Template Name: MeFamily
   * Template URL: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/
@@ -143,7 +142,7 @@
               </div> 
               <!-- Para mostrar error de una forma mas amigable con el usuario -->
               <div id="error" style ="color: red; margin-bottom : 1rem; display: none;"></div>      
-              <form id="loginForm" action="" method="POST"  class="php-acceso-form mt-5" data-aos="fade-up" data-aos-delay="300">
+              <form id="loginForm" action="login.php" method="POST"  class="php-acceso-form mt-5" data-aos="fade-up" data-aos-delay="300">
                 <div class="mb-4">
                   <label for="email" class="form-label">Email</label>
                   <input type="email" class="form-control" id="email"
@@ -215,7 +214,8 @@
     <!-- Preloader -->
     <div id="preloader"></div>
 
-     
+     <!-- Ficheros de control JS -->
+    <script src="../js/controlAcceso.js" defer></script>
 
     <!-- Vendor JS Files -->
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

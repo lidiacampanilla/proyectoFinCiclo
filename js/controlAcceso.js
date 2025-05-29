@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded',function(){
     let form = document.getElementById('loginForm');
     console.log('form encontrado', form);
     let errorDiv = document.getElementById("error");
-    let url = '/proyectoFinCiclo/php/login.php';
+    let url = 'login.php';
 
     form.addEventListener('submit', async e =>{
         //Para evitar recargas
@@ -27,11 +27,18 @@ document.addEventListener('DOMContentLoaded',function(){
             });
             console.log('fetch enviado esperando');
 
-            let result = await response.json();
+            let text = await response.text();
+            console.log('respuesta del servidor:', text);   
 
+            let result;
+            try{
+                result = JSON.parse(text);
+            } catch (e) {
+                throw new Error('Respuesta no es JSON: ');
+            }
             console.log('respuesta', result);
             if(result.success){
-                window.location.href='./usuarios.php';
+                window.location.href='usuarios.php';
             }else{
                 errorDiv.innerText = result.message;
                 errorDiv.style.display = 'block';

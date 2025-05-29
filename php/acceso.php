@@ -142,7 +142,7 @@
               </div> 
               <!-- Para mostrar error de una forma mas amigable con el usuario -->
               <div id="error" style ="color: red; margin-bottom : 1rem; display: none;"></div>      
-              <form id="loginForm" action="login.php" method="POST"  class="php-acceso-form mt-5" data-aos="fade-up" data-aos-delay="300">
+              <form id="loginForm" action="#" method="POST"  class="php-acceso-form mt-5" data-aos="fade-up" data-aos-delay="300">
                 <div class="mb-4">
                   <label for="email" class="form-label">Email</label>
                   <input type="email" class="form-control" id="email"

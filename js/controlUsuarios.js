@@ -17,18 +17,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const perfilBtn = document.getElementById('miPerfilBtn');
     const divMiPerfil = document.getElementById('miPerfil');
     const avisosDiv = document.getElementById('avisos');
+    const avisosTitulo = document.getElementById('avisosTitulo');
     if (!perfilBtn || !divMiPerfil) return;
 
     perfilBtn.addEventListener('click', function(e) {
         e.preventDefault();
         divMiPerfil.style.display = 'block';
         if (avisosDiv) avisosDiv.style.display = 'none'; 
-
+        if (avisosTitulo) avisosTitulo.style.display = 'none';    
+           
+    
         //Limpiamos el contenido previo
         divMiPerfil.innerHTML = '<h2>Mi Perfil</h2>';
 
         // Tipos de usuario normales
-        const tiposNormales = ['mantilla', 'nazareno', 'costalero', 'otro'];
+        const tiposNormales = ['mantilla', 'nazareno', 'costalero', 'otros'];
 
         if (tiposNormales.includes(tipoUsuario.toLowerCase())) {
             // Redirige a mostrarDatos.php

@@ -238,54 +238,81 @@ function tablaGestionRe($pdo, $baseDatos, $tabla1, $tabla2, $tabla3)
 }
 
 //Con la siguiente funcion hacemos una tabla que muestre todas las categorias, trabajamos con las tablas RECETAS y PERTENECEN, para poder controlar si se puede borrar o no una categoria
-function tablaGestionCat($pdo, $baseDatos, $tabla)
+function tablaDatos($pdo, $baseDatos, $idUsu)
 {
     //Nos aseguramos de estar utilizando nuestra base de datos
     $pdo->query("USE $baseDatos");
 
     //Ejecutamos la consulta con query
-    $consulta = "SELECT * FROM $tabla";
-    $resultado = $pdo->query($consulta);
+    $consulta = "SELECT U.*, T.Nomb_tipo, T.id_tipo FROM USUARIO U
+    JOIN PERTENECEN P ON U.id_usu = P.id_usu
+    JOIN TIPO T ON P.id_tipo = T.id_tipo
+    WHERE U.id_usu = ?";
+    $stmt = $pdo->prepare($consulta);
+    $stmt->execute([$idUsu]);
+    $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
     //Lanzamos errores si no se realiza la consulta, si no hay ningun registro(elseif) nos indicara que la tabla esta vacia, sino mostrara la tabla
     if (!$resultado) {
-        echo "<p>Error en la consulta SQLSTATE[{$pdo->errorCode()}]: {$pdo->errorInfo()[2]}</p>\n";
-    } //Utilizamos PDO::FETCH_ASSOC , para obtener los datos correctamente sin duplicidad
-    elseif (!count($registros = $resultado->fetchAll(PDO::FETCH_ASSOC))) {
         echo "<p id=\"espaciado\">No hay ningún registro en la tabla</p>\n";
-    } else {
+    } //Utilizamos PDO::FETCH_ASSOC , para obtener los datos correctamente sin duplicidad
+    else {
         echo "<div class='container mt-4'>";
-        echo "<table class='table table-bordered '>";
-        echo "<thead>";
-        echo "<tr>";
-
-        //Con las siguientes sentencias cogeria los nombres de las columnas para hacer la cabecera de la tabla de manera NO MANUAL
-
-        foreach (array_keys($registros[0]) as $columna) {
-            echo "<th class='bg-success text-white'>" . htmlspecialchars($columna) . "</th>";
-        }
-        echo "</tr>";
-        echo "</thead>";
-        echo "<tbody>";
-        foreach ($registros as $registro) {
-            echo "<tr>";
-            foreach ($registro as $valor) {
-                echo "<td>", $valor, "</td>";
+        echo "<form method='post' action='modificarUsuario.php'>";
+        $usuario = $resultado[0]; // Asumimos que solo hay un usuario para este id_usu
+        foreach ($usuario as $columna => $valor) {
+            // No permitir modificar la clave primaria ni el tipo de usuario, el campo id_tipo no lo vamos a mostrar.
+            if ($columna == 'id_usu' || $columna == 'id_tipo') {
+                continue;
             }
-            echo "</tr>";
+            $readonly = ($columna == 'id_usu' || $columna == 'Nomb_tipo') ? 'readonly' : '';
+            $bg = ($readonly) ? "background-color:#e9ecef;" : "";
+            echo "<div class='mb-3'>";
+            echo "<label for='$columna' class='form-label'>" . htmlspecialchars($columna) . "</label>";
+            if($columna == 'password') {
+                // Para la contraseña, mostramos un campo de tipo password
+                echo "<input type='password' class='form-control' id='$columna' name='$columna' value='" . htmlspecialchars($valor) . "' style='color:gray;$bg' $readonly>";
+            } elseif ($columna == 'email') {
+                // Para el email, mostramos un campo de tipo email
+                echo "<input type='email' class='form-control' id='$columna' name='$columna' value='" . htmlspecialchars($valor) . "' style='color:gray;$bg' $readonly>";
+            } else {
+                // Para los demás campos, mostramos un campo de texto
+                echo "<input type='text' class='form-control' id='$columna' name='$columna' value='" . htmlspecialchars($valor) . "' style='color:gray;$bg' $readonly>";
+            }
+            
+            echo "</div>";
         }
-        echo "<tr>";
-        echo "<td colspan='" . count(array_keys($registros[0])) . "'>";
-        echo "<p>Elige una opcion</p>";
-        echo "<div>";
-        echo "<button id='insertar' class='btn btn-primary me-2'>Insertar</button>";
-        echo "<button id='modificar' class='btn btn-primary me-2'>Modificar</button>";
-        echo "<button id='borrar' class='btn btn-primary'>Borrar</button>";
+        $id_tipo = $usuario['id_tipo'];
+        mostrarBotonesOperaciones($pdo, $baseDatos, $id_tipo);
+        echo "</form>";
         echo "</div>";
-        echo "</td>";
-        echo "</tr>";
-        echo "</tbody>";
-        echo "</table>";
+    }
+}
+function mostrarBotonesOperaciones($pdo, $baseDatos, $id_tipo)
+{
+    $pdo->query("USE $baseDatos");
+
+    $sqlOperaciones = "SELECT O.id_ope, O.Nomb_ope, O.Descrip_ope
+        FROM OPERACIONES O
+        JOIN REALIZAN R ON O.id_ope = R.id_ope
+        WHERE R.id_tipo = ?";
+    $stmtOpe = $pdo->prepare($sqlOperaciones);
+    $stmtOpe->execute([$id_tipo]);
+    $operaciones = $stmtOpe->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($operaciones) {
+        echo "<div class='mb-3'>";
+        echo "<h5>Operaciones disponibles:</h5>";
+        foreach ($operaciones as $op) {
+            echo "<form method='post' action='operacion.php' style='display:inline-block; margin-right:10px;'>";
+            echo "<input type='hidden' name='id_ope' value='" . htmlspecialchars($op['id_ope']) . "'>";
+            echo "<button type='submit' class='btn btn-secondary' title='" . htmlspecialchars($op['Descrip_ope']) . "'>";
+            echo htmlspecialchars($op['Nomb_ope']);
+            echo "</button>";
+            echo "</form>";
+        }
         echo "</div>";
+    } else {
+        echo "<div class='alert alert-info'>No tienes operaciones asignadas.</div>";
     }
 }
 function obtenerNumero($pdo, $baseDatos)
@@ -378,7 +405,7 @@ function modificar($pdo, $baseDatos, $tabla, $datos)
 }
 
 //Con la siguiente funcion seleccionamos la fila o filas elegidas por el usuario para eliminarlas de la tabla. Le pasamos por parametro la conexion, la base de datos, la tabla y los datos obtenidos del formulario tablaEliminar
-function eliminarRegistro($pdo, $baseDatos, $tabla, $datos)
+function borrar ($pdo, $baseDatos, $tabla, $datos)
 {
     //Nos aseguramos de estan en la base de datos
     $pdo->query("USE $baseDatos");

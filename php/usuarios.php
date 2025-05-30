@@ -107,11 +107,11 @@
        <!-- Section Title -->
       <div id="miPerfil" class="container section-title" data-aos="fade-up" style="display: none;"></div>
       <!-- Page Title -->  
-      <div id="avisos" class="container section-title" data-aos="fade-up">
+      <div id="avisosTitulo" class="container section-title" data-aos="fade-up">
         <h2>Avisos importantes</h2>        
       </div>
       <!-- Page Title --> 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div id="avisos" class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4" id="otros" style ="display: none;">
           <div class="col-lg-6">
             <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">

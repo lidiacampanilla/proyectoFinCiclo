@@ -257,18 +257,38 @@ function tablaDatos($pdo, $baseDatos, $idUsu)
     } //Utilizamos PDO::FETCH_ASSOC , para obtener los datos correctamente sin duplicidad
     else {
         echo "<div class='container mt-4'>";
-        echo "<form method='post' action='modificarUsuario.php'>";
+        echo "<form method='post' action=''>";
         $usuario = $resultado[0]; // Asumimos que solo hay un usuario para este id_usu
+        // AÑADE ESTE CAMPO OCULTO:
+echo "<input type='hidden' name='id_usu' value='" . htmlspecialchars($usuario['id_usu']) . "'>";
+
+// Obtener todos los tipos para el select
+        $stmtTipos = $pdo->query("SELECT id_tipo, Nomb_tipo FROM TIPO");
+        $tipos = $stmtTipos->fetchAll(PDO::FETCH_ASSOC);
         foreach ($usuario as $columna => $valor) {
             // No permitir modificar la clave primaria ni el tipo de usuario, el campo id_tipo no lo vamos a mostrar.
             if ($columna == 'id_usu' || $columna == 'id_tipo') {
                 continue;
             }
-            $readonly = ($columna == 'id_usu' || $columna == 'Nomb_tipo') ? 'readonly' : '';
-            $bg = ($readonly) ? "background-color:#e9ecef;" : "";
+            $readonly = ($columna == 'id_usu' ) ? 'readonly' : '';
+            $bg = ($readonly) ? "background-color:#e9ecef;" : ""; 
             echo "<div class='mb-3'>";
             echo "<label for='$columna' class='form-label'>" . htmlspecialchars($columna) . "</label>";
-            if($columna == 'password') {
+             if ($columna == 'Nomb_tipo') {
+                // Select editable para tipo de usuario
+                echo "<select class='form-control' id='Nomb_tipo' name='Nomb_tipo'>";
+                foreach ($tipos as $tipo) {
+                    if (
+            strtolower($tipo['Nomb_tipo']) === 'junta' ||
+            strtolower($tipo['Nomb_tipo']) === 'administrador'
+        ) {
+            continue; // Saltar estos tipos
+        }
+                    $selected = ($tipo['Nomb_tipo'] == $valor) ? "selected" : "";
+                    echo "<option value='" . htmlspecialchars($tipo['Nomb_tipo']) . "' $selected>" . htmlspecialchars($tipo['Nomb_tipo']) . "</option>";
+                }
+                echo "</select>";
+            }elseif($columna == 'password') {
                 // Para la contraseña, mostramos un campo de tipo password
                 echo "<input type='password' class='form-control' id='$columna' name='$columna' value='" . htmlspecialchars($valor) . "' style='color:gray;$bg' $readonly>";
             } elseif ($columna == 'email') {
@@ -303,12 +323,13 @@ function mostrarBotonesOperaciones($pdo, $baseDatos, $id_tipo)
         echo "<div class='mb-3'>";
         echo "<h5>Operaciones disponibles:</h5>";
         foreach ($operaciones as $op) {
-            echo "<form method='post' action='operacion.php' style='display:inline-block; margin-right:10px;'>";
-            echo "<input type='hidden' name='id_ope' value='" . htmlspecialchars($op['id_ope']) . "'>";
-            echo "<button type='submit' class='btn btn-secondary' title='" . htmlspecialchars($op['Descrip_ope']) . "'>";
+            echo "<button type='button' "
+                . "class='btn btn-secondary btn-operacion me-2' "
+                . "data-accion='" . htmlspecialchars($op['Nomb_ope']) . "' "
+                . "data-id='" . htmlspecialchars($op['id_ope']) . "' "
+                . "title='" . htmlspecialchars($op['Descrip_ope']) . "'>";
             echo htmlspecialchars($op['Nomb_ope']);
             echo "</button>";
-            echo "</form>";
         }
         echo "</div>";
     } else {
@@ -403,9 +424,23 @@ function modificar($pdo, $baseDatos, $tabla, $datos)
     }
     echo ("La modificación se ha realizado correctamente");
 }
+function borrar($pdo, $baseDatos, $tabla, $id_usu)
+{
+    // Nos aseguramos de estar en la base de datos
+    $pdo->query("USE $baseDatos");
 
+    // Preparamos la consulta para borrar el usuario por su id
+    $consulta = "DELETE FROM `$tabla` WHERE id_usu = ?";
+    try {
+        $stmt = $pdo->prepare($consulta);
+        $stmt->execute([$id_usu]);
+        echo "<p>Se ha eliminado el registro seleccionado</p>";
+    } catch (PDOException $e) {
+        echo "<p>Error al eliminar: " . $e->getMessage() . "</p>";
+    }
+}
 //Con la siguiente funcion seleccionamos la fila o filas elegidas por el usuario para eliminarlas de la tabla. Le pasamos por parametro la conexion, la base de datos, la tabla y los datos obtenidos del formulario tablaEliminar
-function borrar ($pdo, $baseDatos, $tabla, $datos)
+function borrarSeleccion ($pdo, $baseDatos, $tabla, $datos)
 {
     //Nos aseguramos de estan en la base de datos
     $pdo->query("USE $baseDatos");

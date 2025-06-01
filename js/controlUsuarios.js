@@ -75,3 +75,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 }); 
+
+// DELEGACIÓN DE EVENTOS PARA BOTONES .btn-operacion
+document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.btn-operacion');
+    if (!btn) return;
+
+    const accion = btn.getAttribute('data-accion');
+    const idOperacion = btn.getAttribute('data-id');
+    const form = btn.closest('form') || document.querySelector('form');
+
+    if (accion && accion.toLowerCase() === 'modificar') {
+        let formData = new FormData(form);
+        formData.append('accion', 'modificar');
+        fetch('accionesUsuario.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(resp => resp.text())
+        .then(html => {
+            const contenedor = document.querySelector('.container.mt-4');
+            if (contenedor) contenedor.innerHTML = html;
+        })
+        .catch(err => alert('Error al modificar: ' + err));
+        } else if (accion && accion.toLowerCase() === 'borrar') {
+        if (!confirm('¿Seguro que quieres darte de baja?')) return;
+        let formData = new FormData(form);
+        formData.append('accion', 'borrar');
+        fetch('accionesUsuario.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(resp => resp.text())
+        .then(html => {
+            const contenedor = document.querySelector('.container.mt-4');
+            if (contenedor) contenedor.innerHTML = html;
+            setTimeout(() => {
+                window.location.href = './index.html';
+            }, 5000);
+        })
+        .catch(err => alert('Error al borrar: ' + err));
+    } else if (accion) {
+        // Aquí puedes gestionar otras operaciones personalizadas
+        alert('Operación: ' + accion + ' (id: ' + idOperacion + ')');
+        // Por ejemplo, podrías hacer un fetch a otro PHP según la operación
+    }
+});

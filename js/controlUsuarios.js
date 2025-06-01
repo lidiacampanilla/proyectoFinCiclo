@@ -52,18 +52,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Botón Mis Datos
             document.getElementById('btnMisDatos').onclick = function() {
-                fetch('mostrarDatosPersonales.php')
-                    .then(res => res.text())
-                    .then(html => {
-                        document.getElementById('contenidoExtra').innerHTML = html;
-                    })
-                    .catch(() => {
-                        document.getElementById('contenidoExtra').innerHTML = '<div class="alert alert-danger">No se pudo cargar tus datos personales.</div>';
-                    });
+                fetch('mostrarDatos.php')
+                .then(res => res.text())
+                .then(html => {
+                    divMiPerfil.innerHTML += html;
+                })
+                .catch(() => {
+                    divMiPerfil.innerHTML += '<div class="alert alert-danger">No se pudo cargar tus datos.</div>';
+                });
             };
            // Botón Datos Hermanos
             document.getElementById('btnDatosHermanos').onclick = function() {
-                fetch('tablaHermanos.php')
+                fetch('mostrarHermanos.php')
                     .then(res => res.text())
                     .then(html => {
                         document.getElementById('contenidoExtra').innerHTML = html;
@@ -111,7 +111,7 @@ document.addEventListener('click', function (e) {
             const contenedor = document.querySelector('.container.mt-4');
             if (contenedor) contenedor.innerHTML = html;
             setTimeout(() => {
-                window.location.href = './index.html';
+                window.location.href = '/GitHub/proyectoFinCiclo/index.html';
             }, 5000);
         })
         .catch(err => alert('Error al borrar: ' + err));
@@ -119,5 +119,16 @@ document.addEventListener('click', function (e) {
         // Aquí puedes gestionar otras operaciones personalizadas
         alert('Operación: ' + accion + ' (id: ' + idOperacion + ')');
         // Por ejemplo, podrías hacer un fetch a otro PHP según la operación
+    }
+});
+
+//Este código es para seleccionar/deseleccionar todos los checkboxes de la tabla de hermanos
+document.addEventListener('DOMContentLoaded', function() {
+    const checkAll = document.getElementById('checkAll');
+    if (checkAll) {
+        checkAll.addEventListener('change', function() {
+            const checks = document.querySelectorAll("input[name='elegido[]']");
+            checks.forEach(chk => chk.checked = this.checked);
+        });
     }
 });

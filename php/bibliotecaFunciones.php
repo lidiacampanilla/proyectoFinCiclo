@@ -96,145 +96,74 @@ function validarAcceso($email,$password,$pdo){
         }
       } 
 
-//Creamos la función para mostrar los usuarios, pasamos por parametro, la conexión, la base de datos y la tabla a mostrar.
-function mostrarUsuarios($pdo, $baseDatos, $tabla)
-{
-    //Nos aseguramos de estar usando la base de datos
-    $pdo->query("USE $baseDatos");
 
-    //Creamos la consulta
-    $consulta = "SELECT * FROM $tabla";
-
-    //Ejecutamos la consulta con query
-    $resultado = $pdo->query($consulta);
-    //Lanzamos errores si no se realiza la consulta, si no hay ningun registro(elseif) nos indicara que la tabla esta vacia, sino mostrara la tabla
-    if (!$resultado) {
-        echo "<p>Error en la consulta SQLSTATE[{$pdo->errorCode()}]: {$pdo->errorInfo()[2]}</p>\n";
-        return;
-    } //Utilizamos PDO::FETCH_ASSOC , para obtener los datos correctamente sin duplicidad
-    elseif (!count($registros = $resultado->fetchAll(PDO::FETCH_ASSOC))) {
-        echo "<p class='p-3 mb-2 bg-info text-dark'>No hay ningún registro en la tabla</p>\n";
-    } else {
-        echo '<div class="album py-5 bg-body-tertiary">';
-        echo '<div class="container">';
-        echo '<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">';
-
-        //Ahora dividimos cada registro en cada uno de los campos para ir mostrando las imagenes
-        foreach ($registros as $registro) {
-            $Cod_receta = htmlspecialchars($registro['Cod_receta']);
-            $Nomb_receta = htmlspecialchars($registro['Nomb_receta']);
-            $Descrip_receta = htmlspecialchars($registro['Descrip_receta']);
-            $Foto = htmlspecialchars($registro['Foto']);
-            $Doc_pdf = $registro['Doc_pdf'];
-            $Tiempo = htmlspecialchars($registro['Tiempo']);
-
-
-            //Ahora vamos a generar el cuadro de cada receta
-            echo '<div class="col">';
-            echo '<div class="card shadow-sm">';
-            echo '<img src="' . $Foto . '" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="' . $Nomb_receta . '">';
-            echo '<div class="card-body">';
-            echo ' <h5 class="card-tittle">' . $Nomb_receta . '</h5>';
-            echo '<p class="card-text">' . $Descrip_receta . '</p>';
-            echo '<div class="d-flex justify-content-between align-items-center">';
-            echo '<div class="btn-group">';
-            echo '<a href="' . $Doc_pdf . '" class="btn btn-sm btn-outline-secondary" target="_blank">Ver Receta</a>';
-            echo "</div>";
-            echo '<p class="card-text mr-0">' . $Tiempo . ' min</p>';
-
-            echo "</div>";
-            echo "</div>";
-            echo "</div>";
-            echo "</div>";
-        }
-        echo "</div>";
-        echo "</div>";
-        echo "</div>";
-    }
-}
-
-//La siguiente función la utilizamos para obtener las categorias de la tabla categorias de una forma dinámica
-function obtenerCategorias($pdo, $baseDatos)
-{
-    //Nos aseguramos de estar usando la base de datos
-    $pdo->query("USE $baseDatos");
-
-    //Creamos la consulta
-    $consulta = "SELECT Cod_categoria,Nomb_categoria FROM CATEGORIAS";
-    $resultado = $pdo->query($consulta);
-
-    if ($resultado) {
-        while ($categoria = $resultado->fetch(PDO::FETCH_ASSOC)) {
-            $Cod_categoria = htmlspecialchars($categoria['Cod_categoria']);
-            $Nomb_categoria = htmlspecialchars($categoria['Nomb_categoria']);
-
-            //Construimos nuestro html
-            echo "<input type='checkbox' id='categoria$Cod_categoria' name='tipo[]' value='$Cod_categoria'>";
-            echo "<label for='categoria$Cod_categoria'>$Nomb_categoria</label><br>";
-        }
-    } else {
-        echo "<p>No hay categorias</p>";
-    }
-}
-//Hacemos la funcion insertar que recibira por parametro la conexion, la base de datos,la tabla y los datos recogidos de la funcion "insertar"
 
 
 //Con la siguiente funcion hacemos una tabla que muestre todas las recetas, trabajamos con las tablas RECETAS y CATEGORIAS, para mostrar tambien las categorias de las recetas
-function tablaGestionRe($pdo, $baseDatos, $tabla1, $tabla2, $tabla3)
+function tablaGestionHer($pdo, $baseDatos, $idUsu)
 {
+    
     //Nos aseguramos de estar utilizando nuestra base de datos
     $pdo->query("USE $baseDatos");
 
-    //Ejecutamos la consulta con query
-    $consulta = "SELECT R.Cod_receta,R.Nomb_receta,R.Descrip_receta,R.Foto,R.Tiempo,R.Doc_pdf, GROUP_CONCAT(C.Nomb_categoria SEPARATOR ',') AS Categorias FROM $tabla1 R
-      LEFT JOIN $tabla2 P ON R.Cod_receta = P.Cod_Receta
-      LEFT JOIN $tabla3 C ON P.Cod_categoria = C.Cod_Categoria
-      GROUP BY R.Cod_receta";
+   // Consulta para obtener todos los usuarios y su tipo
+    $consulta = "SELECT U.*, T.Nomb_tipo, T.id_tipo 
+                 FROM USUARIO U
+                 JOIN PERTENECEN P ON U.id_usu = P.id_usu
+                 JOIN TIPO T ON P.id_tipo = T.id_tipo";
     $resultado = $pdo->query($consulta);
-    //Lanzamos errores si no se realiza la consulta, si no hay ningun registro(elseif) nos indicara que la tabla esta vacia, sino mostrara la tabla
-    if (!$resultado) {
-        echo "<p>Error en la consulta SQLSTATE[{$pdo->errorCode()}]: {$pdo->errorInfo()[2]}</p>\n";
-    } //Utilizamos PDO::FETCH_ASSOC , para obtener los datos correctamente sin duplicidad
-    elseif (!count($registros = $resultado->fetchAll(PDO::FETCH_ASSOC))) {
+
+    $registros = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+    if (!$registros) {
         echo "<p class='p-3 mb-2 bg-info text-dark'>No hay ningún registro en la tabla</p>\n";
-    } else {
-        echo "<div class='container mt-4'>";
-        echo "<table class='table table-bordered table-sm'>";
-        echo "<thead >";
-        echo "<tr>";
-
-        //Con las siguientes sentencias cogeria los nombres de las columnas para hacer la cabecera de la tabla de manera NO MANUAL
-
-        foreach (array_keys($registros[0]) as $columna) {
-            echo "<th class='bg-success text-white'>" . htmlspecialchars($columna) . "</th>";
-        }
-        echo "</tr>";
-        echo "</thead>";
-        echo "<tbody>";
-        foreach ($registros as $registro) {
-            echo "<tr>";
-            foreach ($registro as $columna => $valor) {
-                if($columna == 'Foto' || $columna == 'Doc_pdf'){
-                    $valor = basename($valor);
-                }
-                echo "<td>", $valor, "</td>";
-            }
-            echo "</tr>";
-        }
-        echo "<tr>";
-        echo "<td colspan='" . count(array_keys($registros[0])) . "'>";
-        echo "<p>Elige una opcion</p>";
-        echo "<div>";
-        echo "<button id='insertar' class='btn btn-primary me-2'>Insertar</button>";
-        echo "<button id='modificar' class='btn btn-primary me-2'>Modificar</button>";
-        echo "<button id='borrar' class='btn btn-primary'>Borrar</button>";
-        echo "</div>";
-        echo "</td>";
-        echo "</tr>";
-        echo "</tbody>";
-        echo "</table>";
-        echo "</div>";
+        return;
     }
+
+    echo "<div class='container mt-4'>";
+    echo "<form method='post' id='formGestionHer'>";
+    echo "<div class='table-responsive'>";
+    echo "<table class='table table-bordered table-hover align-middle'>";
+    echo "<thead class='table-success'>";
+    echo "<tr>";
+    echo "<th><input type='checkbox' id='checkAll'></th>"; // Checkbox para seleccionar todos
+    // Cabeceras dinámicas
+    foreach (array_keys($registros[0]) as $columna) {
+        if ($columna === 'id_tipo') continue; // Ocultamos id_tipo si no quieres mostrarlo
+        echo "<th>" . htmlspecialchars($columna) . "</th>";
+    }
+    echo "</tr>";
+    echo "</thead>";
+    echo "<tbody>";
+    foreach ($registros as $registro) {
+        echo "<tr>";
+        // Checkbox para seleccionar el registro
+        echo "<td><input type='checkbox' name='elegido[]' value='" . htmlspecialchars($registro['id_usu']) . "'></td>";
+        foreach ($registro as $columna => $valor) {
+            if ($columna === 'id_tipo') continue;
+            echo "<td>" . htmlspecialchars($valor) . "</td>";
+        }
+        echo "</tr>";
+    }
+    echo "</tbody>";
+    echo "</table>";
+    echo "</div>";
+     // Botón para borrar seleccionados
+    echo "<button type='submit' class='btn btn-danger mt-2' name='borrarSeleccionados'>Borrar seleccionados</button>";
+    echo "</form>";
+
+    // Obtener el id_tipo del usuario actual para mostrar sus operaciones
+    $stmtTipo = $pdo->prepare("SELECT T.id_tipo FROM USUARIO U
+        JOIN PERTENECEN P ON U.id_usu = P.id_usu
+        JOIN TIPO T ON P.id_tipo = T.id_tipo
+        WHERE U.id_usu = ?");
+    $stmtTipo->execute([$idUsu]);
+    $id_tipo_usuario = $stmtTipo->fetchColumn();
+    if ($id_tipo_usuario) {
+        mostrarBotonesOperaciones($pdo, $baseDatos, $id_tipo_usuario);
+    }
+
+    echo "</div>";
 }
 
 //Con la siguiente funcion hacemos una tabla que muestre todas las categorias, trabajamos con las tablas RECETAS y PERTENECEN, para poder controlar si se puede borrar o no una categoria
@@ -260,9 +189,9 @@ function tablaDatos($pdo, $baseDatos, $idUsu)
         echo "<form method='post' action=''>";
         $usuario = $resultado[0]; // Asumimos que solo hay un usuario para este id_usu
         // AÑADE ESTE CAMPO OCULTO:
-echo "<input type='hidden' name='id_usu' value='" . htmlspecialchars($usuario['id_usu']) . "'>";
+        echo "<input type='hidden' name='id_usu' value='" . htmlspecialchars($usuario['id_usu']) . "'>";
 
-// Obtener todos los tipos para el select
+        // Obtener todos los tipos para el select
         $stmtTipos = $pdo->query("SELECT id_tipo, Nomb_tipo FROM TIPO");
         $tipos = $stmtTipos->fetchAll(PDO::FETCH_ASSOC);
         foreach ($usuario as $columna => $valor) {
@@ -270,6 +199,18 @@ echo "<input type='hidden' name='id_usu' value='" . htmlspecialchars($usuario['i
             if ($columna == 'id_usu' || $columna == 'id_tipo') {
                 continue;
             }
+
+            // OCULTAR Nomb_tipo si el usuario es administrador o junta
+            if (
+                $columna == 'Nomb_tipo' &&
+                (
+                    strtolower($usuario['Nomb_tipo']) === 'administrador' ||
+                    strtolower($usuario['Nomb_tipo']) === 'junta'
+                )
+            ) {
+                continue;
+            }
+
             $readonly = ($columna == 'id_usu' ) ? 'readonly' : '';
             $bg = ($readonly) ? "background-color:#e9ecef;" : ""; 
             echo "<div class='mb-3'>";
@@ -301,8 +242,12 @@ echo "<input type='hidden' name='id_usu' value='" . htmlspecialchars($usuario['i
             
             echo "</div>";
         }
-        $id_tipo = $usuario['id_tipo'];
-        mostrarBotonesOperaciones($pdo, $baseDatos, $id_tipo);
+        /* $id_tipo = $usuario['id_tipo'];
+        mostrarBotonesOperaciones($pdo, $baseDatos, $id_tipo); */
+        echo "<div class='mb-3'>";
+        echo "<button type='button' class='btn btn-secondary btn-operacion me-2' data-accion='modificar' data-id='2' name='modificar' class='btn btn-primary me-2'>Modificar</button>";
+        echo "<button type='button' class='btn btn-secondary btn-operacion me-2' data-accion='borrar' data-id='3' name='borrar' class='btn btn-danger'>Borrar</button>";
+        echo "</div>";
         echo "</form>";
         echo "</div>";
     }
@@ -336,28 +281,7 @@ function mostrarBotonesOperaciones($pdo, $baseDatos, $id_tipo)
         echo "<div class='alert alert-info'>No tienes operaciones asignadas.</div>";
     }
 }
-function obtenerNumero($pdo, $baseDatos)
-{
-    //Nos aseguramos de estar usando la base de datos
-    $pdo->query("USE $baseDatos");
 
-    //Creamos la consulta
-    $consulta = "SELECT Cod_receta FROM RECETAS";
-    $resultado = $pdo->query($consulta);
-
-    if ($resultado) {
-        while ($numero = $resultado->fetch(PDO::FETCH_ASSOC)) {
-            $Cod_receta = htmlspecialchars($numero['Cod_receta']);
-            
-
-            //Construimos nuestro html
-            echo "<option value='$Cod_receta'>$Cod_receta</option>";
-           
-        }
-    } else {
-        echo "<p>No hay recetas</p>";
-    }
-}
 
 //La siguientes función modificará tan solo los campos que indica el usuaria en la tabla modificar. Como parametros le pasamos la conexión, la base de datos, la tabla y los datos obtenidos por post en el formulario de la tabla modificar.
 function modificar($pdo, $baseDatos, $tabla, $datos)
@@ -434,7 +358,7 @@ function borrar($pdo, $baseDatos, $tabla, $id_usu)
     try {
         $stmt = $pdo->prepare($consulta);
         $stmt->execute([$id_usu]);
-        echo "<p>Se ha eliminado el registro seleccionado</p>";
+    
     } catch (PDOException $e) {
         echo "<p>Error al eliminar: " . $e->getMessage() . "</p>";
     }
@@ -493,22 +417,7 @@ function borrarSeleccion ($pdo, $baseDatos, $tabla, $datos)
     }
 }
 //Con la siguiente funcion se podra eliminar totalmente la tabla seleccionada. Pasamos por parametro la conexión, la base de datos y la tabla.
-function eliminarTabla($pdo, $baseDatos, $tabla)
-{
-    //Nos aseguramos de estar en la base de datos
-    $pdo->query("USE $baseDatos");
 
-    //Preparamos la consulta
-    $consulta = "DROP TABLE `$tabla`";
-    try {
-        $stmt = $pdo->prepare($consulta);
-        $stmt->execute();
-    } catch (PDOException $e) {
-        echo "<p>Error al modificar:" . $e->getMessage() . "</p>";
-    }
-}
-
-//Esta función es para encontrar el nombre de la tabla en la consulta, pasamos por parametro la consulta.
 function nombreTabla($consulta)
 {
     //Ponemos toda la consulta en mayuscula para facilitar la busqueda

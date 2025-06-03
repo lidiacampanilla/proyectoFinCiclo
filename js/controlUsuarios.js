@@ -61,12 +61,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     divMiPerfil.innerHTML += '<div class="alert alert-danger">No se pudo cargar tus datos.</div>';
                 });
             };
+            //Esta función activa el checkbox "checkAll" para seleccionar/desmarcar todos los checkboxes de la lista de hermanos
+            function activarCheckAll() {
+            const checkAll = document.getElementById('checkAll');
+            if (checkAll) {
+                checkAll.addEventListener('change', function() {
+                    const checks = document.querySelectorAll("input[name='elegido[]']");
+                    checks.forEach(chk => chk.checked = this.checked);
+                });
+            }
+        }
            // Botón Datos Hermanos
             document.getElementById('btnDatosHermanos').onclick = function() {
                 fetch('mostrarHermanos.php')
                     .then(res => res.text())
                     .then(html => {
                         document.getElementById('contenidoExtra').innerHTML = html;
+                        activarCheckAll(); // Activamos el checkbox "checkAll"
                     })
                     .catch(() => {
                         document.getElementById('contenidoExtra').innerHTML = '<div class="alert alert-danger">No se pudo cargar la tabla de hermanos.</div>';
@@ -98,7 +109,7 @@ document.addEventListener('click', function (e) {
             if (contenedor) contenedor.innerHTML = html;
         })
         .catch(err => alert('Error al modificar: ' + err));
-        } else if (accion && accion.toLowerCase() === 'borrar') {
+        }/* else if (accion && accion.toLowerCase() === 'borrar') {
         if (!confirm('¿Seguro que quieres darte de baja?')) return;
         let formData = new FormData(form);
         formData.append('accion', 'borrar');
@@ -115,20 +126,157 @@ document.addEventListener('click', function (e) {
             }, 5000);
         })
         .catch(err => alert('Error al borrar: ' + err));
-    } else if (accion) {
-        // Aquí puedes gestionar otras operaciones personalizadas
-        alert('Operación: ' + accion + ' (id: ' + idOperacion + ')');
-        // Por ejemplo, podrías hacer un fetch a otro PHP según la operación
+    }  */
+});
+
+function cargarTiposEnSelect(select) {
+    fetch('obtenerTipos.php')
+        .then(res => res.json())
+        .then(tipos => {
+            select.innerHTML = '';
+            tipos.forEach(tipo => {
+                let option = document.createElement('option');
+                option.value = tipo.Nomb_tipo;
+                option.textContent = tipo.Nomb_tipo;
+                select.appendChild(option);
+            });
+        });
+}
+
+// Delegación de eventos para los botones de operaciones
+document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.btn-operacion');
+    if (!btn) return;
+    const accion = btn.getAttribute('data-accion').toLowerCase();
+
+    // INSERTAR
+    if (accion === 'insertar') {
+        const tabla = document.querySelector('#formGestionHer table tbody');
+        if (tabla) {
+            let columnas = tabla.parentElement.querySelectorAll('thead th');
+            let fila = document.createElement('tr');
+            fila.innerHTML = `<td></td>` +
+                Array.from(columnas).slice(1).map((th) => {
+                    let name = th.textContent.trim();
+                    if (name === 'password') {
+                        return `<td><input type="password" class="form-control form-control-sm" name="password"></td>`;
+                    } else if (name === 'Nomb_tipo') {
+                        return `<td><select class="form-select form-select-sm" name="Nomb_tipo"></select></td>`;
+                    } else if (name === 'id_usu') {
+                        return `<td></td>`;
+                    } else {
+                        return `<td><input type="text" class="form-control form-control-sm" name="${name}"></td>`;
+                    }
+                }).join('');
+            tabla.prepend(fila);
+            // Cargar tipos en el select
+            fila.querySelectorAll('select[name="Nomb_tipo"]').forEach(select => {
+                cargarTiposEnSelect(select);
+            });
+            // Botón para guardar la inserción
+            let btnGuardar = document.createElement('button');
+            btnGuardar.type = 'button';
+            btnGuardar.textContent = 'Guardar';
+            btnGuardar.className = 'btn btn-success btn-sm ms-2';
+            btnGuardar.onclick = function () {
+                let formData = new FormData();
+                fila.querySelectorAll('input, select').forEach(input => {
+                    if (input.name && input.value !== "****" && input.name !== "id_usu") formData.append(input.name, input.value);
+                });
+                formData.append('accion', 'insertar');
+                fetch('accionesUsuario.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(resp => resp.text())
+                .then(html => {
+                    const contenedor = document.getElementById('contenidoExtra');
+                    if (contenedor) {
+                         contenedor.innerHTML = html;
+                    } else {
+                        alert('No se encontró el contenedor contenidoExtra');
+                    }
+                    activarCheckAll();
+                });
+            };
+            fila.appendChild(btnGuardar);
+        }
+    }
+    // MODIFICAR (múltiple)
+    else if (accion === 'modificar') {
+        let form = document.getElementById('formGestionHer');
+        let formData = new FormData(form);
+        formData.append('accion', 'modificar');
+        fetch('accionesUsuario.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(resp => resp.text())
+        .then(html => {
+            document.getElementById('contenidoExtra').innerHTML = html;
+            activarCheckAll();
+        });
+    }
+
+    // BORRAR (múltiple)
+    else if (accion === 'borrar') {
+    // Busca el formulario más cercano al botón o el de gestión múltiple
+    let form = document.getElementById('formGestionHer') || btn.closest('form');
+    let formData = new FormData(form);
+    formData.append('accion', 'borrar');
+    fetch('accionesUsuario.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(resp => resp.text())
+    .then(html => {
+        // Si el formulario NO es el de gestión múltiple, es perfil individual
+        if (!form.id || form.id !== 'formGestionHer') {
+            document.body.innerHTML = html;
+            setTimeout(() => {
+                window.location.href = '/GitHub/proyectoFinCiclo/index.html';
+            }, 5000);
+        } else {
+            // Si es gestión de hermanos, solo actualiza la tabla
+            document.getElementById('contenidoExtra').innerHTML = html;
+            activarCheckAll();
+        }
+    });
+}
+
+    // FILTRAR
+    else if (accion === 'filtrar') {
+        // Muestra un pequeño formulario de filtro
+        document.getElementById('contenidoExtra').innerHTML = `
+            <form id="formFiltrar" class="mb-3">
+                <div class="row g-2">
+                    <div class="col">
+                        <input type="text" name="nombre" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="nomb_tipo" class="form-control" placeholder="Tipo">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Filtrar</button>
+                    </div>
+                </div>
+            </form>
+        `;
+        document.getElementById('formFiltrar').onsubmit = function(ev) {
+            ev.preventDefault();
+            let formData = new FormData(this);
+            formData.append('accion', 'filtrar');
+            fetch('accionesUsuario.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(resp => resp.text())
+            .then(html => {
+                document.getElementById('contenidoExtra').innerHTML = html;
+                activarCheckAll();
+            });
+        };
     }
 });
 
-//Este código es para seleccionar/deseleccionar todos los checkboxes de la tabla de hermanos
-document.addEventListener('DOMContentLoaded', function() {
-    const checkAll = document.getElementById('checkAll');
-    if (checkAll) {
-        checkAll.addEventListener('change', function() {
-            const checks = document.querySelectorAll("input[name='elegido[]']");
-            checks.forEach(chk => chk.checked = this.checked);
-        });
-    }
-});
+

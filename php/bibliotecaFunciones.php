@@ -67,10 +67,11 @@ function insertar($pdo, $baseDatos, $tabla, $datos)
         $stmt = $pdo->prepare($consulta);
         //Ejecutamos, con esto conseguimos sustituir los ? por los valores obtenidos con array_values.
         $stmt->execute($valores);
-        /* echo ("Se ha insertado el registro correctamente"); */
+        echo ("Se ha insertado el registro correctamente"); 
     } catch (PDOException $e) {
-        print "<p>Código de Error:" . $e->getCode() . "<br>El Mensaje es: " . $e->getMessage() . "</p>";
-        exit;
+        echo "<div class='alert alert-danger'>Error al insertar: " . $e->getMessage() . "</div>";
+        return;
+        /*  exit; */
     }
 }
 
@@ -99,20 +100,17 @@ function validarAcceso($email,$password,$pdo){
 
 
 
-//Con la siguiente funcion hacemos una tabla que muestre todas las recetas, trabajamos con las tablas RECETAS y CATEGORIAS, para mostrar tambien las categorias de las recetas
+//Con la siguiente funcion hacemos una tabla que muestre todas las hermanos, trabajamos con las tablas USUARIOS y TIPO, para mostrar tambien los tipos de hermanos.
 function tablaGestionHer($pdo, $baseDatos, $idUsu)
 {
-    
-    //Nos aseguramos de estar utilizando nuestra base de datos
     $pdo->query("USE $baseDatos");
 
-   // Consulta para obtener todos los usuarios y su tipo
+    // Consulta para obtener todos los usuarios y su tipo
     $consulta = "SELECT U.*, T.Nomb_tipo, T.id_tipo 
                  FROM USUARIO U
                  JOIN PERTENECEN P ON U.id_usu = P.id_usu
                  JOIN TIPO T ON P.id_tipo = T.id_tipo";
     $resultado = $pdo->query($consulta);
-
     $registros = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
     if (!$registros) {
@@ -120,39 +118,68 @@ function tablaGestionHer($pdo, $baseDatos, $idUsu)
         return;
     }
 
+    // Obtener todos los tipos para el select
+    $stmtTipos = $pdo->query("SELECT id_tipo, Nomb_tipo FROM TIPO");
+    $tipos = $stmtTipos->fetchAll(PDO::FETCH_ASSOC);
+
     echo "<div class='container mt-4'>";
     echo "<form method='post' id='formGestionHer'>";
     echo "<div class='table-responsive'>";
-    echo "<table class='table table-bordered table-hover align-middle'>";
+    echo "<table class='table table-bordered table-hover align-middle table-sm'>";
     echo "<thead class='table-success'>";
     echo "<tr>";
-    echo "<th><input type='checkbox' id='checkAll'></th>"; // Checkbox para seleccionar todos
+    echo "<th style='width:30px;'><input type='checkbox' id='checkAll'></th>"; // Checkbox para seleccionar todos
+
     // Cabeceras dinámicas
     foreach (array_keys($registros[0]) as $columna) {
         if ($columna === 'id_tipo') continue; // Ocultamos id_tipo si no quieres mostrarlo
-        echo "<th>" . htmlspecialchars($columna) . "</th>";
+        echo "<th style='font-size:0.95em;'>" . htmlspecialchars($columna) . "</th>";
     }
     echo "</tr>";
     echo "</thead>";
     echo "<tbody>";
-    foreach ($registros as $registro) {
+
+    foreach ($registros as $i => $registro) {
         echo "<tr>";
         // Checkbox para seleccionar el registro
         echo "<td><input type='checkbox' name='elegido[]' value='" . htmlspecialchars($registro['id_usu']) . "'></td>";
+
         foreach ($registro as $columna => $valor) {
             if ($columna === 'id_tipo') continue;
-            echo "<td>" . htmlspecialchars($valor) . "</td>";
+
+            echo "<td style='padding:2px 4px;'>";
+            // Campo oculto para id_usu (solo una vez por fila)
+            if ($columna == 'id_usu') {
+                echo "<input type='hidden' name='id_usu[$i]' value='" . htmlspecialchars($valor) . "'>";
+                echo htmlspecialchars($valor);
+            }
+            // Campo password: solo muestra 4 asteriscos, no editable
+            elseif ($columna == 'password') {
+                echo "<input type='text' class='form-control form-control-sm' value='****' readonly style='width:60px;text-align:center;background-color:#e9ecef;'>";
+            }
+            // Campo Nomb_tipo: select editable
+            elseif ($columna == 'Nomb_tipo') {
+                echo "<select class='form-select form-select-sm' name='Nomb_tipo[$i]' style='min-width:90px;max-width:120px;'>";
+                foreach ($tipos as $tipo) {
+                    $selected = ($tipo['Nomb_tipo'] == $valor) ? "selected" : "";
+                    echo "<option value='" . htmlspecialchars($tipo['Nomb_tipo']) . "' $selected>" . htmlspecialchars($tipo['Nomb_tipo']) . "</option>";
+                }
+                echo "</select>";
+            }
+            // Otros campos: input editable compacto
+            else {
+                echo "<input type='text' class='form-control form-control-sm' name='{$columna}[$i]' value='" . htmlspecialchars($valor) . "' style='min-width:80px;max-width:130px;'>";
+            }
+            echo "</td>";
         }
         echo "</tr>";
     }
     echo "</tbody>";
     echo "</table>";
     echo "</div>";
-     // Botón para borrar seleccionados
-    echo "<button type='submit' class='btn btn-danger mt-2' name='borrarSeleccionados'>Borrar seleccionados</button>";
     echo "</form>";
 
-    // Obtener el id_tipo del usuario actual para mostrar sus operaciones
+    // Mostrar las operaciones permitidas para el usuario logueado
     $stmtTipo = $pdo->prepare("SELECT T.id_tipo FROM USUARIO U
         JOIN PERTENECEN P ON U.id_usu = P.id_usu
         JOIN TIPO T ON P.id_tipo = T.id_tipo
@@ -363,6 +390,102 @@ function borrar($pdo, $baseDatos, $tabla, $id_usu)
         echo "<p>Error al eliminar: " . $e->getMessage() . "</p>";
     }
 }
+function tablaGestionHerFiltrada($pdo, $baseDatos, $idUsu, $nombre = '', $nomb_tipo = '')
+{
+    $pdo->query("USE $baseDatos");
+
+    // Construir la consulta con filtros dinámicos
+    $sql = "SELECT U.*, T.Nomb_tipo, T.id_tipo 
+            FROM USUARIO U
+            JOIN PERTENECEN P ON U.id_usu = P.id_usu
+            JOIN TIPO T ON P.id_tipo = T.id_tipo
+            WHERE 1=1";
+    $params = [];
+
+    if ($nombre !== '') {
+        $sql .= " AND U.nombre LIKE ?";
+        $params[] = "%$nombre%";
+    }
+    if ($nomb_tipo !== '') {
+        $sql .= " AND T.Nomb_tipo LIKE ?";
+        $params[] = "%$nomb_tipo%";
+    }
+
+    $resultado = $pdo->prepare($sql);
+    $resultado->execute($params);
+    $registros = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+    if (!$registros) {
+        echo "<p class='p-3 mb-2 bg-info text-dark'>No hay ningún registro que cumpla el filtro</p>\n";
+        return;
+    }
+
+    // Obtener todos los tipos para el select
+    $stmtTipos = $pdo->query("SELECT id_tipo, Nomb_tipo FROM TIPO");
+    $tipos = $stmtTipos->fetchAll(PDO::FETCH_ASSOC);
+
+    echo "<div class='container mt-4'>";
+    echo "<form method='post' id='formGestionHer'>";
+    echo "<div class='table-responsive'>";
+    echo "<table class='table table-bordered table-hover align-middle table-sm'>";
+    echo "<thead class='table-success'>";
+    echo "<tr>";
+    echo "<th style='width:30px;'><input type='checkbox' id='checkAll'></th>";
+
+    foreach (array_keys($registros[0]) as $columna) {
+        if ($columna === 'id_tipo') continue;
+        echo "<th style='font-size:0.95em;'>" . htmlspecialchars($columna) . "</th>";
+    }
+    echo "</tr>";
+    echo "</thead>";
+    echo "<tbody>";
+
+    foreach ($registros as $i => $registro) {
+        echo "<tr>";
+        echo "<td><input type='checkbox' name='elegido[]' value='" . htmlspecialchars($registro['id_usu']) . "'></td>";
+        foreach ($registro as $columna => $valor) {
+            if ($columna === 'id_tipo') continue;
+            echo "<td style='padding:2px 4px;'>";
+            if ($columna == 'id_usu') {
+                echo "<input type='hidden' name='id_usu[$i]' value='" . htmlspecialchars($valor) . "'>";
+                echo htmlspecialchars($valor);
+            } elseif ($columna == 'password') {
+                echo "<input type='text' class='form-control form-control-sm' value='****' readonly style='width:60px;text-align:center;background-color:#e9ecef;'>";
+            } elseif ($columna == 'Nomb_tipo') {
+                echo "<select class='form-select form-select-sm' name='Nomb_tipo[$i]' style='min-width:90px;max-width:120px;'>";
+                foreach ($tipos as $tipo) {
+                    $selected = ($tipo['Nomb_tipo'] == $valor) ? "selected" : "";
+                    echo "<option value='" . htmlspecialchars($tipo['Nomb_tipo']) . "' $selected>" . htmlspecialchars($tipo['Nomb_tipo']) . "</option>";
+                }
+                echo "</select>";
+            } else {
+                echo "<input type='text' class='form-control form-control-sm' name='{$columna}[$i]' value='" . htmlspecialchars($valor) . "' style='min-width:80px;max-width:130px;'>";
+            }
+            echo "</td>";
+        }
+        echo "</tr>";
+    }
+    echo "</tbody>";
+    echo "</table>";
+    echo "</div>";
+    echo "<button type='submit' class='btn btn-danger mt-2' name='borrarSeleccionados'>Borrar seleccionados</button>";
+    echo "</form>";
+
+    // Mostrar las operaciones permitidas para el usuario logueado
+    $stmtTipo = $pdo->prepare("SELECT T.id_tipo FROM USUARIO U
+        JOIN PERTENECEN P ON U.id_usu = P.id_usu
+        JOIN TIPO T ON P.id_tipo = T.id_tipo
+        WHERE U.id_usu = ?");
+    $stmtTipo->execute([$idUsu]);
+    $id_tipo_usuario = $stmtTipo->fetchColumn();
+    if ($id_tipo_usuario) {
+        mostrarBotonesOperaciones($pdo, $baseDatos, $id_tipo_usuario);
+    }
+
+    echo "</div>";
+}
+
+
 //Con la siguiente funcion seleccionamos la fila o filas elegidas por el usuario para eliminarlas de la tabla. Le pasamos por parametro la conexion, la base de datos, la tabla y los datos obtenidos del formulario tablaEliminar
 function borrarSeleccion ($pdo, $baseDatos, $tabla, $datos)
 {

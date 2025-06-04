@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (tiposNormales.includes(tipoUsuario.toLowerCase())) {
             // Redirige a mostrarDatos.php
-            fetch('mostrarDatos.php')
+            fetch('/php/mostrarDatos.php')
                 .then(res => res.text())
                 .then(html => {
                     divMiPerfil.innerHTML += html;
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Botón Mis Datos
             document.getElementById('btnMisDatos').onclick = function() {
-                fetch('mostrarDatos.php')
+                fetch('/php/mostrarDatos.php')
                 .then(res => res.text())
                 .then(html => {
                     divMiPerfil.innerHTML += html;
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
            // Botón Datos Hermanos
             document.getElementById('btnDatosHermanos').onclick = function() {
-                fetch('mostrarHermanos.php')
+                fetch('/php/mostrarHermanos.php')
                     .then(res => res.text())
                     .then(html => {
                         document.getElementById('contenidoExtra').innerHTML = html;
@@ -99,7 +99,7 @@ document.addEventListener('click', function (e) {
     if (accion && accion.toLowerCase() === 'modificar') {
         let formData = new FormData(form);
         formData.append('accion', 'modificar');
-        fetch('accionesUsuario.php', {
+        fetch('/php/accionesUsuario.php', {
             method: 'POST',
             body: formData
         })
@@ -130,7 +130,7 @@ document.addEventListener('click', function (e) {
 });
 
 function cargarTiposEnSelect(select) {
-    fetch('obtenerTipos.php')
+    fetch('/php/obtenerTipos.php')
         .then(res => res.json())
         .then(tipos => {
             select.innerHTML = '';
@@ -184,7 +184,7 @@ document.addEventListener('click', function (e) {
                     if (input.name && input.value !== "****" && input.name !== "id_usu") formData.append(input.name, input.value);
                 });
                 formData.append('accion', 'insertar');
-                fetch('accionesUsuario.php', {
+                fetch('/php/accionesUsuario.php', {
                     method: 'POST',
                     body: formData
                 })
@@ -207,7 +207,7 @@ document.addEventListener('click', function (e) {
         let form = document.getElementById('formGestionHer');
         let formData = new FormData(form);
         formData.append('accion', 'modificar');
-        fetch('accionesUsuario.php', {
+        fetch('/php/accionesUsuario.php', {
             method: 'POST',
             body: formData
         })
@@ -224,7 +224,7 @@ document.addEventListener('click', function (e) {
     let form = document.getElementById('formGestionHer') || btn.closest('form');
     let formData = new FormData(form);
     formData.append('accion', 'borrar');
-    fetch('accionesUsuario.php', {
+    fetch('/php/accionesUsuario.php', {
         method: 'POST',
         body: formData
     })
@@ -233,8 +233,9 @@ document.addEventListener('click', function (e) {
         // Si el formulario NO es el de gestión múltiple, es perfil individual
         if (!form.id || form.id !== 'formGestionHer') {
             document.body.innerHTML = html;
+            console.log('Redirigiendo a /index.html en 5 segundos');
             setTimeout(() => {
-                window.location.href = '/GitHub/proyectoFinCiclo/index.html';
+                window.location.href = '/index.html';
             }, 5000);
         } else {
             // Si es gestión de hermanos, solo actualiza la tabla
@@ -266,7 +267,7 @@ document.addEventListener('click', function (e) {
             ev.preventDefault();
             let formData = new FormData(this);
             formData.append('accion', 'filtrar');
-            fetch('accionesUsuario.php', {
+            fetch('/php/accionesUsuario.php', {
                 method: 'POST',
                 body: formData
             })

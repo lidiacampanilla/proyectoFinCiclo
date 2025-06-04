@@ -3,7 +3,7 @@ require_once 'bibliotecaFunciones.php';
 require_once 'mysqlConexion.php'; // Asegúrate de tener la conexión $pdo
 
 $baseDatos = 'cofradia'; // Cambia por el nombre real de tu base de datos
-$tabla = 'USUARIO'; // Cambia si tu tabla de usuarios tiene otro nombre
+$tabla = 'usuario'; // Cambia si tu tabla de usuarios tiene otro nombre
 $pdo = conexion($baseDatos);
 session_start();
 $idUsu = $_SESSION['id_usu'] ?? null;
@@ -57,7 +57,7 @@ if ($accion === 'insertar') {
     // Obtener id_tipo a partir de Nomb_tipo
     $id_tipo = null;
     if (isset($datos['Nomb_tipo'])) {
-        $stmtTipo = $pdo->prepare("SELECT id_tipo FROM TIPO WHERE Nomb_tipo = ?");
+        $stmtTipo = $pdo->prepare("SELECT id_tipo FROM tipo WHERE Nomb_tipo = ?");
         $stmtTipo->execute([$datos['Nomb_tipo']]);
         $id_tipo = $stmtTipo->fetchColumn();
         unset($datos['Nomb_tipo']);
@@ -76,7 +76,7 @@ if ($accion === 'insertar') {
 
     // Ahora inserta en PERTENECEN
     if ($id_tipo && $id_usu) {
-        $stmtPert = $pdo->prepare("INSERT INTO PERTENECEN (id_usu, id_tipo) VALUES (?, ?)");
+        $stmtPert = $pdo->prepare("INSERT INTO pertenecen (id_usu, id_tipo) VALUES (?, ?)");
         $stmtPert->execute([$id_usu, $id_tipo]);
     }
 
@@ -90,20 +90,20 @@ if ($accion === 'insertar') {
     if (isset($datos['Nomb_tipo'])) {
         if (is_array($datos['Nomb_tipo'])) {
             foreach ($datos['Nomb_tipo'] as $i => $nomb_tipo) {
-                $stmtTipo = $pdo->prepare("SELECT id_tipo FROM TIPO WHERE Nomb_tipo = ?");
+                $stmtTipo = $pdo->prepare("SELECT id_tipo FROM tipo WHERE Nomb_tipo = ?");
                 $stmtTipo->execute([$nomb_tipo]);
                 $nuevoIdTipo = $stmtTipo->fetchColumn();
                 if ($nuevoIdTipo && isset($datos['id_usu'][$i])) {
-                    $stmtPert = $pdo->prepare("UPDATE PERTENECEN SET id_tipo = ? WHERE id_usu = ?");
+                    $stmtPert = $pdo->prepare("UPDATE pertenecen SET id_tipo = ? WHERE id_usu = ?");
                     $stmtPert->execute([$nuevoIdTipo, $datos['id_usu'][$i]]);
                 }
             }
         } else {
-            $stmtTipo = $pdo->prepare("SELECT id_tipo FROM TIPO WHERE Nomb_tipo = ?");
+            $stmtTipo = $pdo->prepare("SELECT id_tipo FROM tipo WHERE Nomb_tipo = ?");
             $stmtTipo->execute([$datos['Nomb_tipo']]);
             $nuevoIdTipo = $stmtTipo->fetchColumn();
             if ($nuevoIdTipo) {
-                $stmtPert = $pdo->prepare("UPDATE PERTENECEN SET id_tipo = ? WHERE id_usu = ?");
+                $stmtPert = $pdo->prepare("UPDATE pertenecen SET id_tipo = ? WHERE id_usu = ?");
                 $stmtPert->execute([$nuevoIdTipo, $datos['id_usu']]);
             }
         }
@@ -134,6 +134,7 @@ if ($accion === 'insertar') {
         // Borrado individual
         borrar($pdo, $baseDatos, $tabla, $idUsu);
         echo "<div class='alert alert-warning'>Sentimos mucho tu baja</div>";
+       
     }
 
 } elseif ($accion === 'filtrar') {

@@ -79,9 +79,9 @@ function insertar($pdo, $baseDatos, $tabla, $datos)
 function validarAcceso($email,$password,$pdo){
     //Lanzamos la consulta para iniciar la verificacion del email y del password
         $stmt = $pdo -> prepare ("SELECT U.id_usu, U.password, U.Nomb_usu, T.Nomb_tipo
-                                  FROM USUARIO U
-                                  JOIN PERTENECEN P ON U.id_usu = P.id_usu
-                                  JOIN TIPO T ON P.id_tipo = T.id_tipo
+                                  FROM usuario U
+                                  JOIN pertenecen P ON U.id_usu = P.id_usu
+                                  JOIN tipo T ON P.id_tipo = T.id_tipo
                                   WHERE U.email = ?");
         $stmt->execute([$email]);
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -107,9 +107,9 @@ function tablaGestionHer($pdo, $baseDatos, $idUsu)
 
     // Consulta para obtener todos los usuarios y su tipo
     $consulta = "SELECT U.*, T.Nomb_tipo, T.id_tipo 
-                 FROM USUARIO U
-                 JOIN PERTENECEN P ON U.id_usu = P.id_usu
-                 JOIN TIPO T ON P.id_tipo = T.id_tipo";
+                 FROM usuario U
+                 JOIN pertenecen P ON U.id_usu = P.id_usu
+                 JOIN tipo T ON P.id_tipo = T.id_tipo";
     $resultado = $pdo->query($consulta);
     $registros = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
@@ -119,7 +119,7 @@ function tablaGestionHer($pdo, $baseDatos, $idUsu)
     }
 
     // Obtener todos los tipos para el select
-    $stmtTipos = $pdo->query("SELECT id_tipo, Nomb_tipo FROM TIPO");
+    $stmtTipos = $pdo->query("SELECT id_tipo, Nomb_tipo FROM tipo");
     $tipos = $stmtTipos->fetchAll(PDO::FETCH_ASSOC);
 
     echo "<div class='container mt-4'>";
@@ -180,9 +180,9 @@ function tablaGestionHer($pdo, $baseDatos, $idUsu)
     echo "</form>";
 
     // Mostrar las operaciones permitidas para el usuario logueado
-    $stmtTipo = $pdo->prepare("SELECT T.id_tipo FROM USUARIO U
-        JOIN PERTENECEN P ON U.id_usu = P.id_usu
-        JOIN TIPO T ON P.id_tipo = T.id_tipo
+    $stmtTipo = $pdo->prepare("SELECT T.id_tipo FROM usuario U
+        JOIN pertenecen P ON U.id_usu = P.id_usu
+        JOIN tipo T ON P.id_tipo = T.id_tipo
         WHERE U.id_usu = ?");
     $stmtTipo->execute([$idUsu]);
     $id_tipo_usuario = $stmtTipo->fetchColumn();
@@ -200,9 +200,9 @@ function tablaDatos($pdo, $baseDatos, $idUsu)
     $pdo->query("USE $baseDatos");
 
     //Ejecutamos la consulta con query
-    $consulta = "SELECT U.*, T.Nomb_tipo, T.id_tipo FROM USUARIO U
-    JOIN PERTENECEN P ON U.id_usu = P.id_usu
-    JOIN TIPO T ON P.id_tipo = T.id_tipo
+    $consulta = "SELECT U.*, T.Nomb_tipo, T.id_tipo FROM usuario U
+    JOIN pertenecen P ON U.id_usu = P.id_usu
+    JOIN tipo T ON P.id_tipo = T.id_tipo
     WHERE U.id_usu = ?";
     $stmt = $pdo->prepare($consulta);
     $stmt->execute([$idUsu]);
@@ -219,7 +219,7 @@ function tablaDatos($pdo, $baseDatos, $idUsu)
         echo "<input type='hidden' name='id_usu' value='" . htmlspecialchars($usuario['id_usu']) . "'>";
 
         // Obtener todos los tipos para el select
-        $stmtTipos = $pdo->query("SELECT id_tipo, Nomb_tipo FROM TIPO");
+        $stmtTipos = $pdo->query("SELECT id_tipo, Nomb_tipo FROM tipo");
         $tipos = $stmtTipos->fetchAll(PDO::FETCH_ASSOC);
         foreach ($usuario as $columna => $valor) {
             // No permitir modificar la clave primaria ni el tipo de usuario, el campo id_tipo no lo vamos a mostrar.
@@ -284,8 +284,8 @@ function mostrarBotonesOperaciones($pdo, $baseDatos, $id_tipo)
     $pdo->query("USE $baseDatos");
 
     $sqlOperaciones = "SELECT O.id_ope, O.Nomb_ope, O.Descrip_ope
-        FROM OPERACIONES O
-        JOIN REALIZAN R ON O.id_ope = R.id_ope
+        FROM operaciones O
+        JOIN realizan R ON O.id_ope = R.id_ope
         WHERE R.id_tipo = ?";
     $stmtOpe = $pdo->prepare($sqlOperaciones);
     $stmtOpe->execute([$id_tipo]);
@@ -396,9 +396,9 @@ function tablaGestionHerFiltrada($pdo, $baseDatos, $idUsu, $nombre = '', $nomb_t
 
     // Construir la consulta con filtros dinámicos
     $sql = "SELECT U.*, T.Nomb_tipo, T.id_tipo 
-            FROM USUARIO U
-            JOIN PERTENECEN P ON U.id_usu = P.id_usu
-            JOIN TIPO T ON P.id_tipo = T.id_tipo
+            FROM usuario U
+            JOIN pertenecen P ON U.id_usu = P.id_usu
+            JOIN tipo T ON P.id_tipo = T.id_tipo
             WHERE 1=1";
     $params = [];
 
@@ -421,7 +421,7 @@ function tablaGestionHerFiltrada($pdo, $baseDatos, $idUsu, $nombre = '', $nomb_t
     }
 
     // Obtener todos los tipos para el select
-    $stmtTipos = $pdo->query("SELECT id_tipo, Nomb_tipo FROM TIPO");
+    $stmtTipos = $pdo->query("SELECT id_tipo, Nomb_tipo FROM tipo");
     $tipos = $stmtTipos->fetchAll(PDO::FETCH_ASSOC);
 
     echo "<div class='container mt-4'>";
@@ -472,9 +472,9 @@ function tablaGestionHerFiltrada($pdo, $baseDatos, $idUsu, $nombre = '', $nomb_t
     echo "</form>";
 
     // Mostrar las operaciones permitidas para el usuario logueado
-    $stmtTipo = $pdo->prepare("SELECT T.id_tipo FROM USUARIO U
-        JOIN PERTENECEN P ON U.id_usu = P.id_usu
-        JOIN TIPO T ON P.id_tipo = T.id_tipo
+    $stmtTipo = $pdo->prepare("SELECT T.id_tipo FROM usuario U
+        JOIN pertenecen P ON U.id_usu = P.id_usu
+        JOIN tipo T ON P.id_tipo = T.id_tipo
         WHERE U.id_usu = ?");
     $stmtTipo->execute([$idUsu]);
     $id_tipo_usuario = $stmtTipo->fetchColumn();

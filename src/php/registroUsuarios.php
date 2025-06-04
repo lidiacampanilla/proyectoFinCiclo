@@ -3,7 +3,7 @@
       include("./bibliotecaFunciones.php");
       
       
-      $baseDatos="COFRADIA";
+      $baseDatos="cofradia";
       $pdo=conexion($baseDatos);
       
       //Si existen los campos del formulario los extraemos para poder insertarlos en la tabla de la base de datos. 
@@ -41,11 +41,11 @@
         }
 
         //Vamos a comprobar si el DNI o el email ya existen, ya que son campos unicos
-        $stmt = $pdo->prepare("SELECT COUNT(*) FROM USUARIO WHERE DNI = ?");
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM usuario WHERE DNI = ?");
         $stmt -> execute([$dni]);
         if ($stmt->fetchColumn()>0) throw new Exception("DNI ya registrado");
 
-        $stmt = $pdo->prepare("SELECT COUNT(*) FROM USUARIO WHERE email = ?");
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM usuario WHERE email = ?");
         $stmt -> execute([$email]);
         if ($stmt->fetchColumn()>0) throw new Exception("email ya registrado");
 
@@ -53,15 +53,15 @@
         $datosUsuario = ['dni'=>$dni,'email'=>$email,'Nomb_usu'=>$nombre,'Ape_usu'=>$apellidos,'password'=>$password,'direccion'=>$direccion,
                     'poblacion'=>$poblacion, 'cod_postal'=>$cp, 'provincia'=>$provincia, 'cta_bancaria'=>$cuenta];
 
-        $baseDatos='COFRADIA';
-        $tabla='USUARIO';
+        $baseDatos='cofradia';
+        $tabla='usuario';
         insertar($pdo,$baseDatos,$tabla,$datosUsuario);
         
         //Extraemos el id_usu que se ha creado automaticamente al insertar el usuario
         $id_usu = $pdo->lastInsertId();
 
         //Apartir del tipoHermano extraemos el id_tipo
-        $stmt = $pdo->prepare("SELECT id_tipo FROM TIPO WHERE Nomb_tipo = ?");
+        $stmt = $pdo->prepare("SELECT id_tipo FROM tipo WHERE Nomb_tipo = ?");
         $stmt -> execute([$tipo]);
         $id_tipo = $stmt->fetchColumn();
         //Validamos el tipo de Hermano
@@ -75,7 +75,7 @@
               'id_usu'=>$id_usu,
               'id_tipo'=> $id_tipo
             ];
-            $tablaPer = 'PERTENECEN';
+            $tablaPer = 'pertenecen';
            
             insertar($pdo,$baseDatos,$tablaPer,$datosPertenecen);
          

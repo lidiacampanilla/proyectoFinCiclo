@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded',function(){
     let form = document.getElementById('loginForm');
     console.log('form encontrado', form);
     let errorDiv = document.getElementById("error");
-    let url = 'login.php';
+    let url = '/php/login.php';
 
     form.addEventListener('submit', async e =>{
         //Para evitar recargas
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded',function(){
             }
             console.log('respuesta', result);
             if(result.success){
-                window.location.href='usuarios.php';
+                window.location.href='/php/usuarios.php';
             }else{
                 errorDiv.innerText = result.message;
                 errorDiv.style.display = 'block';

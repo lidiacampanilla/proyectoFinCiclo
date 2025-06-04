@@ -2,7 +2,7 @@
 session_start();
 include("./mysqlConexion.php");
 include("./bibliotecaFunciones.php");
-$baseDatos = "COFRADIA";
+$baseDatos = "cofradia";
 $pdo = conexion($baseDatos);
 
 if (!isset($_SESSION['id_usu'])) {
@@ -12,5 +12,5 @@ if (!isset($_SESSION['id_usu'])) {
 
 $idUsu = $_SESSION['id_usu'];
 
-tablaDatos($pdo, $baseDatos, $idUsu);
+tablaGestionHer($pdo, $baseDatos, $idUsu);
 ?>

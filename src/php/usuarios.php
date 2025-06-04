@@ -1,16 +1,15 @@
-<!-- Nos aseguramos de iniciar la sesion -->
- <?php
-  session_start();
+<?php
+session_start();
 
   if(!isset($_SESSION['tipo'])){
-    header("Location: acceso.php");
+    header("Location: /acceso.php");
     exit;
   }
 
   //Inicializamos las variables que vamos a usar
   $tipoUsuario = $_SESSION['tipo'];
   $nombre = $_SESSION['nombre'];
- ?>
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -76,7 +75,7 @@
               </li>
               <li><a href="../patrimonio.html">Patrimonio</a></li>
               <li><a href="../galeria.html">Galeria</a></li>
-              <li><a href="./acceso.html">Acceso</a></li>
+              <li><a href="/php/acceso.html">Acceso</a></li>
               <li><a href="../contacto.html">Contacto</a></li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -97,7 +96,7 @@
           <h1 class="mb-2 mb-lg-0">¡Bienvenid@ <?php echo htmlspecialchars($nombre); ?>!</h1>
           <nav class="breadcrumbs">
             <ol>
-              <li><a href="../index.html">Salir</a></li>
+              <li><a href="/index.html">Salir</a></li>
               <li class="current"><a href="#" id="miPerfilBtn">Mi perfil</a></li>
             </ol>
           </nav>

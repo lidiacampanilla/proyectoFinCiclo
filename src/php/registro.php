@@ -93,7 +93,7 @@
     </header>
 
     <main class="main">
-      <!-- About Section -->
+     
       <section id="contact" class="contact section registro"> 
         
         <!-- Page Title -->
@@ -111,13 +111,17 @@
           </div>
         </div>
         <!-- End Page Title -->
+          
+      <!-- About Section -->
         <div class="container mt-5">
+          <!-- El siguiente contenedor esta oculto, Mostrara mensaje de accion realizada o si hay algun error, mediante .js -->
+                        <div id="error" class="text-center mb-4" style ="color: red; margin-bottom : 1rem; display: none;"></div>
             <div class="row justify-content-center">
+              
                 <div class="col-md-8 col-lg-6">
                     <div class="formulario">
                         <h3 class="text-center mb-4">Formulario de Registro</h3>
-                        <!-- El siguiente contenedor esta oculto, si hay algun error mostrara un mensaje mediante .js -->
-                        <div id="error" style ="color: red; margin-bottom : 1rem; display: none;"></div>
+                        
                         <form action="./registroUsuarios.php" method="POST" class="php-acceso-form" data-aos="fade-up" data-aos-delay="200">
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre</label>

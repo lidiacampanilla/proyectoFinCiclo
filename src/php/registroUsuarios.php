@@ -81,7 +81,8 @@
          
         //Ahora confirmamos la transaccion
         $pdo->commit(); 
-        echo "ok";
+        /*echo "ok"; */
+        echo "Se ha registrado correctamente el usuario";
         exit;
         }catch (Exception $e){
           //Si hay algun error revertimos la transaccion

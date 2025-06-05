@@ -8,19 +8,20 @@ document.querySelector("form").addEventListener("submit", function(e){
     //Limpiamos pantalla por si habia algún error antes
     document.querySelectorAll(".is-invalid").forEach(el => el.classList.remove("is-invalid"));
 
-    fetch("registroUsuarios.php", {
+    fetch("/php/registroUsuarios.php", {
         method: "POST",
         body: formData,
     })
         .then(response => response.text())
         .then(result =>{
             
-            if (result.trim() == "ok"){
-                window.location.href = "../php/acceso.php";
-            }else{
+            
                 //Se muestra el mensaje devuelto por registroUsuarios.php
-                errorDiv.textContent = result;
+                errorDiv.innerHTML = result;
                 errorDiv.style.display = "block";
+
+                // Hacer scroll al principio de la página
+     window.scrollTo({ top: 0, behavior: "smooth" });
 
                 //Identificamos los campos con error
                 if (result.includes("DNI")){
@@ -33,7 +34,7 @@ document.querySelector("form").addEventListener("submit", function(e){
                     document.getElementById("cuenta").classList.add("is-invalid");
                 }
 
-            }
+            
         })
 
         .catch(error => {

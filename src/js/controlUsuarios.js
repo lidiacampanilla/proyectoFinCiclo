@@ -232,7 +232,7 @@ document.addEventListener('click', function (e) {
     .then(html => {
         // Si el formulario NO es el de gestión múltiple, es perfil individual
         if (!form.id || form.id !== 'formGestionHer') {
-            document.body.innerHTML = html;
+           document.getElementById('miPerfil').innerHTML = html;
             console.log('Redirigiendo a /index.html en 5 segundos');
             setTimeout(() => {
                 window.location.href = '/index.html';
@@ -249,20 +249,34 @@ document.addEventListener('click', function (e) {
     else if (accion === 'filtrar') {
         // Muestra un pequeño formulario de filtro
         document.getElementById('contenidoExtra').innerHTML = `
-            <form id="formFiltrar" class="mb-3">
-                <div class="row g-2">
-                    <div class="col">
-                        <input type="text" name="nombre" class="form-control" placeholder="Nombre">
-                    </div>
-                    <div class="col">
-                        <input type="text" name="nomb_tipo" class="form-control" placeholder="Tipo">
-                    </div>
-                    <div class="col">
-                        <button type="submit" class="btn btn-primary">Filtrar</button>
-                    </div>
-                </div>
-            </form>
-        `;
+    <form id="formFiltrar" class="mb-3">
+        <div class="row g-2">
+            <div class="col">
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre">
+            </div>
+            <div class="col">
+                <select name="nomb_tipo" id="selectTipoFiltro" class="form-control">
+                    <option value="">Todos los tipos</option>
+                </select>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </div>
+        </div>
+    </form>
+`;
+
+fetch('/php/obtenerTipos.php')
+    .then(res => res.json())
+    .then(tipos => {
+        const select = document.getElementById('selectTipoFiltro');
+        tipos.forEach(tipo => {
+            let option = document.createElement('option');
+            option.value = tipo.Nomb_tipo;
+            option.textContent = tipo.Nomb_tipo;
+            select.appendChild(option);
+        });
+    });
         document.getElementById('formFiltrar').onsubmit = function(ev) {
             ev.preventDefault();
             let formData = new FormData(this);

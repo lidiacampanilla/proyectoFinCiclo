@@ -67,7 +67,7 @@ function insertar($pdo, $baseDatos, $tabla, $datos)
         $stmt = $pdo->prepare($consulta);
         //Ejecutamos, con esto conseguimos sustituir los ? por los valores obtenidos con array_values.
         $stmt->execute($valores);
-        echo ("Se ha insertado el registro correctamente"); 
+        /* echo ("Se ha insertado el registro correctamente");  */
     } catch (PDOException $e) {
         echo "<div class='alert alert-danger'>Error al insertar: " . $e->getMessage() . "</div>";
         return;
@@ -403,7 +403,7 @@ function tablaGestionHerFiltrada($pdo, $baseDatos, $idUsu, $nombre = '', $nomb_t
     $params = [];
 
     if ($nombre !== '') {
-        $sql .= " AND U.nombre LIKE ?";
+        $sql .= " AND U.Nomb_usu LIKE ?";
         $params[] = "%$nombre%";
     }
     if ($nomb_tipo !== '') {
@@ -468,7 +468,6 @@ function tablaGestionHerFiltrada($pdo, $baseDatos, $idUsu, $nombre = '', $nomb_t
     echo "</tbody>";
     echo "</table>";
     echo "</div>";
-    echo "<button type='submit' class='btn btn-danger mt-2' name='borrarSeleccionados'>Borrar seleccionados</button>";
     echo "</form>";
 
     // Mostrar las operaciones permitidas para el usuario logueado

@@ -133,7 +133,7 @@
               <img src="../assets/img/acceso.jpeg" class="img-fluid" alt="imagen del Cristo de la Buena muerte" />
             </div>
             <div class="col-lg-6">
-              <div class="text-center mb-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="text-center mb-4" data-aos="fade-up" data-aos-delay="100">
                   <img alt="escudo cofradía" style="width: 35%" class="mb-3" src="../assets/img/favicon.png"/>
                   <h4 class="fw-bold mb-1 mt-5">
                     Cofradía Buena Muerte y Amargura
@@ -142,7 +142,7 @@
               </div> 
               <!-- Para mostrar error de una forma mas amigable con el usuario -->
               <div id="error" style ="color: red; margin-bottom : 1rem; display: none;"></div>      
-              <form id="loginForm" action="#" method="POST"  class="php-acceso-form mt-5" data-aos="fade-up" data-aos-delay="300">
+              <form id="loginForm" action="#" method="POST"  class="php-acceso-form mt-5" data-aos="fade-up" data-aos-delay="150">
                 <div class="mb-4">
                   <label for="email" class="form-label">Email</label>
                   <input type="email" class="form-control" id="email"
@@ -155,12 +155,12 @@
                   name="password" placeholder="Contraseña" required>
                 </div>
 
-                <div class="col-md-12 text-center mt-5" data-aos="fade-up" data-aos-delay="400">
+                <div class="col-md-12 text-center mt-5" data-aos="fade-up" data-aos-delay="200">
                   <button type="submit">Acceder
                   </button>
                 </div>
               </form>  
-              <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="500">
+              <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="250">
                 <a class="text-decoration-none fw-4" href="./registro.php">Quiero ser Hermano/a</a>
               </div>
             </div>

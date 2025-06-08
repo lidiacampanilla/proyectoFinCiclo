@@ -213,6 +213,9 @@ function tablaDatos($pdo, $baseDatos, $idUsu)
     } //Utilizamos PDO::FETCH_ASSOC , para obtener los datos correctamente sin duplicidad
     else {
         echo "<div class='container mt-4'>";
+        echo "<div class='row justify-content-center'>";
+        echo "<div class='col-md-8 col-lg-6'>";
+        echo "<div class='formulario'>";
         echo "<form method='post' action=''>";
         $usuario = $resultado[0]; // Asumimos que solo hay un usuario para este id_usu
         // AÑADE ESTE CAMPO OCULTO:
@@ -271,11 +274,15 @@ function tablaDatos($pdo, $baseDatos, $idUsu)
         }
         /* $id_tipo = $usuario['id_tipo'];
         mostrarBotonesOperaciones($pdo, $baseDatos, $id_tipo); */
-        echo "<div class='mb-3'>";
+        /* echo "<div class='mb-3'>"; */
+        echo "<div class='text-center mt-4'>";
         echo "<button type='button' class='btn btn-secondary btn-operacion me-2' data-accion='modificar' data-id='2' name='modificar' class='btn btn-primary me-2'>Modificar</button>";
         echo "<button type='button' class='btn btn-secondary btn-operacion me-2' data-accion='borrar' data-id='3' name='borrar' class='btn btn-danger'>Borrar</button>";
         echo "</div>";
         echo "</form>";
+        echo "</div>";
+        echo "</div>";
+        echo "</div>";
         echo "</div>";
     }
 }

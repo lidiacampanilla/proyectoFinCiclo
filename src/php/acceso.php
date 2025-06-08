@@ -130,7 +130,7 @@
         <div class="container mt-5">
           <div class="row gy-4">
             <div class="col-lg-6">
-              <img src="../assets/img/acceso.jpeg" class="img-fluid" alt="imagen del Cristo de la Buena muerte" />
+              <img src="../assets/img/acceso.webp" class="img-fluid" alt="imagen del Cristo de la Buena muerte" />
             </div>
             <div class="col-lg-6">
               <div class="text-center mb-4" data-aos="fade-up" data-aos-delay="100">

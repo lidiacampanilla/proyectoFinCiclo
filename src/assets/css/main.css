@@ -1599,7 +1599,7 @@ section,
 # Registro
 --------------------------------------------------------------*/
 .registro{
-  background-image: url(../img/hero-carousel/hero-carousel-1.jpg);
+  background-image: url(../img/hero-carousel/hero-carousel-1.webp);
   background-size: cover;
   background-position: center;
   backdrop-filter: blur(5px);

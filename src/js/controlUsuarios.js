@@ -105,8 +105,22 @@ document.addEventListener('click', function (e) {
         })
         .then(resp => resp.text())
         .then(html => {
-            const contenedor = document.querySelector('.container.mt-4');
-            if (contenedor) contenedor.innerHTML = html;
+            const contenedor = document.querySelector('.container.mt-4') || document.getElementById('contenidoExtra');
+    if (contenedor) contenedor.innerHTML = html;
+
+    // Marcar campos inválidos si hay error
+    if (html.includes("DNI")) {
+        document.querySelectorAll("input[name='dni'], input[name^='dni']").forEach(el => el.classList.add("is-invalid"));
+    }
+    if (html.includes("Email")) {
+        document.querySelectorAll("input[name='email'], input[name^='email']").forEach(el => el.classList.add("is-invalid"));
+    }
+    if (html.includes("ya registrado")) {
+        // Marca ambos por si acaso
+        document.querySelectorAll("input[name='dni'], input[name^='dni'], input[name='email'], input[name^='email']").forEach(el => el.classList.add("is-invalid"));
+    }
+
+
         })
         .catch(err => alert('Error al modificar: ' + err));
         }/* else if (accion && accion.toLowerCase() === 'borrar') {

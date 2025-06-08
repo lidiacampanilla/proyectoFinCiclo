@@ -115,6 +115,68 @@ if ($accion === 'insertar') {
             $datos[$key] = [$value];
         }
     }
+    //Para controlar los campos DNI, email y cta_bancaria, utilizamos el siguiente código
+    $errores = [];
+
+    // Validar DNI
+    if(isset ($datos['DNI'])){
+        $dni = is_array($datos['DNI']) ? $datos['DNI'] : [$datos['DNI']];
+        foreach ($dni as $i => $d) {
+            if (!validarDNI($d)) {
+                $errores[] = "DNI ERRONEO";
+            }else {
+                // Comprobar si el DNI ya existe en la base de datos
+                // Excluyendo el usuario actual (id_usu)
+                $id_usu_actual = isset($datos['id_usu'][$i]) ? $datos['id_usu'][$i]: $datos['id_usu'];
+                $stmt = $pdo->prepare("SELECT COUNT(*) FROM usuario WHERE dni = ? AND id_usu != ?");
+                $stmt->execute([$d, $id_usu_actual]);
+                if ($stmt->fetchColumn() > 0) {
+                    $errores[] = "DNI ya registrado";
+                }
+            }
+        }
+    }
+    // Validar email
+    if(isset ($datos['email'])){
+        $email = is_array($datos['email']) ? $datos['email'] : [$datos['email']];
+        foreach ($email as $i=> $e) {
+            $id_usu_actual = isset($datos['id_usu'][$i]) ? $datos['id_usu'][$i] : $datos['id_usu'];
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM usuario WHERE email = ? AND id_usu != ?");
+            $stmt->execute([$e, $id_usu_actual]); 
+            if ($stmt->fetchColumn() > 0) {
+                $errores[] = "Email ya registrado";
+            }
+        }
+    }
+    // Validar cta_bancaria
+    if(isset ($datos['cta_bancaria'])){
+        $cta_bancaria = is_array($datos['cta_bancaria']) ? $datos['cta_bancaria'] : [$datos['cta_bancaria']];
+         // Validar cada cuenta bancaria
+         // Si es un array, recorremos cada elemento
+         // Si es un string, lo convertimos a array para validarlo
+        foreach ($cta_bancaria as $c) {
+            if (!validarIBAN($c)) {
+                $errores[] = "Cuenta bancaria no válida";
+            }
+         }
+    }
+
+    // Si hay errores, mostramos un mensaje y no hacemos la modificación
+    if (!empty($errores)) {
+        echo "<div class='alert alert-danger'>Errores encontrados: " . implode(', ', $errores) . "</div>";
+        exit;
+    }
+    if (isset($datos['password'])) {
+    foreach ($datos['password'] as $i => $pass) {
+        if (trim($pass) !== '') {
+            $datos['password'][$i] = password_hash($pass, PASSWORD_DEFAULT);
+        } else {
+            unset($datos['password'][$i]); // Si está vacío, no modificar
+        }
+    }
+    // Si todos los campos password están vacíos, elimina la clave
+    if (empty($datos['password'])) unset($datos['password']);
+}
     modificar($pdo, $baseDatos, $tabla, $datos);
     // Si es modificación múltiple, muestra tablaGestionHer; si es individual, tablaDatos
     if (isset($datos['id_usu']) && count($datos['id_usu']) > 1) {

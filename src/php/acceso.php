@@ -170,6 +170,7 @@
       <!--/About Section -->
     </main>
 
+    <!-- Footer -->
     <footer id="footer" class="footer dark-background">
       <div class="container">
         <h3 class="sitename">Buena Muerte y Amargura</h3>
@@ -178,10 +179,9 @@
           Santísima de la Amargura
         </p>
         <div class="social-links d-flex justify-content-center">
-          <a href=""><i class="bi bi-twitter-x"></i></a>
-          <a href=""><i class="bi bi-facebook"></i></a>
-          <a href=""><i class="bi bi-instagram"></i></a>
-          <a href=""><i class="bi bi-tiktok"></i></a>
+          <a href="https://www.facebook.com/share/18tLZr2hX2/?mibextid=wwXIfr"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/buena_muerte_y_amargura?igsh=MWcyY2tpaTVoaTBoaA=="><i class="bi bi-instagram"></i></a>
+          <a href="https://www.tiktok.com/@buenamuerteyamargura?_t=ZN-8x3fKiH99sM&_r=1"><i class="bi bi-tiktok"></i></a>
         </div>
         <div class="container">
           <div class="copyright">
@@ -203,7 +203,8 @@
       </div>
     </footer>
 
-    <!-- Scroll Top -->
+    <!-- Scroll Top, boton flecha que se muestra como un icono de Bootstrap, que sirve para subir al inicio de
+     la pagina una vez que el usuraio esta abajo-->
     <a
       href="#"
       id="scroll-top"
@@ -211,7 +212,8 @@
       ><i class="bi bi-arrow-up-short"></i
     ></a>
 
-    <!-- Preloader -->
+    <!-- Preloader, Contenedor vacio para mostrar una animacion mientras se carga la página, siempre y cuendo 
+     sea necesario -->
     <div id="preloader"></div>
 
      <!-- Ficheros de control JS -->

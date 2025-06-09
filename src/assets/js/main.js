@@ -10,7 +10,7 @@
   "use strict";
 
   /**
-   * Apply .scrolled class to the body as the page is scrolled down
+   * Añade la clase .scrolled al body cuando se hace scroll
    */
   function toggleScrolled() {
     const selectBody = document.querySelector('body');
@@ -23,7 +23,7 @@
   window.addEventListener('load', toggleScrolled);
 
   /**
-   * Mobile nav toggle
+   * Mobile nav toggle -boton para abrir/cerrar el menú de navegación en dispositivos móviles-
    */
   const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
 
@@ -35,7 +35,7 @@
   mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
 
   /**
-   * Hide mobile nav on same-page/hash links
+   * Ocultar el menú de navegación móvil al hacer clic en un enlace
    */
   document.querySelectorAll('#navmenu a').forEach(navmenu => {
     navmenu.addEventListener('click', () => {
@@ -47,7 +47,7 @@
   });
 
   /**
-   * Toggle mobile nav dropdowns
+   *Despliega submenús en el menú móvil
    */
   document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
     navmenu.addEventListener('click', function(e) {
@@ -59,7 +59,7 @@
   });
 
   /**
-   * Preloader
+   * Preloader: Elimina el preloader una vez que la página ha cargado
    */
   const preloader = document.querySelector('#preloader');
   if (preloader) {
@@ -69,7 +69,8 @@
   }
 
   /**
-   * Scroll top button
+   * Scroll top button: muestra/oculta el botón de desplazamiento hacia arriba
+   * y añade un evento para desplazarse suavemente hacia arriba al hacer clic
    */
   let scrollTop = document.querySelector('.scroll-top');
 
@@ -90,7 +91,7 @@
   document.addEventListener('scroll', toggleScrollTop);
 
   /**
-   * Animation on scroll function and init
+   * Animation on scroll function and init (inicializa animaciones al hacer scroll)
    */
   function aosInit() {
     AOS.init({
@@ -103,7 +104,7 @@
   window.addEventListener('load', aosInit);
 
   /**
-   * Auto generate the carousel indicators
+   * Genera automáticamente los indicadores de los carruseles
    */
   document.querySelectorAll('.carousel-indicators').forEach((carouselIndicator) => {
     carouselIndicator.closest('.carousel').querySelectorAll('.carousel-item').forEach((carouselItem, index) => {
@@ -116,7 +117,8 @@
   });
 
   /**
-   * Init swiper sliders
+   * Inicializa sliders de Swiper
+   * Si el elemento tiene la clase .swiper-tab, se inicializa con paginación personalizada
    */
   function initSwiper() {
     document.querySelectorAll(".init-swiper").forEach(function(swiperElement) {
@@ -135,7 +137,7 @@
   window.addEventListener("load", initSwiper);
 
   /**
-   * Initiate glightbox
+   * Inicializa glightbox para galerías de imágenes
    */
   const glightbox = GLightbox({
     selector: '.glightbox'

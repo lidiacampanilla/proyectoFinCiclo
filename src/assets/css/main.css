@@ -147,8 +147,6 @@ h6 {
 # Global Header
 --------------------------------------------------------------*/
 .header {
-  /*color: var(--default-color);
-  background-color: var(--background-color);*/
   color: white;
   background-color: rgb(113, 20, 20);
   padding: 15px 0;
@@ -170,7 +168,6 @@ h6 {
   font-size: 30px;
   margin: 0;
   font-weight: 700;
-  /*color: var(--heading-color);*/
   color:white;
 }
 
@@ -481,7 +478,7 @@ h6 {
   color: var(--default-color);
 }
 /*--------------------------------------------------------------
-# Preloader
+# Preloader, estilos para el contenedor de carga
 --------------------------------------------------------------*/
 #preloader {
   position: fixed;
@@ -648,7 +645,7 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Hero Section
+# Hero Section- Carousel de pagina de inicio
 --------------------------------------------------------------*/
 .hero {
   padding: 0;
@@ -887,7 +884,7 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Featured Members Section
+# Featured Members Section-pagina del patrimonio
 --------------------------------------------------------------*/
 .featured-members .features-item {
   color: color-mix(in srgb, var(--default-color), transparent 20%);
@@ -989,18 +986,11 @@ section,
   margin: 0 2px;
 }
 
-/*--------------------------------------------------------------
-# Starter Section Section
---------------------------------------------------------------*/
-.starter-section {
-  background-color: #df1529;
-  /* Add your styles here */
-}
 
 /*--------------------------------------------------------------
 # Events Section
 --------------------------------------------------------------*/
-.events .card {
+/* .events .card {
   border: 0;
   padding: 0 30px;
   margin-bottom: 60px;
@@ -1056,7 +1046,7 @@ section,
 .events .card:hover .card-body .card-title a {
   color: var(--accent-color);
 }
-
+ */
 /*--------------------------------------------------------------
 # Gallery Section
 --------------------------------------------------------------*/
@@ -1123,7 +1113,7 @@ section,
 /*--------------------------------------------------------------
 # Blog Posts Section
 --------------------------------------------------------------*/
-.blog-posts article {
+/* .blog-posts article {
   background-color: var(--surface-color);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   padding: 30px;
@@ -1175,12 +1165,12 @@ section,
   font-size: 14px;
   color: color-mix(in srgb, var(--default-color), transparent 40%);
   margin-bottom: 0;
-}
+} */
 
 /*--------------------------------------------------------------
 # Blog Pagination Section
 --------------------------------------------------------------*/
-.blog-pagination {
+/* .blog-pagination {
   padding-top: 0;
   color: color-mix(in srgb, var(--default-color), transparent 40%);
 }
@@ -1217,12 +1207,12 @@ section,
 .blog-pagination li a.active a,
 .blog-pagination li a:hover a {
   color: var(--contrast-color);
-}
+} */
 
 /*--------------------------------------------------------------
 # Blog Details Section
 --------------------------------------------------------------*/
-.blog-details {
+/* .blog-details {
   padding-bottom: 30px;
 }
 
@@ -1370,12 +1360,12 @@ section,
 
 .blog-details .meta-bottom .share i {
   padding-left: 5px;
-}
+} */
 
 /*--------------------------------------------------------------
 # Blog Comments Section
 --------------------------------------------------------------*/
-.blog-comments {
+/* .blog-comments {
   padding: 10px 0;
 }
 
@@ -1429,12 +1419,12 @@ section,
 
 .blog-comments .comment.comment-reply {
   padding-left: 40px;
-}
+} */
 
 /*--------------------------------------------------------------
 # Comment Form Section
 --------------------------------------------------------------*/
-.comment-form {
+/* .comment-form {
   padding-top: 10px;
 }
 
@@ -1510,7 +1500,7 @@ section,
 .comment-form form .btn-primary:hover {
   color: var(--contrast-color);
   background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
-}
+} */
 
 /*--------------------------------------------------------------
 # Contact Section
@@ -1615,7 +1605,7 @@ section,
 /*--------------------------------------------------------------
 # Widgets
 --------------------------------------------------------------*/
-.widgets-container {
+/* .widgets-container {
   background-color: var(--surface-color);
   padding: 30px;
   margin: 60px 0 30px 0;
@@ -1813,4 +1803,4 @@ section,
   padding-left: 5px;
   color: color-mix(in srgb, var(--default-color), transparent 60%);
   font-size: 14px;
-}
+} */

@@ -21,7 +21,7 @@ document.querySelector("form").addEventListener("submit", function(e){
                 errorDiv.style.display = "block";
 
                 // Hacer scroll al principio de la página
-     window.scrollTo({ top: 0, behavior: "smooth" });
+                window.scrollTo({ top: 0, behavior: "smooth" });
 
                 //Identificamos los campos con error
                 if (result.includes("DNI")){

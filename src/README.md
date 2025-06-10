@@ -42,6 +42,11 @@ Mi proyecto fin de ciclo se basa en la implementación de un sitio web para una 
 - GitHub (control de versiones)
 - Docker (contenedorización del proyecto)
 
+## Documentación
+
+- [Manual de Usuario](./manualUsuario.md)
+- [Manual Técnico](./manualTecnico.md)
+
 ## Vista Previa del Diseño
 
 A continuación, se muestra una primera aproximación a la pantalla de inicio del sitio web:

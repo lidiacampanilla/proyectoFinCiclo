@@ -52,6 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Botón Mis Datos
             document.getElementById('btnMisDatos').onclick = function() {
+                // Limpiamos el contenido previo
+                divMiPerfil.innerHTML = '<h2>Mis Datos</h2>';
                 fetch('/php/mostrarDatos.php')
                 .then(res => res.text())
                 .then(html => {
@@ -73,6 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
            // Botón Datos Hermanos
             document.getElementById('btnDatosHermanos').onclick = function() {
+                // Limpiamos el contenido previo
+                /* divMiPerfil.innerHTML = '<h2>¡¡¡¡Datos Hermanos</h2>'; */
                 fetch('/php/mostrarHermanos.php')
                     .then(res => res.text())
                     .then(html => {
@@ -108,6 +112,10 @@ document.addEventListener('click', function (e) {
             const contenedor = document.querySelector('.container.mt-4') || document.getElementById('contenidoExtra');
     if (contenedor) contenedor.innerHTML = html;
 
+    // Hacer scroll al principio de la página
+       setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}, 50);
     // Marcar campos inválidos si hay error
     if (html.includes("DNI")) {
         document.querySelectorAll("input[name='dni'], input[name^='dni']").forEach(el => el.classList.add("is-invalid"));
@@ -219,6 +227,7 @@ document.addEventListener('click', function (e) {
     // MODIFICAR (múltiple)
     else if (accion === 'modificar') {
         let form = document.getElementById('formGestionHer');
+        
         let formData = new FormData(form);
         formData.append('accion', 'modificar');
         fetch('/php/accionesUsuario.php', {
@@ -227,7 +236,7 @@ document.addEventListener('click', function (e) {
         })
         .then(resp => resp.text())
         .then(html => {
-            document.getElementById('contenidoExtra').innerHTML = html;
+            document.getElementById('contenidoExtra')./* innerHTML = html; */
             activarCheckAll();
         });
     }

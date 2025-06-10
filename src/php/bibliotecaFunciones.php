@@ -177,7 +177,7 @@ function tablaGestionHer($pdo, $baseDatos, $idUsu)
     echo "</tbody>";
     echo "</table>";
     echo "</div>";
-    echo "</form>";
+    
 
     // Mostrar las operaciones permitidas para el usuario logueado
     $stmtTipo = $pdo->prepare("SELECT T.id_tipo FROM usuario U
@@ -189,7 +189,7 @@ function tablaGestionHer($pdo, $baseDatos, $idUsu)
     if ($id_tipo_usuario) {
         mostrarBotonesOperaciones($pdo, $baseDatos, $id_tipo_usuario);
     }
-
+    echo "</form>";
     echo "</div>";
 }
 

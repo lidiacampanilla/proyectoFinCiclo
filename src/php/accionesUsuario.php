@@ -166,16 +166,24 @@ if ($accion === 'insertar') {
         echo "<div class='alert alert-danger'>Errores encontrados: " . implode(', ', $errores) . "</div>";
         exit;
     }
+    //Con el siguiente código, vamos a modificar los campos de contraseña y hashearla si no están vacíos
     if (isset($datos['password'])) {
-    foreach ($datos['password'] as $i => $pass) {
-        if (trim($pass) !== '') {
-            $datos['password'][$i] = password_hash($pass, PASSWORD_DEFAULT);
+    if (is_array($datos['password'])) {
+        foreach ($datos['password'] as $i => $pass) {
+            if (trim($pass) !== '') {
+                $datos['password'][$i] = password_hash($pass, PASSWORD_DEFAULT);
+            } else {
+                unset($datos['password'][$i]); // Si está vacío, no modificar
+            }
+        }
+        if (empty($datos['password'])) unset($datos['password']);
+    } else {
+        if (trim($datos['password']) !== '') {
+            $datos['password'] = password_hash($datos['password'], PASSWORD_DEFAULT);
         } else {
-            unset($datos['password'][$i]); // Si está vacío, no modificar
+            unset($datos['password']);
         }
     }
-    // Si todos los campos password están vacíos, elimina la clave
-    if (empty($datos['password'])) unset($datos['password']);
 }
     modificar($pdo, $baseDatos, $tabla, $datos);
     // Si es modificación múltiple, muestra tablaGestionHer; si es individual, tablaDatos

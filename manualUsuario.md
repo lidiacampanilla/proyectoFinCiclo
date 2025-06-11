@@ -1,4 +1,4 @@
-![Pantalla de inicio](./src/asset/img/manualUsu/portada.jpg)
+![Pantalla de inicio](./src/assets/img/manualUsu/portada.jpg)
 # MANUAL USUARIO  
 **WEB COFRADÍA BUENA MUERTE**  
 

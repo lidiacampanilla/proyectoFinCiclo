@@ -43,7 +43,7 @@ proyectoFinCiclo/
 │   ├── forms/            # Formularios PHP (contacto, etc.)
 │   ├── php/              # Lógica de servidor (bibliotecaFunciones.php, accionesUsuario.php, etc.)
 │   ├── js/               # Scripts JavaScript (controlUsuarios.js, controlRegistrar.js, etc.)
-│   ├── contacto.html     # Página de contacto
+│   ├── index.html        # Página de inicio
 │   ├── registro.php      # Página de registro
 │   └── ...               # Otras páginas y recursos
 │

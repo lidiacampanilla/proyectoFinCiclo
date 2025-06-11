@@ -1,278 +1,447 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Web Cofradia Buena muerte</title>
+    <meta
+      name="description"
+      content="bootstrap, html, css, js, php, formularios, bbdd"
+    />
+    <meta name="keywords" content="" />
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Web Cofradia Buena muerte</title>
-  <meta name="description" content="bootstrap, html, css, js, php, formularios, bbdd">
-  <meta name="keywords" content="">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  
+    <!-- Fuentes-->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Fuentes-->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet" />
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
-
-  <!-- =======================================================
+    <!-- =======================================================
   * Template Name: MeFamily
   * Template URL: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/
   * Updated: Aug 07 2024 with Bootstrap v5.3.3
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-</head>
+  </head>
 
-<body class="index-page">
-
-  <header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="escudo de la Cofradia">
-        <h1 class="sitename">BUENA MUERTE Y AMARGURA</h1>
-      </a>
-
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="#hero" class="active">Inicio</a></li>
-          <li class="dropdown"><a href="#"><span>Hermandad</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="historia.html">Historia</a></li>
-              <li class="dropdown"><a href="#"><span>Colectivos</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="juntaGobierno.html">Junta de Gobierno</a></li>
-                  <li><a href="grupoJoven.html">Grupo Joven</a></li>
-                  <li><a href="costaleros.html">Costaleros</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li><a href="patrimonio.html">Patrimonio</a></li>
-          <li><a href="galeria.html">Galeria</a></li>
-          <li><a href="./php/acceso.php">Acceso</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-
-    </div>
-  </header>
-
-  <main class="main">
-
-    <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background">
-
-      <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
-
-        <div class="carousel-item active">
-          <img src="assets/img/hero-carousel/hero-carousel-1.webp" alt="">
-        </div><!-- End Carousel Item -->
-        <div class="carousel-item active">
-          <img src="assets/img/hero-carousel/hero-carousel-2.webp" alt="">
-        </div><!-- End Carousel Item -->
-        <div class="carousel-item active">
-          <img src="assets/img/hero-carousel/hero-carousel-3.webp" alt="">
-        </div><!-- End Carousel Item -->
-        <div class="carousel-item active">
-          <img src="assets/img/hero-carousel/hero-carousel-4.webp" alt="">
-        </div><!-- End Carousel Item -->
-
-        <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+  <body class="index-page">
+    <header id="header" class="header d-flex align-items-center sticky-top">
+      <div
+        class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between"
+      >
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="assets/img/logo.png" alt="escudo de la Cofradia" />
+          <h1 class="sitename">BUENA MUERTE Y AMARGURA</h1>
         </a>
-
-        <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
-          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-        </a>
-
-        <ol class="carousel-indicators"></ol>
-
+        <!-- Menu de navegacion -->
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="#hero" class="active">Inicio</a></li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Hermandad</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li><a href="historia.html">Historia</a></li>
+                <li class="dropdown">
+                  <a href="#"
+                    ><span>Colectivos</span>
+                    <i class="bi bi-chevron-down toggle-dropdown"></i
+                  ></a>
+                  <ul>
+                    <li><a href="juntaGobierno.html">Junta de Gobierno</a></li>
+                    <li><a href="grupoJoven.html">Grupo Joven</a></li>
+                    <li><a href="costaleros.html">Costaleros</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="patrimonio.html">Patrimonio</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="./php/acceso.php">Acceso</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
       </div>
+    </header>
 
-    </section><!-- /Hero Section -->
+    <main class="main">
+      <!-- Seccion imagenes inicio carousel -->
+      <section id="hero" class="hero section dark-background">
+        <div
+          id="hero-carousel"
+          class="carousel slide carousel-fade"
+          data-bs-ride="carousel"
+          data-bs-interval="5000"
+        >
+          <div class="carousel-item active">
+            <img src="assets/img/hero-carousel/hero-carousel-1.webp" alt="" />
+          </div>
+          <!-- End Carousel Item -->
+          <div class="carousel-item active">
+            <img src="assets/img/hero-carousel/hero-carousel-2.webp" alt="" />
+          </div>
+          <!-- End Carousel Item -->
+          <div class="carousel-item active">
+            <img src="assets/img/hero-carousel/hero-carousel-3.webp" alt="" />
+          </div>
+          <!-- End Carousel Item -->
+          <div class="carousel-item active">
+            <img src="assets/img/hero-carousel/hero-carousel-4.webp" alt="" />
+          </div>
+          <!-- End Carousel Item -->
 
-    <!-- About Section -->
-    <section id="about" class="about section">
+          <a
+            class="carousel-control-prev"
+            href="#hero-carousel"
+            role="button"
+            data-bs-slide="prev"
+          >
+            <span
+              class="carousel-control-prev-icon bi bi-chevron-left"
+              aria-hidden="true"
+            ></span>
+          </a>
 
-    <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Real e Ilustre Cofradia</h2>
-        <h2>Cristo de la Buena Muerte y Maria Santisima de la Amargura</h2>
-    
-        
-      </div> <!--End Section Title -->
+          <a
+            class="carousel-control-next"
+            href="#hero-carousel"
+            role="button"
+            data-bs-slide="next"
+          >
+            <span
+              class="carousel-control-next-icon bi bi-chevron-right"
+              aria-hidden="true"
+            ></span>
+          </a>
 
-      <!-- Page Title -->
-    <div class="page-title beigs-background">
-      <div class="container d-lg-flex justify-content-between align-items-center">
-        <h1 class="mb-2 mb-lg-0">Noticias Breves y Eventos</h1>
-        
-      </div>
-    </div><!-- End Page Title -->
+          <ol class="carousel-indicators"></ol>
+        </div>
+      </section>
+      <!-- Fin seccion Carousel -->
 
-    </section> <!--/About Section -->
-
-    <!-- Seccion de noticias Breves -->
-    <section id="features" class="features section">
-    
-      <div class="container">
-
-        <div class="row gy-4">
-          
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="feature-item position-relative">
-              <div class="post-img">
-                <img src="assets/img/noticia1.webp" alt="" class="img-fluid">
-              </div>
-              
-                <h3>Cruz de los niños</h3>
-              
-              <p>Celebracion de la misa sábado 14/06 a las 20:00 y seguidamente procesion.</p>
-            </div>
-          </div><!-- Fin Noticia -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="feature-item position-relative">
-              <div class="post-img">
-                <img src="assets/img/noticia2.webp" alt="" class="img-fluid">
-              </div>
-              
-                <h3>Cartel Semana Santa 2025</h3>
-              
-              <p>Ya tenemos cartel para nuestro gran día, compartelo.</p>
-            </div>
-          </div><!-- Fin Noticia -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="feature-item position-relative">
-              <div class="post-img">
-                <img src="assets/img/noticia3.webp" alt="" class="img-fluid">
-              </div>
-              
-                <h3>Subida al paso</h3>
-              
-              <p>Subida de la imagen del Cristo a su paso el 7/04/25 a las 21:30</p>
-            </div>
-          </div><!-- Fin Noticia -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="feature-item position-relative">
-              <div class="post-img">
-                <img src="assets/img/noticia4.webp" alt="" class="img-fluid">
-              </div>
-              
-                <h3>Misa de Hermandad</h3>
-              
-              <p>La misa se celebra el 05/04/2025 a las 20:00 en la iglesia parroquial de Berja.</p>
-            </div>
-          </div><!-- Fin Noticia -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="feature-item position-relative">
-              <div class="post-img">
-                <img src="assets/img/noticia5.webp" alt="" class="img-fluid">
-              </div>
-              
-                <h3>Pregón de Semana Santa</h3>
-              
-              <p>Tendrá lugar en el Teatro a las 12:00, el Domingo 06/04/2025</p>
-            </div>
-          </div><!-- Fin Noticia -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="feature-item position-relative">
-              <div class="post-img">
-                <img src="assets/img/noticia6.webp" alt="" class="img-fluid">
-              </div>
-              
-                <h3>Adoración de la Cruz</h3>
-              
-              <p>Adoración amenizada con el Ensemble de saxofones, el 03/04/2025 a las 21:30</p>
-            </div>
-          </div><!-- Fin Noticia -->
-
+      <!-- Seccion presentaion -->
+      <section id="about" class="about section">
+        <!-- Titulo pagina -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Real e Ilustre Cofradia</h2>
+          <h2>Cristo de la Buena Muerte y Maria Santisima de la Amargura</h2>
         </div>
 
-      </div>
+        <div class="page-title beigs-background">
+          <div
+            class="container d-lg-flex justify-content-between align-items-center"
+          >
+            <h1 class="mb-2 mb-lg-0">Noticias Breves y Eventos</h1>
+          </div>
+        </div>
+        <!--Fin titulo pagina -->
+      </section>
+      <!--Fin seccion presentacion -->
 
-    </section><!-- Fin Seccion noticias Breves -->
+      <!-- Seccion de noticias Breves -->
+      <section id="features" class="features section">
+        <div class="container">
+          <div class="row gy-4">
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="feature-item position-relative">
+                <div class="post-img">
+                  <img
+                    src="assets/img/noticia1.webp"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </div>
 
-    <!-- Seccion de Fotos recientes -->
-    <section id="recent-photos" class="recent-photos section">
+                <h3>Cruz de los niños</h3>
 
-      <!-- Titulo -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Fotos Recientes</h2>
-      </div><!-- End Section Title -->
+                <p>
+                  Celebracion de la misa sábado 14/06 a las 20:00 y seguidamente
+                  procesion.
+                </p>
+              </div>
+            </div>
+            <!-- Fin Noticia -->
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div class="feature-item position-relative">
+                <div class="post-img">
+                  <img
+                    src="assets/img/noticia2.webp"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </div>
 
-        <div class="swiper init-swiper">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "centeredSlides": true,
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 1,
-                  "spaceBetween": 0
+                <h3>Cartel Semana Santa 2025</h3>
+
+                <p>Ya tenemos cartel para nuestro gran día, compartelo.</p>
+              </div>
+            </div>
+            <!-- Fin Noticia -->
+
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div class="feature-item position-relative">
+                <div class="post-img">
+                  <img
+                    src="assets/img/noticia3.webp"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </div>
+
+                <h3>Subida al paso</h3>
+
+                <p>
+                  Subida de la imagen del Cristo a su paso el 7/04/25 a las
+                  21:30
+                </p>
+              </div>
+            </div>
+            <!-- Fin Noticia -->
+
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <div class="feature-item position-relative">
+                <div class="post-img">
+                  <img
+                    src="assets/img/noticia4.webp"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </div>
+
+                <h3>Misa de Hermandad</h3>
+
+                <p>
+                  La misa se celebra el 05/04/2025 a las 20:00 en la iglesia
+                  parroquial de Berja.
+                </p>
+              </div>
+            </div>
+            <!-- Fin Noticia -->
+
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
+              <div class="feature-item position-relative">
+                <div class="post-img">
+                  <img
+                    src="assets/img/noticia5.webp"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </div>
+
+                <h3>Pregón de Semana Santa</h3>
+
+                <p>
+                  Tendrá lugar en el Teatro a las 12:00, el Domingo 06/04/2025
+                </p>
+              </div>
+            </div>
+            <!-- Fin Noticia -->
+
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="600"
+            >
+              <div class="feature-item position-relative">
+                <div class="post-img">
+                  <img
+                    src="assets/img/noticia6.webp"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </div>
+
+                <h3>Adoración de la Cruz</h3>
+
+                <p>
+                  Adoración amenizada con el Ensemble de saxofones, el
+                  03/04/2025 a las 21:30
+                </p>
+              </div>
+            </div>
+            <!-- Fin Noticia -->
+          </div>
+        </div>
+      </section>
+      <!-- Fin Seccion noticias Breves -->
+
+      <!-- Seccion de Fotos recientes -->
+      <section id="recent-photos" class="recent-photos section">
+        <!-- Titulo -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Fotos Recientes</h2>
+        </div>
+        <!-- Fin titulo -->
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper init-swiper">
+            <!-- Código que define el movimiento de las imagenes -->
+            <script type="application/json" class="swiper-config">
+              {
+                "loop": true,
+                "speed": 600,
+                "autoplay": {
+                  "delay": 5000
                 },
-                "768": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 20
+                "slidesPerView": "auto",
+                "centeredSlides": true,
+                "pagination": {
+                  "el": ".swiper-pagination",
+                  "type": "bullets",
+                  "clickable": true
                 },
-                "1200": {
-                  "slidesPerView": 5,
-                  "spaceBetween": 20
+                "breakpoints": {
+                  "320": {
+                    "slidesPerView": 1,
+                    "spaceBetween": 0
+                  },
+                  "768": {
+                    "slidesPerView": 3,
+                    "spaceBetween": 20
+                  },
+                  "1200": {
+                    "slidesPerView": 5,
+                    "spaceBetween": 20
+                  }
                 }
               }
-            }
-          </script>
-          <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/img/recent-photos/recent-photos-1.webp"><img src="assets/img/recent-photos/recent-photos-1.webp" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/img/recent-photos/recent-photos-2.webp"><img src="assets/img/recent-photos/recent-photos-2.webp" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/img/recent-photos/recent-photos-3.webp"><img src="assets/img/recent-photos/recent-photos-3.webp" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/img/recent-photos/recent-photos-4.webp"><img src="assets/img/recent-photos/recent-photos-4.webp" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/img/recent-photos/recent-photos-5.webp"><img src="assets/img/recent-photos/recent-photos-5.webp" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/img/recent-photos/recent-photos-6.webp"><img src="assets/img/recent-photos/recent-photos-6.webp" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/img/recent-photos/recent-photos-7.webp"><img src="assets/img/recent-photos/recent-photos-7.webp" class="img-fluid" alt=""></a></div>
-            
+            </script>
+            <div class="swiper-wrapper align-items-center">
+              <div class="swiper-slide">
+                <a
+                  class="glightbox"
+                  data-gallery="images-gallery"
+                  href="assets/img/recent-photos/recent-photos-1.webp"
+                  ><img
+                    src="assets/img/recent-photos/recent-photos-1.webp"
+                    class="img-fluid"
+                    alt=""
+                /></a>
+              </div>
+              <div class="swiper-slide">
+                <a
+                  class="glightbox"
+                  data-gallery="images-gallery"
+                  href="assets/img/recent-photos/recent-photos-2.webp"
+                  ><img
+                    src="assets/img/recent-photos/recent-photos-2.webp"
+                    class="img-fluid"
+                    alt=""
+                /></a>
+              </div>
+              <div class="swiper-slide">
+                <a
+                  class="glightbox"
+                  data-gallery="images-gallery"
+                  href="assets/img/recent-photos/recent-photos-3.webp"
+                  ><img
+                    src="assets/img/recent-photos/recent-photos-3.webp"
+                    class="img-fluid"
+                    alt=""
+                /></a>
+              </div>
+              <div class="swiper-slide">
+                <a
+                  class="glightbox"
+                  data-gallery="images-gallery"
+                  href="assets/img/recent-photos/recent-photos-4.webp"
+                  ><img
+                    src="assets/img/recent-photos/recent-photos-4.webp"
+                    class="img-fluid"
+                    alt=""
+                /></a>
+              </div>
+              <div class="swiper-slide">
+                <a
+                  class="glightbox"
+                  data-gallery="images-gallery"
+                  href="assets/img/recent-photos/recent-photos-5.webp"
+                  ><img
+                    src="assets/img/recent-photos/recent-photos-5.webp"
+                    class="img-fluid"
+                    alt=""
+                /></a>
+              </div>
+              <div class="swiper-slide">
+                <a
+                  class="glightbox"
+                  data-gallery="images-gallery"
+                  href="assets/img/recent-photos/recent-photos-6.webp"
+                  ><img
+                    src="assets/img/recent-photos/recent-photos-6.webp"
+                    class="img-fluid"
+                    alt=""
+                /></a>
+              </div>
+              <div class="swiper-slide">
+                <a
+                  class="glightbox"
+                  data-gallery="images-gallery"
+                  href="assets/img/recent-photos/recent-photos-7.webp"
+                  ><img
+                    src="assets/img/recent-photos/recent-photos-7.webp"
+                    class="img-fluid"
+                    alt=""
+                /></a>
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
         </div>
+      </section>
+      <!-- Fin seccion fotos recientes -->
+    </main>
 
-      </div>
-
-    </section><!-- /Recent Photos Section -->
-
-  </main>
-
-   <!-- Footer -->
+    <!-- Footer -->
     <footer id="footer" class="footer dark-background">
       <div class="container">
         <h3 class="sitename">Buena Muerte y Amargura</h3>
@@ -281,9 +450,17 @@
           Santísima de la Amargura
         </p>
         <div class="social-links d-flex justify-content-center">
-          <a href="https://www.facebook.com/share/18tLZr2hX2/?mibextid=wwXIfr"><i class="bi bi-facebook"></i></a>
-          <a href="https://www.instagram.com/buena_muerte_y_amargura?igsh=MWcyY2tpaTVoaTBoaA=="><i class="bi bi-instagram"></i></a>
-          <a href="https://www.tiktok.com/@buenamuerteyamargura?_t=ZN-8x3fKiH99sM&_r=1"><i class="bi bi-tiktok"></i></a>
+          <a href="https://www.facebook.com/share/18tLZr2hX2/?mibextid=wwXIfr"
+            ><i class="bi bi-facebook"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/buena_muerte_y_amargura?igsh=MWcyY2tpaTVoaTBoaA=="
+            ><i class="bi bi-instagram"></i
+          ></a>
+          <a
+            href="https://www.tiktok.com/@buenamuerteyamargura?_t=ZN-8x3fKiH99sM&_r=1"
+            ><i class="bi bi-tiktok"></i
+          ></a>
         </div>
         <div class="container">
           <div class="copyright">
@@ -327,7 +504,5 @@
 
     <!-- Main JS File -->
     <script src="assets/js/main.js"></script>
-
-</body>
-
+  </body>
 </html>

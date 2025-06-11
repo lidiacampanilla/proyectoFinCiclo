@@ -1,4 +1,4 @@
-![Pantalla de inicio](./asset/img/manualUsu/portada.jpg)
+![Pantalla de inicio](./src/asset/img/manualUsu/portada.jpg)
 # MANUAL USUARIO  
 **WEB COFRADÍA BUENA MUERTE**  
 
@@ -48,6 +48,8 @@ Para acceder a la aplicación, lo haremos mediante la siguiente URL:
 
 ## Navegación general
 
+![pantallaInicio](./src/assets/img/manualUsu/nav.png)
+
 Desde el menú de navegación se podrá acceder a:
 
 - **HERMANDAD** (historia y miembros de la hermandad)  
@@ -62,6 +64,8 @@ Desde el menú de navegación se podrá acceder a:
 
 ### HERMANDAD
 
+![Pagina Hermandad](./src/assets/img/manualUsu/hermandad.png)
+
 - **Historia:** Breve historia de la Hermandad  
 - **Colectivos:** Distintos colectivos que forman la Hermandad  
 - **Junta de Gobierno:** Breve descripción, con imagen  
@@ -74,15 +78,19 @@ Desde el menú de navegación se podrá acceder a:
 
 Se muestran fotos y breves explicaciones del patrimonio que posee la Hermandad.
 
+![Pagina patrimonio](./src/assets/img/manualUsu/patrimonio.PNG)
 ---
 
 ### GALERÍA
 
 Se mostrarán 8 fotos, que se podrán seleccionar para ver en mayor tamaño.
 
+![Pagina galeria](./src/assets/img/manualUsu/galeria.PNG)
 ---
 
 ### ACCESO
+
+![Pagina acceso](./src/assets/img/manualUsu/acceso.PNG)
 
 #### Hermanos ya registrados
 
@@ -95,8 +103,12 @@ Según el tipo de Hermano, se mostrarán diferentes avisos.
   - Se mostrarán los datos personales.  
   - Podrá **modificar** o **borrar** su información.
 
+![Acceso normal](./src/assets/img/manualUsu/miPerfil.PNG)
+
 - Si el hermano es **administrador o miembro de la Junta**:  
   - Verá dos secciones:
+
+![Acceso admi. y junta](./src/assets/img/manualUsu/miPerfil1.PNG)
 
     **Mis Datos:**  
     - Se muestran los datos personales, con opción de modificar o borrar.  
@@ -108,8 +120,12 @@ Según el tipo de Hermano, se mostrarán diferentes avisos.
     **Administrador:**  
     - Podrá insertar, modificar, borrar o filtrar (por nombre o tipo).  
 
+![Administrador](./src/assets/img/manualUsu/administrador.PNG)
+
     **Junta:**  
     - Podrá modificar, borrar o filtrar.
+
+![Junta](./src/assets/img/manualUsu/junta.PNG)
 
 #### Registrarse
 
@@ -127,4 +143,5 @@ Opciones disponibles: **costalero, nazareno, mantilla, otros**
 - Email de contacto  
 - Formulario para enviar mensajes  
 
+![Pagina de contacto](./src/assets/img/manualUsu/contacto.PNG)
 ---

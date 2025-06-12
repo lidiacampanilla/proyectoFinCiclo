@@ -11,6 +11,8 @@ if (!isset($_SESSION['id_usu'])) {
 }
 
 $idUsu = $_SESSION['id_usu'];
-
+// Función para mostrar la tabla de datos del usuario
 tablaDatos($pdo, $baseDatos, $idUsu);
 ?>
+
+<!-- Con este código, se muestra una tabla con los datos del usuario que ha iniciado sesión. -->

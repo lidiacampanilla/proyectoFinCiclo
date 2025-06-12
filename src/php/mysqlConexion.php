@@ -1,7 +1,8 @@
 <?php
 
 /* function conexion($baseDatos){
-    //Creamos las variables de conexión
+    //Creamos las variables de conexión para trabajar con xampp
+    //Si se va a utilizar Docker, cambiar las variables de conexión a las de Docker
     $server = "localhost";
     $user = "root";
     $password = "";
@@ -42,7 +43,8 @@ function conexionSinBase(){
 } */
 
 
-function conexion($baseDatos){
+function conexion($baseDatos)
+{
     // Variables de conexión para Docker Compose
     $server = "db";
     $user = "user";
@@ -61,7 +63,8 @@ function conexion($baseDatos){
     return $pdo;
 }
 
-function conexionSinBase(){
+function conexionSinBase()
+{
     $server = "db";
     $user = "user";
     $password = "password";

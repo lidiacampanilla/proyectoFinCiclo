@@ -11,3 +11,6 @@ COPY php.ini /usr/local/etc/php/
 
 # Habilita mod_rewrite si lo necesitas
 RUN a2enmod rewrite
+
+#Se crea una imagen  personalizada de PHP con Apache
+# con soporte para MySQL y configuraciones de PHP personalizadas.

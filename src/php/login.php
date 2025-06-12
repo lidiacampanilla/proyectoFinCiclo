@@ -29,10 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // Función para validar el acceso que esta en la biblioteca de funciones
+    // Esta función debe devolver un array con los datos del usuario si las credenciales son correctas
     $usuario = validarAcceso($email, $password, $pdo);
 
     if ($usuario) {
-        // Guardamos los datos en sesión
+        // Guardamos los datos en sesión que vamos a necesitar para el resto de la aplicación
         $_SESSION['id_usu'] = $usuario['id_usu'];
         $_SESSION['tipo'] = $usuario['tipo'];
         $_SESSION['nombre'] = $usuario['nombre'];

@@ -1,54 +1,46 @@
-document.addEventListener('DOMContentLoaded',function(){
-   console.log("controlAcceso.js cargado");
-    let form = document.getElementById('loginForm');
-    console.log('form encontrado', form);
-    let errorDiv = document.getElementById("error");
-    let url = '/php/login.php';
+document.addEventListener("DOMContentLoaded", function () {
+  let errorDiv = document.getElementById("error");
+  let url = "/php/login.php";
 
-    form.addEventListener('submit', async e =>{
-        //Para evitar recargas
-        e.preventDefault();
-        console.log('enviando login a ', url);
+  form.addEventListener("submit", async (e) => {
+    //Para evitar recargas
+    e.preventDefault();
 
-          //Eliminar mensajes previos
-        errorDiv.style.display = 'none';
-        errorDiv.innerText='';
+    //Eliminar mensajes previos
+    errorDiv.style.display = "none";
+    errorDiv.innerText = "";
 
-        let email = form.email.value.trim();
-        let password = form.password.value;
-    
-      
+    let email = form.email.value.trim();
+    let password = form.password.value;
 
-        try{
-            let response = await fetch(url,{
-                method: "POST",
-                headers: {'Accept': 'application/json'},
-                body: new URLSearchParams({email,password})
-            });
-            console.log('fetch enviado esperando');
+    try {
+      // Validar campos. Enviamos los campos email y password al servidor
+      let response = await fetch(url, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new URLSearchParams({ email, password }),
+      });
+      let text = await response.text();
 
-            let text = await response.text();
-            console.log('respuesta del servidor:', text);   
-
-            let result;
-            try{
-                result = JSON.parse(text);
-            } catch (e) {
-                throw new Error('Respuesta no es JSON: ');
-            }
-            console.log('respuesta', result);
-            if(result.success){
-                window.location.href='/php/usuarios.php';
-            }else{
-                errorDiv.innerText = result.message;
-                errorDiv.style.display = 'block';
-            }
-        } catch (e){
-            console.error('Error en la solicitud:', e);
-            errorDiv.innerText = 'Error de conexion. Intentalo mas tarde.';
-            errorDiv.style.display = 'block';
-        }
-        
-    });
-
+      let result;
+      // Si la respuesta no es JSON, lanzamos un error
+      try {
+        result = JSON.parse(text);
+      } catch (e) {
+        throw new Error("Respuesta no es JSON: ");
+      }
+      // Si la respuesta no es un objeto con la propiedad success, lanzamos un error. La propiedad success debe ser un booleano.
+      if (result.success) {
+        // Si la respuesta es correcta, redirigimos a usuarios.php
+        window.location.href = "/php/usuarios.php";
+      } else {
+        // Si la respuesta es incorrecta, mostramos el mensaje de error
+        errorDiv.innerText = result.message;
+        errorDiv.style.display = "block";
+      }
+    } catch (e) {
+      errorDiv.innerText = "Error de conexion. Intentalo mas tarde.";
+      errorDiv.style.display = "block";
+    }
+  });
 });

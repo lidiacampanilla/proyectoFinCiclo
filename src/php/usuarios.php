@@ -1,14 +1,14 @@
 <?php
 session_start();
+//Iniciamos la sesión y comprobamos si el usuario ha iniciado sesión para utilizar la variable de sesión
+if (!isset($_SESSION['tipo'])) {
+  header("Location: /acceso.php");
+  exit;
+}
 
-  if(!isset($_SESSION['tipo'])){
-    header("Location: /acceso.php");
-    exit;
-  }
-
-  //Inicializamos las variables que vamos a usar
-  $tipoUsuario = $_SESSION['tipo'];
-  $nombre = $_SESSION['nombre'];
+//Inicializamos las variables que vamos a usar
+$tipoUsuario = $_SESSION['tipo'];
+$nombre = $_SESSION['nombre'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -22,7 +22,7 @@ session_start();
 
   <!-- Favicons -->
   <link href="../assets/img/favicon.png" rel="icon">
-  
+
 
   <!-- Fuentes-->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -50,49 +50,50 @@ session_start();
 
 <body class="index-page">
 
-    <header id="header" class="header d-flex align-items-center sticky-top">
-        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-    
-          <a href="../index.html" class="logo d-flex align-items-center">
-            <img src="../assets/img/logo.png" alt="escudo de la Cofradia">
-            <h1 class="sitename">BUENA MUERTE Y AMARGURA</h1>
-          </a>
-    
-          <nav id="navmenu" class="navmenu">
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="../index.html" class="logo d-flex align-items-center">
+        <img src="../assets/img/logo.png" alt="escudo de la Cofradia">
+        <h1 class="sitename">BUENA MUERTE Y AMARGURA</h1>
+      </a>
+      <!-- Menú de navegación -->
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="../index.html" class="active">Inicio</a></li>
+          <li class="dropdown"><a href="#"><span>Hermandad</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="../index.html" class="active">Inicio</a></li>
-              <li class="dropdown"><a href="#"><span>Hermandad</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <li><a href="../historia.html">Historia</a></li>
+              <li class="dropdown"><a href="#"><span>Colectivos</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
-                  <li><a href="../historia.html">Historia</a></li>
-                  <li class="dropdown"><a href="#"><span>Colectivos</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                    <ul>
-                      <li><a href="../juntaGobierno.html">Junta de Gobierno</a></li>
-                      <li><a href="../grupoJoven.html">Grupo Joven</a></li>
-                      <li><a href="../costaleros.html">Costaleros</a></li>
-                    </ul>
-                  </li>
+                  <li><a href="../juntaGobierno.html">Junta de Gobierno</a></li>
+                  <li><a href="../grupoJoven.html">Grupo Joven</a></li>
+                  <li><a href="../costaleros.html">Costaleros</a></li>
                 </ul>
               </li>
-              <li><a href="../patrimonio.html">Patrimonio</a></li>
-              <li><a href="../galeria.html">Galeria</a></li>
-              <li><a href="/php/acceso.html">Acceso</a></li>
-              <li><a href="../contacto.html">Contacto</a></li>
             </ul>
-            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-          </nav>
-    
-        </div>
-      </header>
+          </li>
+          <li><a href="../patrimonio.html">Patrimonio</a></li>
+          <li><a href="../galeria.html">Galeria</a></li>
+          <li><a href="/php/acceso.php">Acceso</a></li>
+          <li><a href="../contacto.html">Contacto</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
 
   <main class="main">
 
-   
 
-    <!-- About Section -->
+
+    <!-- Sección de presentación -->
     <section id="about" class="about section">
 
-    <div class="page-title light-background">
+      <div class="page-title light-background">
         <div class="container d-lg-flex justify-content-between align-items-center">
+          <!-- Co el siguiente código accedemos a la varible que hemos obtenido de la sesión que se ha iniciado anteriormente -->
           <h1 class="mb-2 mb-lg-0">¡Bienvenid@ <?php echo htmlspecialchars($nombre); ?>!</h1>
           <nav class="breadcrumbs">
             <ol>
@@ -101,22 +102,22 @@ session_start();
             </ol>
           </nav>
         </div>
-      </div><!-- FIN Menu Bienvenida-->
+      </div><!-- Fin sección de presentación-->
 
-       <!-- Section Title -->
+      <!-- Contenedor que se mostrara cuando el usuario entre en su perfil, en principio está oculto -->
       <div id="miPerfil" class="container section-title" data-aos="fade-up" style="display: none;"></div>
-      <!-- Page Title -->  
+      <!-- Fin contenedor Mi Perfil -->
       <div id="avisosTitulo" class="container section-title" data-aos="fade-up">
-        <h2>Avisos importantes</h2>        
+        <h2>Avisos importantes</h2>
       </div>
-      <!-- Page Title --> 
+      <!-- Contendores que se haran visibles según el tipo de hermano, mostrando de ese modo los avisos correspondientes -->
       <div id="avisos" class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-4" id="otros" style ="display: none;">
+        <div class="row gy-4" id="otros" style="display: none;">
           <div class="col-lg-6">
             <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
           </div>
         </div>
-        <div class="row gy-4" id="nazarenos" style ="display: none;">
+        <div class="row gy-4" id="nazarenos" style="display: none;">
           <div class="col-lg-6">
             <img src="../assets/img/Nazarenos.jpeg" class="img-fluid" alt="">
           </div>
@@ -124,7 +125,7 @@ session_start();
             <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
           </div>
         </div>
-        <div class="row gy-4" id="mantillas" style ="display: none;">
+        <div class="row gy-4" id="mantillas" style="display: none;">
           <div class="col-lg-6">
             <img src="../assets/img/mantillas.jpeg" class="img-fluid" alt="">
           </div>
@@ -132,87 +133,84 @@ session_start();
             <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
           </div>
         </div>
-        <div class="row gy-4" id="administrador" style ="display: none;">
+        <div class="row gy-4" id="administrador" style="display: none;">
           <div class="col-lg-6">
             <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
           </div>
         </div>
-        <div class="row gy-4" id="junta" style ="display: none;">
+        <div class="row gy-4" id="junta" style="display: none;">
           <div class="col-lg-6">
             <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
           </div>
         </div>
       </div>
 
-    </section> <!--/About Section -->
+    </section> <!--Fin sección de contenedores -->
 
-    
+
 
   </main>
 
-   <!-- Footer -->
-    <footer id="footer" class="footer dark-background">
+  <!-- Footer -->
+  <footer id="footer" class="footer dark-background">
+    <div class="container">
+      <h3 class="sitename">Buena Muerte y Amargura</h3>
+      <p>
+        Real e Ilustre Cofradia del Cristo de la Buena Muerte y María
+        Santísima de la Amargura
+      </p>
+      <div class="social-links d-flex justify-content-center">
+        <a href="https://www.facebook.com/share/18tLZr2hX2/?mibextid=wwXIfr"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/buena_muerte_y_amargura?igsh=MWcyY2tpaTVoaTBoaA=="><i class="bi bi-instagram"></i></a>
+        <a href="https://www.tiktok.com/@buenamuerteyamargura?_t=ZN-8x3fKiH99sM&_r=1"><i class="bi bi-tiktok"></i></a>
+      </div>
       <div class="container">
-        <h3 class="sitename">Buena Muerte y Amargura</h3>
-        <p>
-          Real e Ilustre Cofradia del Cristo de la Buena Muerte y María
-          Santísima de la Amargura
-        </p>
-        <div class="social-links d-flex justify-content-center">
-          <a href="https://www.facebook.com/share/18tLZr2hX2/?mibextid=wwXIfr"><i class="bi bi-facebook"></i></a>
-          <a href="https://www.instagram.com/buena_muerte_y_amargura?igsh=MWcyY2tpaTVoaTBoaA=="><i class="bi bi-instagram"></i></a>
-          <a href="https://www.tiktok.com/@buenamuerteyamargura?_t=ZN-8x3fKiH99sM&_r=1"><i class="bi bi-tiktok"></i></a>
+        <div class="copyright">
+          <span>Copyright</span>
+          <strong class="px-1 sitename">Buena Muerte y Amargura</strong>
+          <span>All Rights Reserved</span>
         </div>
-        <div class="container">
-          <div class="copyright">
-            <span>Copyright</span>
-            <strong class="px-1 sitename">Buena Muerte y Amargura</strong>
-            <span>All Rights Reserved</span>
-          </div>
-          <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you've purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-            Designed by
-            <a href="https://bootstrapmade.com/">
-              BootstrapMade &amp; LidiaLopez</a
-            >
-          </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you've purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+          Designed by
+          <a href="https://bootstrapmade.com/">
+            BootstrapMade &amp; LidiaLopez</a>
         </div>
       </div>
-    </footer>
+    </div>
+  </footer>
 
-    <!-- Scroll Top, boton flecha que se muestra como un icono de Bootstrap, que sirve para subir al inicio de
+  <!-- Scroll Top, boton flecha que se muestra como un icono de Bootstrap, que sirve para subir al inicio de
      la pagina una vez que el usuraio esta abajo-->
-    <a
-      href="#"
-      id="scroll-top"
-      class="scroll-top d-flex align-items-center justify-content-center"
-      ><i class="bi bi-arrow-up-short"></i
-    ></a>
+  <a
+    href="#"
+    id="scroll-top"
+    class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-    <!-- Preloader, Contenedor vacio para mostrar una animacion mientras se carga la página, siempre y cuendo 
+  <!-- Preloader, Contenedor vacio para mostrar una animacion mientras se carga la página, siempre y cuendo 
      sea necesario -->
-    <div id="preloader"></div>
+  <div id="preloader"></div>
 
-    <!-- Vendor JS Files -->
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/vendor/php-email-form/validate.js"></script>
-    <script src="/assets/vendor/aos/aos.js"></script>
-    <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <!-- Vendor JS Files -->
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/php-email-form/validate.js"></script>
+  <script src="/assets/vendor/aos/aos.js"></script>
+  <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
 
-    <!-- Main JS File -->
-    <script src="/assets/js/main.js"></script>
+  <!-- Main JS File -->
+  <script src="/assets/js/main.js"></script>
 
-  <!-- Pasamos el valor de Nomnb_tipo a nuestro archivo .js -->
-   <script>
+  <!-- Pasamos el valor de Nomnb_tipo a nuestro archivo .js para poder controlar los avisos a mostrar-->
+  <script>
     let tipoUsuario = "<?php echo $_SESSION['tipo']; ?>";
-   </script>
+  </script>
 
   <!-- Fichero Control JS -->
-   <script src="../js/controlUsuarios.js"></script>
+  <script src="../js/controlUsuarios.js"></script>
 
 </body>
 

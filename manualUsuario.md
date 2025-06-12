@@ -111,7 +111,7 @@ Según el tipo de Hermano, se mostrarán diferentes avisos.
 ![Acceso admi. y junta](./src/assets/img/manualUsu/miPerfil1.PNG)
 
     **Mis Datos:**  
-    - Se muestran los datos personales, con opción de modificar o borrar.  
+    - Se muestran los datos personales, con opción de modificar o borrar. El tipo de usuario no se podrá modificar.  
 
     **Datos Hermanos:**  
     - Tabla con los datos de todos los hermanos.  

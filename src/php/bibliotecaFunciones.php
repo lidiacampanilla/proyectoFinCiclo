@@ -1,6 +1,5 @@
 <?php
 //Hacemos una función para crear la base de datos, le pasamos por parametro la conexión y la consulta en la que creamos la base de datos y las tablas
-
 function crearBaseDatos($pdo, $sqlBaseDatos)
 {
     $pdo->query($sqlBaseDatos);
@@ -11,37 +10,32 @@ function existeBaseDatos($pdo, $baseDatos, $sqlBaseDatos)
 {
     $resultado = $pdo->query('SHOW DATABASES');
 
-    /*$registros = $resultado->fetchAll();
-   for ($i = 0; $i < count($registros); $i++) {
-        if ($registros[$i] == $baseDatos) {
-            return true;
-        } else {
-            crearBaseDatos($pdo, $sqlBaseDatos);
-        }
-    }*/
-    $registros = $resultado ->fetchAll(PDO::FETCH_COLUMN);
-    if (in_array ($baseDatos, $registros)){
+
+    $registros = $resultado->fetchAll(PDO::FETCH_COLUMN);
+    if (in_array($baseDatos, $registros)) {
         return true;
-    }else{
+    } else {
         crearBaseDatos($pdo, $sqlBaseDatos);
         return false;
     }
 }
 
 //Con la siguiente función vamos a validar el DNI
-function validarDNI($dni){
+function validarDNI($dni)
+{
     $letras = "TRWAGMYFPDXBNJZSQVHLCKE";
     //Transformamos todo a mayuscula
     $dni = strtoupper($dni);
     //Esta funcion "preg_match" devuleve 1 si coincide con la expresion regular y 0 sino coincide
-    if (!preg_match("/^[0-9]{8}[A-Z]$/",$dni)) return false;
-    $numero = substr ($dni, 0, 8);
+    if (!preg_match("/^[0-9]{8}[A-Z]$/", $dni)) return false;
+    $numero = substr($dni, 0, 8);
     $letra = substr($dni, -1);
     return $letra == $letras[$numero % 23];
 }
 
 //Con la siguiente función validamos la cta_bancaria(IBAN) que deberá tener dos letras y 22 números
-function validarIBAN ($iban){
+function validarIBAN($iban)
+{
     return preg_match("/^[A-Z]{2}[0-9]{22}$/", strtoupper($iban));
 }
 
@@ -67,35 +61,39 @@ function insertar($pdo, $baseDatos, $tabla, $datos)
         $stmt = $pdo->prepare($consulta);
         //Ejecutamos, con esto conseguimos sustituir los ? por los valores obtenidos con array_values.
         $stmt->execute($valores);
-        /* echo ("Se ha insertado el registro correctamente");  */
     } catch (PDOException $e) {
-        echo "<div class='alert alert-danger'>Error al insertar: " . $e->getMessage() . "</div>";
-        return;
-        /*  exit; */
+        if (strpos($e->getMessage(), 'usuario.email') !== false) {
+            echo "<div  class='alert alert-danger'>Email duplicado</div>";
+        } elseif (strpos($e->getMessage(), 'usuario.DNI') !== false) {
+            echo "<div  class='alert alert-danger'>DNI duplicado</div>";
+        } else {
+            echo "<div class='alert alert-danger'>Error al insertar: " . $e->getMessage() . "</div>";
+        }
     }
 }
 
 //Creamos una funcion para validar el acceso de usuarios
-function validarAcceso($email,$password,$pdo){
+function validarAcceso($email, $password, $pdo)
+{
     //Lanzamos la consulta para iniciar la verificacion del email y del password
-        $stmt = $pdo -> prepare ("SELECT U.id_usu, U.password, U.Nomb_usu, T.Nomb_tipo
+    $stmt = $pdo->prepare("SELECT U.id_usu, U.password, U.Nomb_usu, T.Nomb_tipo
                                   FROM usuario U
                                   JOIN pertenecen P ON U.id_usu = P.id_usu
                                   JOIN tipo T ON P.id_tipo = T.id_tipo
                                   WHERE U.email = ?");
-        $stmt->execute([$email]);
-        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->execute([$email]);
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if($usuario && password_verify($password, $usuario['password'])){
-          return[
-            'id_usu'=>$usuario['id_usu'],
-            'tipo'=>$usuario['Nomb_tipo'],
-            'nombre'=>$usuario['Nomb_usu']
-          ];
-        }else{
-          return false;
-        }
-      } 
+    if ($usuario && password_verify($password, $usuario['password'])) {
+        return [
+            'id_usu' => $usuario['id_usu'],
+            'tipo' => $usuario['Nomb_tipo'],
+            'nombre' => $usuario['Nomb_usu']
+        ];
+    } else {
+        return false;
+    }
+}
 
 
 
@@ -177,7 +175,7 @@ function tablaGestionHer($pdo, $baseDatos, $idUsu)
     echo "</tbody>";
     echo "</table>";
     echo "</div>";
-    
+
 
     // Mostrar las operaciones permitidas para el usuario logueado
     $stmtTipo = $pdo->prepare("SELECT T.id_tipo FROM usuario U
@@ -187,19 +185,20 @@ function tablaGestionHer($pdo, $baseDatos, $idUsu)
     $stmtTipo->execute([$idUsu]);
     $id_tipo_usuario = $stmtTipo->fetchColumn();
     if ($id_tipo_usuario) {
+        //Función que muestra los botones de operaciones permitidas para el usuario logueado
         mostrarBotonesOperaciones($pdo, $baseDatos, $id_tipo_usuario);
     }
     echo "</form>";
     echo "</div>";
 }
 
-//Con la siguiente funcion hacemos una tabla que muestre todas las categorias, trabajamos con las tablas RECETAS y PERTENECEN, para poder controlar si se puede borrar o no una categoria
+//Con la siguiente funcion hacemos una tabla que muestre los datos de un usuario en concreto, pasamos por parametro la conexión, la base de datos y el id del usuario que queremos mostrar.
 function tablaDatos($pdo, $baseDatos, $idUsu)
 {
     //Nos aseguramos de estar utilizando nuestra base de datos
     $pdo->query("USE $baseDatos");
 
-    //Ejecutamos la consulta con query
+    //Preparamos la consulta para obtener los datos del usuario especificado por su id_usu, junto con el tipo de usuario. Utilizamos JOIN para unir las tablas usuario, pertenecen y tipo.
     $consulta = "SELECT U.*, T.Nomb_tipo, T.id_tipo FROM usuario U
     JOIN pertenecen P ON U.id_usu = P.id_usu
     JOIN tipo T ON P.id_tipo = T.id_tipo
@@ -218,19 +217,20 @@ function tablaDatos($pdo, $baseDatos, $idUsu)
         echo "<div class='formulario'>";
         echo "<form method='post' action=''>";
         $usuario = $resultado[0]; // Asumimos que solo hay un usuario para este id_usu
-        // AÑADE ESTE CAMPO OCULTO:
+        // Añadimos un campo oculto para el id_usu para poder identificarlo en las operaciones posteriores
         echo "<input type='hidden' name='id_usu' value='" . htmlspecialchars($usuario['id_usu']) . "'>";
 
         // Obtener todos los tipos para el select
         $stmtTipos = $pdo->query("SELECT id_tipo, Nomb_tipo FROM tipo");
         $tipos = $stmtTipos->fetchAll(PDO::FETCH_ASSOC);
         foreach ($usuario as $columna => $valor) {
-            // No permitir modificar la clave primaria ni el tipo de usuario, el campo id_tipo no lo vamos a mostrar.
+            // No mostrar id_usu ni id_tipo en el formulario
             if ($columna == 'id_usu' || $columna == 'id_tipo') {
                 continue;
             }
 
-            // OCULTAR Nomb_tipo si el usuario es administrador o junta
+            // OCULTAR Nomb_tipo si el usuario es administrador o junta, ya que estos tipos no se pueden modificar
+            // Convertimos a minúsculas para evitar problemas de mayúsculas/minúsculas
             if (
                 $columna == 'Nomb_tipo' &&
                 (
@@ -241,25 +241,25 @@ function tablaDatos($pdo, $baseDatos, $idUsu)
                 continue;
             }
 
-            $readonly = ($columna == 'id_usu' ) ? 'readonly' : '';
-            $bg = ($readonly) ? "background-color:#e9ecef;" : ""; 
+            $readonly = ($columna == 'id_usu') ? 'readonly' : '';
+            $bg = ($readonly) ? "background-color:#e9ecef;" : "";
             echo "<div class='mb-3'>";
             echo "<label for='$columna' class='form-label'>" . htmlspecialchars($columna) . "</label>";
-             if ($columna == 'Nomb_tipo') {
+            if ($columna == 'Nomb_tipo') {
                 // Select editable para tipo de usuario
                 echo "<select class='form-control' id='Nomb_tipo' name='Nomb_tipo'>";
                 foreach ($tipos as $tipo) {
                     if (
-            strtolower($tipo['Nomb_tipo']) === 'junta' ||
-            strtolower($tipo['Nomb_tipo']) === 'administrador'
-        ) {
-            continue; // Saltar estos tipos
-        }
+                        strtolower($tipo['Nomb_tipo']) === 'junta' ||
+                        strtolower($tipo['Nomb_tipo']) === 'administrador'
+                    ) {
+                        continue; // Saltar estos tipos, no se muestran en el select de esta tabla
+                    }
                     $selected = ($tipo['Nomb_tipo'] == $valor) ? "selected" : "";
                     echo "<option value='" . htmlspecialchars($tipo['Nomb_tipo']) . "' $selected>" . htmlspecialchars($tipo['Nomb_tipo']) . "</option>";
                 }
                 echo "</select>";
-            }elseif($columna == 'password') {
+            } elseif ($columna == 'password') {
                 // Para la contraseña, mostramos un campo de tipo password
                 echo "<input type='password' class='form-control' id='$columna' name='$columna' value='" . htmlspecialchars($valor) . "' style='color:gray;$bg' $readonly>";
             } elseif ($columna == 'email') {
@@ -269,12 +269,10 @@ function tablaDatos($pdo, $baseDatos, $idUsu)
                 // Para los demás campos, mostramos un campo de texto
                 echo "<input type='text' class='form-control' id='$columna' name='$columna' value='" . htmlspecialchars($valor) . "' style='color:gray;$bg' $readonly>";
             }
-            
+
             echo "</div>";
         }
-        /* $id_tipo = $usuario['id_tipo'];
-        mostrarBotonesOperaciones($pdo, $baseDatos, $id_tipo); */
-        /* echo "<div class='mb-3'>"; */
+        // Botones para modificar o borrar el usuario
         echo "<div class='text-center mt-4'>";
         echo "<button type='button' class='btn btn-secondary btn-operacion me-2' data-accion='modificar' data-id='2' name='modificar' class='btn btn-primary me-2'>Modificar</button>";
         echo "<button type='button' class='btn btn-secondary btn-operacion me-2' data-accion='borrar' data-id='3' name='borrar' class='btn btn-danger'>Borrar</button>";
@@ -286,6 +284,8 @@ function tablaDatos($pdo, $baseDatos, $idUsu)
         echo "</div>";
     }
 }
+
+//Con la siguiente función mostramos los botones de operaciones que tiene asignadas el usuario logueado, pasamos por parametro la conexión, la base de datos y el id del tipo de usuario.
 function mostrarBotonesOperaciones($pdo, $baseDatos, $id_tipo)
 {
     $pdo->query("USE $baseDatos");
@@ -323,7 +323,7 @@ function modificar($pdo, $baseDatos, $tabla, $datos)
     //Nos aseguramos de estar usando la base de datos
     $pdo->query("USE $baseDatos");
 
-   
+
 
     //Obtenemos la/las clave Primaria de la tabla en cuestion, para eso tenemos el campo oculto 'opcion'
     $consultaClavePrimaria = $pdo->query("SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA='{$baseDatos}' AND TABLE_NAME='{$tabla}' AND COLUMN_KEY='PRI'");
@@ -370,9 +370,7 @@ function modificar($pdo, $baseDatos, $tabla, $datos)
             $consulta = "UPDATE `$tabla` SET " . implode(", ", $modificaciones) . " WHERE " . implode(" AND ", $condiciones);
 
             try {
-                /*var_dump($numFilas);
-                var_dump($consulta);
-                print_r($valores);*/
+
                 $stmt = $pdo->prepare($consulta);
                 $stmt->execute($valores);
             } catch (PDOException $e) {
@@ -382,21 +380,24 @@ function modificar($pdo, $baseDatos, $tabla, $datos)
     }
     echo ("La modificación se ha realizado correctamente");
 }
+
+//Con la siguiente funcion borramos un usuario por su id, pasamos por parametro la conexión, la base de datos, la tabla y el id del usuario que queremos borrar.
 function borrar($pdo, $baseDatos, $tabla, $id_usu)
 {
     // Nos aseguramos de estar en la base de datos
     $pdo->query("USE $baseDatos");
 
-    // Preparamos la consulta para borrar el usuario por su id
+    // Preparamos la consulta para borrar el usuario por su id_usu
     $consulta = "DELETE FROM `$tabla` WHERE id_usu = ?";
     try {
         $stmt = $pdo->prepare($consulta);
         $stmt->execute([$id_usu]);
-    
     } catch (PDOException $e) {
         echo "<p>Error al eliminar: " . $e->getMessage() . "</p>";
     }
 }
+
+//Con la siguiente funcion hacemos una tabla que muestre los hermanos filtrados por nombre y tipo, pasamos por parametro la conexión, la base de datos, el id del usuario logueado y los filtros de nombre y tipo.
 function tablaGestionHerFiltrada($pdo, $baseDatos, $idUsu, $nombre = '', $nomb_tipo = '')
 {
     $pdo->query("USE $baseDatos");
@@ -493,7 +494,7 @@ function tablaGestionHerFiltrada($pdo, $baseDatos, $idUsu, $nombre = '', $nomb_t
 
 
 //Con la siguiente funcion seleccionamos la fila o filas elegidas por el usuario para eliminarlas de la tabla. Le pasamos por parametro la conexion, la base de datos, la tabla y los datos obtenidos del formulario tablaEliminar
-function borrarSeleccion ($pdo, $baseDatos, $tabla, $datos)
+function borrarSeleccion($pdo, $baseDatos, $tabla, $datos)
 {
     //Nos aseguramos de estan en la base de datos
     $pdo->query("USE $baseDatos");
@@ -543,51 +544,5 @@ function borrarSeleccion ($pdo, $baseDatos, $tabla, $datos)
         echo "<p>Se ha eliminado el registro seleccionado</p>";
     } else {
         echo "<p>No se ha seleccionado ningun registro para eliminar</p>";
-    }
-}
-//Con la siguiente funcion se podra eliminar totalmente la tabla seleccionada. Pasamos por parametro la conexión, la base de datos y la tabla.
-
-function nombreTabla($consulta)
-{
-    //Ponemos toda la consulta en mayuscula para facilitar la busqueda
-    $consultaMayu = trim(strtoupper($consulta));
-
-    //Separamos la consulta por espacios en blanco y lo guardamos en un array.
-    $palabras = explode(" ", $consultaMayu);
-
-    //Buscamos la tabla que se utiliza en la consulta, que ira detras de la palabra FROM, la siguiente variable contiene la posicion que ocupa FROM, le sumaremos 1 para encontrar la tabla en cuestion
-    $indiceFrom = array_search('FROM', $palabras);
-
-    if ($indiceFrom !== false && isset($palabras[$indiceFrom + 1])) {
-        return $palabras[$indiceFrom + 1];
-    } else {
-        return null;
-    }
-}
-
-//La siguiente función la utilizaremos para ejecutar la consulta que introduzca el usuario en un textarea.Pasaremos por parametro la conexión, la base de datos y la consulta.
-function ejecutarConsulta($pdo, $baseDatos, $consulta)
-{
-    //Nos aseguramos de estan en la base de datos
-    $pdo->query("USE $baseDatos");
-
-    try {
-        //Primero vamos a detectar si las consultas lanzadas son "SELECT,SHOW o DESCRIBE" para de esta forma mostrar las tablas correspondientes.Eliminamos todos los espacios del inicio y del fin de la consulta, lo ponemos todo en mayuscula y seleccionamos la primera palabra  de la consulta para analizarla, previamente tenemos que separar con explode todas las palabras de la consulta separadas por espacios en blanco (" ").
-        $consultaMayu = trim(strtoupper($consulta));
-        $tipoConsulta = explode(" ", $consultaMayu)[0];
-
-        if (in_array($tipoConsulta, ["SELECT", "SHOW", "DESCRIBE"])) {
-
-            //Buscamos el nombre de la tabla y la mostramos
-            $tabla = nombreTabla($consulta);
-            /* mostrarTablas($pdo, $baseDatos, $consulta, $tabla); */
-        } else {
-            $stmt = $pdo->prepare($consulta);
-            $stmt->execute();
-
-            echo "<p>La consulta se ha ejecutado correctamente</p>";
-        }
-    } catch (PDOException $e) {
-        echo "<p>Error al ejecutar la consulta:" . $e->getMessage() . "</p>";
     }
 }

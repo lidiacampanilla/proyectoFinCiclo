@@ -32,11 +32,9 @@ function activarCheckAll() {
 
 // Esta función se encarga de cargar los tipos de usuario en el select correspondiente
 function cargarTiposEnSelect(select) {
-  fetch("/php/obtenerTipos.php").then((res) => res.json());
   fetch("/php/obtenerTipos.php")
-    .then((res) => res.text())
+    .then((res) => res.json())
     .then((tipos) => {
-      console.log("Tipos recibidos:", tipos);
       select.innerHTML = "";
       tipos.forEach((tipo) => {
         let option = document.createElement("option");
@@ -130,7 +128,9 @@ document.addEventListener("click", function (e) {
   // INSERTAR
   if (accion === "insertar") {
     //Limpiamos pantalla por si habia algún error antes
-    document.querySelectorAll(".is-invalid").forEach(el => el.classList.remove("is-invalid"));
+    document
+      .querySelectorAll(".is-invalid")
+      .forEach((el) => el.classList.remove("is-invalid"));
     let tabla = document.querySelector("#formGestionHer table tbody");
     if (tabla) {
       let columnas = tabla.parentElement.querySelectorAll("thead th");

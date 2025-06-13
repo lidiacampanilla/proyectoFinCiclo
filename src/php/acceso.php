@@ -87,23 +87,24 @@
 
 
 
+
+
+    <!-- Titulo de la página -->
+    <div class="page-title light-background">
+      <div
+        class="container d-lg-flex justify-content-between align-items-center">
+        <h1 class="mb-2 mb-lg-0">Acceso</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="../index.html">Inicio</a></li>
+            <li class="current">Acceso</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <!-- Fin Titulo de la página -->
     <!--Seccion de acceso -->
     <section id="contact" class="contact section">
-
-      <!-- Titulo de la página -->
-      <div class="page-title light-background">
-        <div
-          class="container d-lg-flex justify-content-between align-items-center">
-          <h1 class="mb-2 mb-lg-0">Acceso</h1>
-          <nav class="breadcrumbs">
-            <ol>
-              <li><a href="../index.html">Inicio</a></li>
-              <li class="current">Acceso</li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-      <!-- Fin Titulo de la página -->
       <div class="container mt-5">
         <div class="row gy-4">
           <div class="col-lg-6">

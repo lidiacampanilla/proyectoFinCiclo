@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
       tipoUsuario.toLowerCase() === "administrador"
     ) {
       divMiPerfil.innerHTML += `
-                <button class="btn btn-primary m-2" id="btnMisDatos">Mis Datos</button>
+                <button class="btn btn-mis-datos m-2" id="btnMisDatos">Mis Datos</button>
                 <button class="btn btn-secondary m-2" id="btnDatosHermanos">Datos Hermanos</button>
                 <div id="contenidoExtra"></div>
             `;

@@ -118,7 +118,7 @@
               <p class="text-muted">ACCESO PRIVADO</p>
             </div>
             <!-- Contendor para mostrar error de una forma mas amigable con el usuario, en principio esta oculto -->
-            <div id="error" style="color: red; margin-bottom : 1rem; display: none;"></div>
+            <div id="error" style="color:#b08e6b; margin-bottom : 1rem; display: none;"></div>
             <form id="loginForm" action="#" method="POST" class="php-acceso-form mt-5" data-aos="fade-up" data-aos-delay="150">
               <div class="mb-4">
                 <label for="email" class="form-label">Email</label>

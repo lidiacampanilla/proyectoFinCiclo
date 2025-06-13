@@ -105,7 +105,7 @@
       <!-- Seccion Formulario de Registro -->
       <div class="container mt-5">
         <!-- El siguiente contenedor esta oculto, Mostrara mensaje de accion realizada o si hay algun error, mediante .js -->
-        <div id="error" class="text-center mb-4" style="color: red; margin-bottom : 1rem; display: none;"></div>
+        <div id="error" class="text-center mb-4" style="color: white; margin-bottom : 1rem; display: none;"></div>
         <div class="row justify-content-center">
 
           <div class="col-md-8 col-lg-6">

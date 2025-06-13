@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  let form = document.getElementById("loginForm");
   let errorDiv = document.getElementById("error");
   let url = "/php/login.php";
 

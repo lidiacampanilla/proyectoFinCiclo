@@ -261,7 +261,7 @@ function tablaDatos($pdo, $baseDatos, $idUsu)
                 echo "</select>";
             } elseif ($columna == 'password') {
                 // Para la contraseña, mostramos un campo de tipo password
-                echo "<input type='password' class='form-control' id='$columna' name='$columna' value='" . htmlspecialchars($valor) . "' style='color:gray;$bg' $readonly>";
+                echo "<input type='password' class='form-control' id='$columna' name='$columna' value='' placeholder='******' style='color:gray;$bg' $readonly>";
             } elseif ($columna == 'email') {
                 // Para el email, mostramos un campo de tipo email
                 echo "<input type='email' class='form-control' id='$columna' name='$columna' value='" . htmlspecialchars($valor) . "' style='color:gray;$bg' $readonly>";

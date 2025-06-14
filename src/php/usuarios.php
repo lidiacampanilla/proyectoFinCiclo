@@ -147,6 +147,8 @@ $nombre = $_SESSION['nombre'];
 
     </section> <!--Fin sección de contenedores -->
 
+
+
   </main>
 
   <!-- Footer -->

@@ -85,24 +85,25 @@
 
   <main class="main">
 
-    <section id="contact" class="contact section registro">
 
-      <!-- Titulo de página -->
-      <div class="page-title light-background">
-        <div
-          class="container d-lg-flex justify-content-between align-items-center">
-          <h1 class="mb-2 mb-lg-0">Registro</h1>
-          <nav class="breadcrumbs">
-            <ol>
-              <li><a href="../index.html">Inicio</a></li>
-              <li class="current">Registro</li>
-            </ol>
-          </nav>
-        </div>
+
+    <!-- Titulo de página -->
+    <div class="page-title light-background">
+      <div
+        class="container d-lg-flex justify-content-between align-items-center">
+        <h1 class="mb-2 mb-lg-0">Registro</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="../index.html">Inicio</a></li>
+            <li class="current">Registro</li>
+          </ol>
+        </nav>
       </div>
-      <!-- Fin titulo de página -->
+    </div>
+    <!-- Fin titulo de página -->
 
-      <!-- Seccion Formulario de Registro -->
+    <!-- Seccion Formulario de Registro -->
+    <section id="contact" class="contact section registro">
       <div class="container mt-5">
         <!-- El siguiente contenedor esta oculto, Mostrara mensaje de accion realizada o si hay algun error, mediante .js -->
         <div id="error" class="text-center mb-4" style="color: white; margin-bottom : 1rem; display: none;"></div>

@@ -106,6 +106,8 @@ $nombre = $_SESSION['nombre'];
 
       <!-- Contenedor que se mostrara cuando el usuario entre en su perfil, en principio está oculto -->
       <div id="miPerfil" class="container section-title" data-aos="fade-up" style="display: none;"></div>
+      <!-- Contenedor que se mostrara cuando el usuario entre en su perfil, en principio está oculto -->
+      <div id="contenidoExtra" class="container section-title" data-aos="fade-up" style="display: none;"></div>
       <!-- Fin contenedor Mi Perfil -->
       <div id="avisosTitulo" class="container section-title" data-aos="fade-up">
         <h2>Avisos importantes</h2>
@@ -114,33 +116,33 @@ $nombre = $_SESSION['nombre'];
       <div id="avisos" class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4" id="otros" style="display: none;">
           <div class="col-lg-6">
-            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
+            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="aviso general de la Cofradia">
           </div>
         </div>
         <div class="row gy-4" id="nazarenos" style="display: none;">
           <div class="col-lg-6">
-            <img src="../assets/img/Nazarenos.jpeg" class="img-fluid" alt="">
+            <img src="../assets/img/Nazarenos.jpeg" class="img-fluid" alt="aviso vestimenta de nazarenos">
           </div>
           <div class="col-lg-6">
-            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
+            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="aviso general de la Cofradia">
           </div>
         </div>
         <div class="row gy-4" id="mantillas" style="display: none;">
           <div class="col-lg-6">
-            <img src="../assets/img/mantillas.jpeg" class="img-fluid" alt="">
+            <img src="../assets/img/mantillas.jpeg" class="img-fluid" alt="aviso vestimenta de mantillas">
           </div>
           <div class="col-lg-6">
-            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
+            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="aviso general de la Cofradia">
           </div>
         </div>
         <div class="row gy-4" id="administrador" style="display: none;">
           <div class="col-lg-6">
-            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
+            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="aviso general de la Cofradia">
           </div>
         </div>
         <div class="row gy-4" id="junta" style="display: none;">
           <div class="col-lg-6">
-            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="">
+            <img src="../assets/img/avisoGeneral.jpeg" class="img-fluid" alt="aviso general de la Cofradia">
           </div>
         </div>
       </div>

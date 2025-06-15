@@ -1,5 +1,7 @@
-![Pantalla de inicio](./src/assets/img/manualUsu/portada.jpg)
 # MANUAL USUARIO  
+
+![Pantalla de inicio](./src/assets/img/manualUsu/portada.jpg)
+
 **WEB COFRADÍA BUENA MUERTE**  
 
 **Autor:** Lidia Lopez Martin  
@@ -79,6 +81,7 @@ Desde el menú de navegación se podrá acceder a:
 Se muestran fotos y breves explicaciones del patrimonio que posee la Hermandad.
 
 ![Pagina patrimonio](./src/assets/img/manualUsu/patrimonio.PNG)
+
 ---
 
 ### GALERÍA
@@ -86,6 +89,7 @@ Se muestran fotos y breves explicaciones del patrimonio que posee la Hermandad.
 Se mostrarán 8 fotos, que se podrán seleccionar para ver en mayor tamaño.
 
 ![Pagina galeria](./src/assets/img/manualUsu/galeria.PNG)
+
 ---
 
 ### ACCESO
@@ -144,4 +148,3 @@ Opciones disponibles: **costalero, nazareno, mantilla, otros**
 - Formulario para enviar mensajes  
 
 ![Pagina de contacto](./src/assets/img/manualUsu/contacto.PNG)
----

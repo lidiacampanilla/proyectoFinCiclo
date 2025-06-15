@@ -1,5 +1,7 @@
-![Pantalla de inicio](./src/assets/img/manualUsu/portada.jpg)
 # MANUAL TECNICO  
+
+![Pantalla de inicio](./src/assets/img/manualUsu/portada.jpg)
+
 **WEB COFRADÍA BUENA MUERTE**  
 
 **Autor:** Lidia Lopez Martin  
@@ -14,14 +16,14 @@
 2. [Estructura del Proyecto](#estructura-del-proyecto)
 3. [Requisitos Técnicos](#requisitos-técnicos)
 4. [Instalación y Puesta en Marcha](#instalación-y-puesta-en-marcha)
-5. [Configuración de Docker y Base de Datos](#configuración-de-docker-y-base-de-datos)
-6. [Descripción de la Arquitectura](#descripción-de-la-arquitectura)
-7. [Descripción de los Componentes](#descripción-de-los-componentes)
-8. [Principales Funcionalidades](#principales-funcionalidades)
-9. [Seguridad](#seguridad)
-10. [Pruebas y Validaciones](#pruebas-y-validaciones)
-11. [Mantenimiento y Ampliación](#mantenimiento-y-ampliación)
-12. [Contactar con el Autor](#contactar-con-el-autor)
+5. [Configuración de Docker y Base de Datos](#5-configuración-de-docker-y-base-de-datos)
+6. [Descripción de la Arquitectura](#6-descripción-de-la-arquitectura)
+7. [Descripción de los Componentes](#7-descripción-de-los-componentes)
+8. [Principales Funcionalidades](#8-principales-funcionalidades)
+9. [Seguridad](#9-seguridad)
+10. [Pruebas y Validaciones](#10-pruebas-y-validaciones)
+11. [Mantenimiento y Ampliación](#11-mantenimiento-y-ampliación)
+12. [Contactar con el Autor](#12-contactar-con-el-autor)
 
 ---
 
@@ -30,8 +32,6 @@
 Este manual técnico describe la arquitectura, instalación, configuración y funcionamiento interno de la aplicación web **Cofradía Buena Muerte**. El objetivo es facilitar el mantenimiento, despliegue y futuras ampliaciones del sistema.
 
 ---
-
-## Estructura del Proyecto
 
 ## Estructura del Proyecto
 
@@ -70,7 +70,6 @@ Para el diseño del sitio web se partió de una plantilla gratuita basada en Boo
 - **Eliminación de secciones innecesarias:** Por ejemplo, se eliminó la página del blog y otros apartados no relevantes.
 - **Cambios en la navegación:** Se ajustó el menú y enlaces según los apartados reales del proyecto.
 
-
 ---
 
 ## Requisitos Técnicos
@@ -86,17 +85,19 @@ Para el diseño del sitio web se partió de una plantilla gratuita basada en Boo
 ## Instalación y Puesta en Marcha
 
 1. **Clonar el repositorio:**
+
    ```bash
    git clone https://github.com/lidiacampanilla/proyectoFinCiclo.git
    cd proyectoFinCiclo
+
 2. **Arrancar los servicios con Docker Compose:**
 
 - **Docker Desktop**
 - **Termial:** docker-compose up -build (desde la carpeta del proyecto)
 
-3. **Acceder a la aplicacion**
+- **Acceder a la aplicacion**
 
-- Navegar a **http://localhost:8080**
+- Navegar a **<http://localhost:8080>**
 
 ---
 
@@ -104,7 +105,10 @@ Para el diseño del sitio web se partió de una plantilla gratuita basada en Boo
 
 - **Dockerfile:** Define la imagen personalizada de PHP 8.2 con Apache, instala extensiones necesarias y copia el código fuente y la configuración personalizada.
 - **docker-compose.yml:** Orquesta los servicios `web` (PHP+Apache) y `db` (MySQL), monta volúmenes para persistencia y scripts de inicialización.
-- **db-init/init.sql:** Script que crea la base de datos `COFRADIA`, tablas y relaciones necesarias para la aplicación.
+- **db-init/init.sql:** Script que crea la base de datos `cofradia`, tablas y relaciones necesarias para la aplicación.
+- **E/R y grafo relacional**
+
+![Pantalla de inicio](./src/assets/img/manualUsu/ER.jpeg)
 
 ---
 
@@ -120,20 +124,46 @@ Para el diseño del sitio web se partió de una plantilla gratuita basada en Boo
 ## 7. Descripción de los Componentes
 
 ### PHP
+
+- `acceso.php`: Página para logearse o registrarse.
 - `bibliotecaFunciones.php`: Funciones reutilizables para acceso a datos, generación de tablas, validaciones, etc.
-- `accionesUsuario.php`: Controlador de acciones AJAX (modificar, borrar, insertar usuarios).
+- `accionesUsuario.php`: Controlador de acciones AJAX (modificar, borrar, insertar usuarios y filtrar).
+- `instalacion.php`: Crear base de datos para utilizar si se despliega en xampp
+- `login.php`: Controlar la entrada de datos de acceso para enviar a validar.
+- `mostrarDatos.php - mostrarHermanos.php`: Utiliza datos de la sesion abierta para mostrar datos
+- `mysqulConexion.php`: Funciones para conectar a la base de datos.
+- `obtenerTipos.php`: Lanzar consulta para utilizar los tipos de hermanos en los select.
+- `registro.php`: Página del formulario de registro
+- `usuarios.php`: Página de usuario con datos de la sesion abierta.
 - `registroUsuarios.php`: Lógica de registro de nuevos usuarios.
 - `forms/contact.php`: Procesamiento del formulario de contacto y envío de emails (pendiente de finalizar).
+- `baseDatos.php`: Consulta para la creación de la base de datos (utilizada para desplegar en xampp)
 
 ### JavaScript
+
+- `main.js`: Control de scroll, carousel de imagenes, responsive, etc..
+- `controlAcceso.js`:Mandamos datos a login.php para comprobarlos y dar acceso a usuarios.
 - `controlUsuarios.js`: Validaciones y gestión dinámica de usuarios (modificar, borrar, etc.).
 - `controlRegistrar.js`: Validaciones en el registro de usuarios.
 
+### HTML
+
+- `contacto.html`: Página con datos de contacto y plano de localización
+- `costaleros.html-grupoJoven.html-historia.html-juntaGobierno.html-patrimonio.html`: Páginas de contenido
+- `galeria.html`: Página con galeria de fotos
+- `index.html`: Página principal
+
 ### CSS
+
 - `main.css`: Estilos personalizados sobre Bootstrap.
 
 ### Base de datos
+
 - `init.sql`: Estructura y datos iniciales de la base de datos.
+
+### Imagenes
+
+- `img`: Carpeta con todas la imagenes utilizadas en la web
 
 ---
 
@@ -173,14 +203,14 @@ Para el diseño del sitio web se partió de una plantilla gratuita basada en Boo
 - Para modificar la estructura de la base de datos, actualiza `db-init/init.sql` y reinicia el contenedor `db` (ten en cuenta la persistencia de datos).
 - Para cambiar la configuración de PHP, edita `php.ini` y reconstruye el contenedor `web`.
 - Las ampliaciones mas necesarias:
-    - Envio de emails en el apartado contacto.
-    - Implementar código para que el administrador y la junta puedan añadir noticias e imagenes, en las partes de la web diseñadas para esto.
+  - Envio de emails en el apartado contacto.
+  - Implementar código para que el administrador y la junta puedan añadir noticias e imagenes, en las partes de la web diseñadas para esto.
 
 ---
 
 ## 12. Contactar con el Autor
 
 **Lidia Lopez Martin**  
-Email: [tuemail@tudominio.com](mailto:tuemail@tudominio.com)
+Email: [tuemail@tudominio.com](mailto:lidia@gmail.com)
 
 ---

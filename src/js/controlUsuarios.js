@@ -45,8 +45,9 @@ function cargarTiposEnSelect(select) {
     });
 }
 
-/* Con este trozo de codigo controlaremos si el usuario quiere ver su perfil una vez dentro de su usuario */
-/* Ademas segun el tipo de usuario mostrara o bien los datos directamente o bien dos botones que daran la opcion de ver datos personales o datos de los hermanos */
+/* Con este trozo de codigo controlaremos si el usuario quiere ver su perfil una vez logeado */
+/* Ademas segun el tipo de usuario mostrara, o bien los datos directamente o bien dos botones,
+ que daran la opcion de ver datos personales o datos de los hermanos */
 document.addEventListener("DOMContentLoaded", function () {
   let perfilBtn = document.getElementById("miPerfilBtn");
   let divMiPerfil = document.getElementById("miPerfil");
@@ -152,6 +153,7 @@ document.addEventListener("click", function (e) {
             }
           })
           .join("");
+      //Añadimos la fila al inicio de la tabla          
       tabla.prepend(fila);
       // Cargar tipos en el select
       fila.querySelectorAll('select[name="Nomb_tipo"]').forEach((select) => {
@@ -167,11 +169,14 @@ document.addEventListener("click", function (e) {
           .querySelectorAll(".is-invalid")
           .forEach((el) => el.classList.remove("is-invalid"));
         let formData = new FormData();
+        // Recorremos los inputs de la fila para recoger sus valores
         fila.querySelectorAll("input, select").forEach((input) => {
           if (input.name && input.value !== "****" && input.name !== "id_usu")
             formData.append(input.name, input.value);
         });
+        // Añadimos la acción de insertar al formData
         formData.append("accion", "insertar");
+        // Enviamos los datos al servidor
         fetch("/php/accionesUsuario.php", {
           method: "POST",
           body: formData,
@@ -212,7 +217,8 @@ document.addEventListener("click", function (e) {
         setTimeout(() => {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }, 50);
-        // Marcar campos inválidos si hay error
+        // Marcar campos inválidos si hay error, tanto si el nombre del input es "dni" o "email", 
+        // como si empieza por "dni" o "email"
         if (html.includes("DNI")) {
           document
             .querySelectorAll("input[name='dni'], input[name^='dni']")
@@ -250,7 +256,6 @@ document.addEventListener("click", function (e) {
         // Si el formulario NO es el de gestión múltiple, es perfil individual y al borrarlo redirige a index.html
         if (!form.id || form.id !== "formGestionHer") {
           document.getElementById("miPerfil").innerHTML = html;
-          console.log("Redirigiendo a /index.html en 5 segundos");
           setTimeout(() => {
             window.location.href = "/index.html";
           }, 5000);

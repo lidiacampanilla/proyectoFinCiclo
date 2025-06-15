@@ -84,11 +84,6 @@
   </header>
 
   <main class="main">
-
-
-
-
-
     <!-- Titulo de la página -->
     <div class="page-title light-background">
       <div
